@@ -1,6 +1,6 @@
 ## Welcome to GitHub Pages
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](YOUR_EMAIL_CODE)
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](YOUR_EMAIL_CODE)
 
 You can use the [editor on GitHub](https://github.com/vitalitylearning2021/interpolationCUDA/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
