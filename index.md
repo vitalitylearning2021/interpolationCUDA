@@ -23,26 +23,13 @@ Interpolation consists of approximately reconstructing the values of a function 
   <img alt="img-name" src="interpolationProblem.png" width="512">
   <br>
     <em>The interpolation problem.</em>
+  <figcaption>An elephant at sunset</figcaption>
 </p>
 
-The green curve represents a certain function \(f(x)\), the red dots are
-its samples \(f_0,f_1,\ldots,f_{M-1}\) used as data for interpolation
-and we want to reconstruct the function values at the yellow crosses
-(*interpolation points*) from the knowledge of its samples.  
-A very large number of interpolation techniques have been proposed, some
-using non-equispaced samples and some using equally spaced samples. We
-will here assume equally spaced samples and will consider the most
-common interpolation techniques.  
-The same techniques that we will illustrate below can be used for
-one-dimensional, two-dimensional, three-dimensional or multi-dimensional
-problems, depending on the application. In the present project,
-interpolation will be applied to image manipulation, hence a
-two-dimensional one.  
-To clarify the application significance, in the framework of image
-manipulation, interpolation serves different purposes. For example, one
-may just want to fill the image with intermediate samples besides the
-available ones, with a procedure known as *increasing image resolution*.
-This procedure is illustrated below in figure
+The green curve represents a certain function <img src="https://render.githubusercontent.com/render/math?math=f(x)">, the red dots are its samples <img src="https://render.githubusercontent.com/render/math?math=\(f_0,f_1,\ldots,f_{M-1}\)"> used as data for interpolation and we want to reconstruct the function values at the yellow crosses (*interpolation points*) from the knowledge of its samples.  
+A very large number of interpolation techniques have been proposed, some using non-equispaced samples and some using equally spaced samples. We will here assume equally spaced samples and will consider the most common interpolation techniques.  
+The same techniques that we will illustrate below can be used for one-dimensional, two-dimensional, three-dimensional or multi-dimensional problems, depending on the application. In the present project, interpolation will be applied to image manipulation, hence a two-dimensional one.  
+To clarify the application significance, in the framework of image manipulation, interpolation serves different purposes. For example, one may just want to fill the image with intermediate samples besides the available ones, with a procedure known as *increasing image resolution*. This procedure is illustrated below in figure
 [1.2](#increasingResolution):
 
 ![Applications of interpolation: increasing image resolution
