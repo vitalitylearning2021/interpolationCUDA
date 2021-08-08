@@ -1,34 +1,19 @@
 # Writing CUDA kernels for interpolation
 
-In this first chapter, the direct use of CUDA for a simple yet common
-problem like image interpolation is illustrated. This will enable us to
-get familiar with the functions running on the GPU, namely, the *kernel
-functions*. Furthermore, being interpolation very common in technical
-and scientific applications, the development of parallel interpolation
-codes permits having a tool that can be reused when needed.  
-In this chapter, we will cover the following topics:
+In this project, we use CUDA for a simple yet common problem like image interpolation and we get familiar with the functions running on the GPU, the *kernel functions*. Being interpolation very common in technical and scientific applications, the code permits having a tool that can be reused when needed.  
+We cover the following topics:
 
   - Nearest-neighbor interpolation;
-
   - Linear and bilinear interpolation;
-
   - CUDA texture memory;
-
   - Texture filtering;
-
   - Nearest-neighbor and linear interpolations of a PGM image;
-
   - Cubic B-spline interpolation;
-
   - Bicubic B-spline interpolation of a PGM image;
-
   - Texture lookup;
-
   - Catmull-Rom interpolation.
 
-Different common interpolation techniques for PGM images will be
-presented and implemented with customized CUDA kernels, also using CUDA
-texture memory.
+Different common interpolation techniques for PGM images are implemented with customized CUDA kernels, also using CUDA texture memory.
 
 ## Technical requirements
 
