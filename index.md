@@ -19,7 +19,6 @@ Different common interpolation techniques for PGM images are implemented with cu
 
 Interpolation consists of approximately reconstructing the values of a function by properly combining its samples. The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. Figure [1](#interpolationProblem) below shows an example of the interpolation problem:
 
-![interpolationProblem]
 <p align="center">
   <img src="interpolationProblem.png" width="512" id="interpolationProblem">
   <br>
@@ -31,6 +30,12 @@ A very large number of interpolation techniques have been proposed, some using n
 The same techniques that we will illustrate below can be used for one-dimensional, two-dimensional, three-dimensional or multi-dimensional problems, depending on the application. In the present project, interpolation will be applied to image manipulation, hence a two-dimensional one.  
 To clarify the application significance, in the framework of image manipulation, interpolation serves different purposes. For example, one may just want to fill the image with intermediate samples besides the available ones, with a procedure known as *increasing image resolution*. This procedure is illustrated below in figure
 [1.2](#increasingResolution):
+
+<p align="center">
+  <img src="interpolationProblem.png" width="512" id="interpolationProblem">
+  <br>
+     <em>Figure 1. The interpolation problem.</em>
+</p>
 
 ![Applications of interpolation: increasing image resolution
 ([https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA02564hires.jpg](https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA02564_hires.jpg)).](/Chapter01/increasingResolution.jpg)
