@@ -38,33 +38,26 @@ To clarify the application significance, in the framework of image manipulation,
 </p>
 
 As it can be seen from figure [2](#increasingResolution), interpolation enables zooming parts of an image.  
-Alternatively, one may want to perform the so-called *image inpainting*, namely, recovering damaged samples. The image inpainting is displayed
-below in Figure [1.3](#imageInpainting):
+Alternatively, one may want to perform the so-called *image inpainting*, namely, recovering damaged samples. The image inpainting is displayed below in Figure [3](#imageInpainting):
 
-![Applications of interpolation: image inpainting
-([https://commons.wikimedia.org/wiki/File:WatermarkandinpaintingonAeroflotAirbusA321-211VP-BUPShagal.png](https://commons.wikimedia.org/wiki/File:Watermark_and_inpainting_on_Aeroflot_Airbus_A321-211_VP-BUP_Shagal.png)).](/Chapter01/imageInpainting.png)
+<p align="center">
+  <img src="imageInpainting.jpg" width="512" id="imageInpainting">
+  <br>
+     <em>Figure 3. Applications of interpolation: image inpainting.</em>
+</p>
 
-Figure [1](#interpolationProblem) In other words, image inpainting enables reconstructing the image at the
-locations occupied by the “jetphotos.net” banner by exploiting the
-knowledge of the image at all the other surrounding locations.  
-Finally, one may wish to perform geometrical transformations to achieve,
-for example, the so-called *image warping*. Image warping is illustrated
-below in Figure [1.4](#imageWarping):
+In other words, image inpainting enables reconstructing the image at the locations occupied by the “jetphotos.net” banner by exploiting the knowledge of the image at all the other surrounding locations.  
+Finally, one may wish to perform geometrical transformations to achieve, for example, the so-called *image warping*. Image warping is illustrated below in Figure [4](#imageWarping):
 
-![Applications of interpolation: image warping
-([https://commons.wikimedia.org/wiki/File:Imagewarpingexample.jpg](https://commons.wikimedia.org/wiki/File:Image_warping_example.jpg)).](/Chapter01/imageWarping.jpg)
+<p align="center">
+  <img src="imageWarping.jpg" width="512" id="imageWarping">
+  <br>
+     <em>Figure 4. Applications of interpolation: image warping.</em>
+</p>
 
-In this case, the image is required at grid points belonging to a
-lattice obtained as a distortion of a standard Cartesian sampling.  
-Henceforth, we will illustrate how exploiting a particular feature of
-GPUs, namely, *texture memory*, will enable performing, directly in
-hardware, basic interpolations as the *nearest-neighbor* (explained in
-the next section) and *linear interpolation*. Hardware interpolations
-are indeed very fast, although they have reduced accuracy.  
-We will also discuss how more complex interpolations, like cubic
-B-spline interpolation, may benefit from texture memory. At the end of
-the Chapter, suggestions on how extending the project in the form of
-(solved) exercises will be given.
+In this case, the image is required at grid points belonging to a lattice obtained as a distortion of a standard Cartesian sampling.  
+Henceforth, we will illustrate how exploiting a particular feature of GPUs, namely, *texture memory*, will enable performing, directly in hardware, basic interpolations as the *nearest-neighbor* (explained in the next section) and *linear interpolation*. Hardware interpolations are indeed very fast, although they have reduced accuracy.  
+We will also discuss how more complex interpolations, like cubic B-spline interpolation, may benefit from texture memory. At the end, suggestions on how extending the project in the form of (solved) exercises will be given.
 
 ## Understanding nearest-neighbor interpolation
 
