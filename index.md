@@ -41,7 +41,7 @@ As it can be seen from figure [2](#increasingResolution), interpolation enables 
 Alternatively, one may want to perform the so-called *image inpainting*, namely, recovering damaged samples. The image inpainting is displayed below in Figure [3](#imageInpainting):
 
 <p align="center">
-  <img src="imageInpainting.jpg" width="512" id="imageInpainting">
+  <img src="imageInpainting.png" width="512" id="imageInpainting">
   <br>
      <em>Figure 3. Applications of interpolation: image inpainting.</em>
 </p>
