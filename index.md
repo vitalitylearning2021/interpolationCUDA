@@ -21,7 +21,7 @@ Interpolation consists of approximately reconstructing the values of a function 
 
 ![The interpolation problem.](https://user-images.githubusercontent.com/83769781/128622756-f54702c1-70ac-4650-b44f-a021139ba8f8.png)
 
-![The interpolation problem.](/Chapter01/interpolationProblem.png)
+![The interpolation problem.](interpolationProblem.png)
 
 The green curve represents a certain function \(f(x)\), the red dots are
 its samples \(f_0,f_1,\ldots,f_{M-1}\) used as data for interpolation
