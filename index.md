@@ -17,12 +17,13 @@ Different common interpolation techniques for PGM images are implemented with cu
 
 ## The interpolation problem
 
-Interpolation consists of approximately reconstructing the values of a function by properly combining its samples. The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1.1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. Figure [1.1](#interpolationProblem) below shows an example of the interpolation problem:
+Interpolation consists of approximately reconstructing the values of a function by properly combining its samples. The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1.1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. Figure [1](#interpolationProblem) below shows an example of the interpolation problem:
 
+![interpolationProblem]
 <p align="center">
-  <img alt="interpolationProblem" src="interpolationProblem.png" width="512">
+  <img src="interpolationProblem.png" width="512" id="interpolationProblem">
   <br>
-     <em>The interpolation problem.</em>
+     <em>Figure 1. The interpolation problem.</em>
 </p>
 
 The green curve represents a certain function <img src="https://render.githubusercontent.com/render/math?math=f(x)">, the red dots are its samples <img src="https://render.githubusercontent.com/render/math?math=\(f_0,f_1,\ldots,f_{M-1}\)"> used as data for interpolation and we want to reconstruct the function values at the yellow crosses (*interpolation points*) from the knowledge of its samples.  
@@ -43,7 +44,7 @@ below in Figure [1.3](#imageInpainting):
 ![Applications of interpolation: image inpainting
 ([https://commons.wikimedia.org/wiki/File:WatermarkandinpaintingonAeroflotAirbusA321-211VP-BUPShagal.png](https://commons.wikimedia.org/wiki/File:Watermark_and_inpainting_on_Aeroflot_Airbus_A321-211_VP-BUP_Shagal.png)).](/Chapter01/imageInpainting.png)
 
-In other words, image inpainting enables reconstructing the image at the
+Figure [1](#interpolationProblem) In other words, image inpainting enables reconstructing the image at the
 locations occupied by the “jetphotos.net” banner by exploiting the
 knowledge of the image at all the other surrounding locations.  
 Finally, one may wish to perform geometrical transformations to achieve,
