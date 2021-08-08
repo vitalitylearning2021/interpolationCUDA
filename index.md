@@ -29,19 +29,15 @@ The green curve represents a certain function <img src="https://render.githubuse
 A very large number of interpolation techniques have been proposed, some using non-equispaced samples and some using equally spaced samples. We will here assume equally spaced samples and will consider the most common interpolation techniques.  
 The same techniques that we will illustrate below can be used for one-dimensional, two-dimensional, three-dimensional or multi-dimensional problems, depending on the application. In the present project, interpolation will be applied to image manipulation, hence a two-dimensional one.  
 To clarify the application significance, in the framework of image manipulation, interpolation serves different purposes. For example, one may just want to fill the image with intermediate samples besides the available ones, with a procedure known as *increasing image resolution*. This procedure is illustrated below in figure
-[1.2](#increasingResolution):
+[2](#increasingResolution):
 
 <p align="center">
-  <img src="interpolationProblem.png" width="512" id="interpolationProblem">
+  <img src="increasingResolution.jpg" width="512" id="increasingResolution">
   <br>
-     <em>Figure 1. The interpolation problem.</em>
+     <em>Figure 2. Applications of interpolation: increasing image resolution.</em>
 </p>
 
-![Applications of interpolation: increasing image resolution
-([https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA02564hires.jpg](https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA02564_hires.jpg)).](/Chapter01/increasingResolution.jpg)
-
-As it can be seen from figure [1.2](#increasingResolution),
-interpolation enables zooming parts of an image.  
+As it can be seen from figure [2](#increasingResolution), interpolation enables zooming parts of an image.  
 Alternatively, one may want to perform the so-called *image inpainting*,
 namely, recovering damaged samples. The image inpainting is displayed
 below in Figure [1.3](#imageInpainting):
