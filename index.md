@@ -15,16 +15,7 @@ We cover the following topics:
 
 Different common interpolation techniques for PGM images are implemented with customized CUDA kernels, also using CUDA texture memory.
 
-## Technical requirements
-
-The main prerequisites regard the fundamentals of C/C++ and CUDA
-programming and basic elements of calculus, especially function
-approximation. Concerning CUDA, a reference introductory book is  while
-a reference advanced book is .  
-The GitHub link for all the code files is as below:
-<https://github.com/CIuliusC/CUDA_Book/tree/master/Chapter%2001>.
-
-## Knowing the interpolation problem
+## The interpolation problem
 
 Interpolation  is a ubiquitous numerical technique in scientific
 applications. It consists of approximately reconstructing the values of
