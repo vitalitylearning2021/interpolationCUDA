@@ -19,9 +19,8 @@ Different common interpolation techniques for PGM images are implemented with cu
 
 Interpolation consists of approximately reconstructing the values of a function by properly combining its samples. The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1.1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. Figure [1.1](#interpolationProblem) below shows an example of the interpolation problem:
 
-![The interpolation problem.](interpolationProblem.png)
 <p align="center">
-  <img alt="img-name" src="/path/image-name.png" width="300">
+  <img alt="img-name" src="interpolationProblem.png" width="512">
   <br>
     <em>The interpolation problem.</em>
 </p>
