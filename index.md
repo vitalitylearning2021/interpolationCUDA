@@ -59,7 +59,7 @@ In this case, the image is required at grid points belonging to a lattice obtain
 Henceforth, we will illustrate how exploiting a particular feature of GPUs, namely, *texture memory*, will enable performing, directly in hardware, basic interpolations as the *nearest-neighbor* (explained in the next section) and *linear interpolation*. Hardware interpolations are indeed very fast, although they have reduced accuracy.  
 We will also discuss how more complex interpolations, like cubic B-spline interpolation, may benefit from texture memory. At the end, suggestions on how extending the project in the form of (solved) exercises will be given.
 
-## Understanding nearest-neighbor interpolation
+## Nearest-neighbor interpolation
 
 Let’s begin by discussing the simplest possible form of interpolation,
 namely, nearest-neighbor interpolation which amounts to use the closest
