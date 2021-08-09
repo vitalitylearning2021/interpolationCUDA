@@ -61,48 +61,30 @@ We will also discuss how more complex interpolations, like cubic B-spline interp
 
 ## Nearest-neighbor interpolation
 
-Let’s begin by discussing the simplest possible form of interpolation,
-namely, nearest-neighbor interpolation which amounts to use the closest
-sample to interpolate a function at a certain interpolation point. Being
-the simplest interpolation, rather than calculating a combination of the
-samples, it simply approximates function values by the
-nearest-neighboring sample.  
-We will understand nearest-neighbor interpolation with one-dimensional
-and two-dimensional interpolation.  
-One-dimensional interpolation consists of having samples of a function
-acquired on the real line and returning interpolated values on the real
-line, as shown below. One-dimensional interpolation is important *per
-se* because it frequently appears in applications and it is a
-preliminary step to learn two-dimensional.Figure
-[1.5](#nearestNeighborInterpolation) below illustrates one-dimensional
-interpolation:
+Nearest-neighbor interpolation is the simplest possible form of interpolation and amounts to use the closest sample to interpolate a function at a certain interpolation point. Being the simplest interpolation, rather than calculating a combination of the samples, it simply approximates function values by the nearest-neighboring sample.  
+We will discuss nearest-neighbor interpolation with one-dimensional and two-dimensional interpolation.  
+One-dimensional interpolation consists of having samples of a function acquired on the real line and returning interpolated values on the real line, as shown below. One-dimensional interpolation is important *per se* because it frequently appears in applications and it is a preliminary step to learn two-dimensional.Figure [5](#nearestNeighborInterpolation) below illustrates one-dimensional interpolation:
 
-![Nearest-neighbor interpolation: one-dimensional
-case.](/Chapter01/nearestNeighborInterpolation.png)
+<p align="center">
+  <img src="nearestNeighborInterpolation.png" width="512" id="nearestNeighborInterpolation">
+  <br>
+     <em>Figure 5. Nearest-neighbor interpolation: one-dimensional
+case.</em>
+</p>
 
-The horizontal yellow segments indicate that the interpolation function
-is assumed to be constant around the samples.  
-The two-dimensional case consists of producing a two-dimensional map of
-interpolated values. These values start from a two-dimensional map of
-function samples. Two-dimensional interpolation and, in particular,
-two-dimensional nearest-neighbor interpolation, is important as it is
-the case encountered in practice when dealing with image manipulation.
-Next, figure [1.6](#nearestNeighborInterpolation2D) shows
-two-dimensional nearest-neighbor interpolation:
+The horizontal yellow segments indicate that the interpolation function is assumed to be constant around the samples.  
+The two-dimensional case consists of producing a two-dimensional map of interpolated values. These values start from a two-dimensional map of function samples. Two-dimensional interpolation and, in particular, two-dimensional nearest-neighbor interpolation, is important as it is the case encountered in practice when dealing with image manipulation.
+Next, figure [6](#nearestNeighborInterpolation2D) shows two-dimensional nearest-neighbor interpolation:
 
-![Nearest-neighbor interpolation: two-dimensional
-case.](/Chapter01/nearestNeighborInterpolation2D.png)
+<p align="center">
+  <img src="nearestNeighborInterpolation2D.png" width="512" id="nearestNeighborInterpolation2D">
+  <br>
+     <em>Figure 6. Nearest-neighbor interpolation: two-dimensional
+case.</em>
+</p>
 
-The colored boxes around the red dots indicate the constantness of the
-interpolation function.  
-Although the typical applications for interpolation techniques are
-two-dimensional, as in the case of image processing, the one-dimensional
-case will serve for illustration purposes because it is simpler to be
-described. Furthermore, the two-dimensional case is an immediate
-extension of the one-dimensional one, yet not introducing any conceptual
-novelty.  
-Let’s learn about one-dimensional and two-dimensional cases for
-nearest-neighbor interpolation in the next two subsections.
+The colored boxes around the red dots indicate the constantness of the interpolation function. Although the typical applications for interpolation techniques are two-dimensional, as in the case of image processing, the one-dimensional case will serve for illustration purposes because it is simpler to be described. Furthermore, the two-dimensional case is an immediate extension of the one-dimensional one, yet not introducing any conceptual novelty.  
+Let’s address one-dimensional and two-dimensional cases for nearest-neighbor interpolation in the next two subsections.
 
 ### Nearest-neighbor interpolation: one-dimensional case
 
