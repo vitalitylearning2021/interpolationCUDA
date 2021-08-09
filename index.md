@@ -110,7 +110,7 @@ Now that we have revised the nearest-neighbor interpolation, let’s briefly rev
 
 ## Linear and bilinear interpolations
 
-Let’s now consider a more accurate form of interpolation, namely, linear interpolation. While nearest-neighbor interpolation does not combine function samples and approximates the function with the nearest sample, linear interpolation is the simplest way to combine function samples to provide interpolation values. One-dimensional linear interpolation is illustrated in the image in figure [1.7](#linearInterpolation1D):
+Let’s now consider a more accurate form of interpolation, namely, linear interpolation. While nearest-neighbor interpolation does not combine function samples and approximates the function with the nearest sample, linear interpolation is the simplest way to combine function samples to provide interpolation values. One-dimensional linear interpolation is illustrated in the image in figure [7](#linearInterpolation1D):
 
 <p align="center">
   <img src="linearInterpolation.png" width="512" id="linearInterpolation1D">
@@ -119,7 +119,7 @@ Let’s now consider a more accurate form of interpolation, namely, linear inter
 </p>
 
 The yellow segments connect the red samples and represent the broken line providing the linear approximation to <img src="https://render.githubusercontent.com/render/math?math=f(x)">.  
-The two-dimensional case is illustrated in figure [1.8](#linearInterpolation2D) below:
+The two-dimensional case is illustrated in figure [8](#linearInterpolation2D) below:
 
 <p align="center">
   <img src="linearInterpolation2D.png" width="512" id="linearInterpolation2D">
