@@ -50,7 +50,7 @@ In other words, image inpainting enables reconstructing the image at the locatio
 Finally, one may wish to perform geometrical transformations to achieve, for example, the so-called *image warping*. Image warping is illustrated below in Figure [4](#imageWarping):
 
 <p align="center">
-  <img src="imageWarping.jpg" width="300" id="imageWarping">
+  <img src="imageWarping.jpg" width="200" id="imageWarping">
   <br>
      <em>Figure 4. Applications of interpolation: image warping.</em>
 </p>
