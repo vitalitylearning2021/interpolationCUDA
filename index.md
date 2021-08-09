@@ -100,18 +100,13 @@ Interpolation is typically a polynomial approximation of a function. The <img sr
 
 ### Nearest-neighbor interpolation: two-dimensional case
 
-Henceforth, for two-dimensional problems, we will assume that the
-function \(f(x,y)\) we want to interpolate is a real function of two
-real variables sampled at the points of the two-dimensional Cartesian
-grid \((x_m,y_n)=(m,n)\), with \(m=0,1,\ldots,M-1\) and
-\(n=0,1,\ldots,N-1\). Analogously to the foregoing subsection, the
-interpolating function under the nearest-neighbor scheme is:
+Henceforth, for two-dimensional problems, we will assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x,y)"> we want to interpolate is a real function of two real variables sampled at the points of the two-dimensional Cartesian grid <img src="https://render.githubusercontent.com/render/math?math=((x_m,y_n)=(m,n)">, with <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1"> and <img src="https://render.githubusercontent.com/render/math?math=n=0,1,\ldots,N-1">. Analogously to the foregoing subsection, the interpolating function under the nearest-neighbor scheme is:
 
-\[\label{nearestNeighborInterpolatingFunction2D}
-f^{(0)}(x,y)=f_{\lfloor x\rceil,\lfloor y\rceil}.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x,y)=f_{\lfloor x\rceil,\lfloor y\rceil}.." id="nearestNeighborInterpolatingFunction2D"> [2]
+</p>
 
-Now that we know what nearest-neighbor interpolation is, let’s learn
-about linear and bilinear interpolations in the next section.
+Now that we have revised the nearest-neighbor interpolation, let’s briefly review linear and bilinear interpolations in the next section.
 
 ## Understanding linear and bilinear interpolations
 
