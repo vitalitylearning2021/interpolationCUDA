@@ -92,10 +92,10 @@ Throughout this chapter and for one-dimensional problems, we will assume that th
 Henceforth, we assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x)"> is required in the interval <img src="https://render.githubusercontent.com/render/math?math=(0,M-1)"> and we indicate by <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil"> the nearest integer to the generic interpolation point <img src="https://render.githubusercontent.com/render/math?math=x">. Accordingly, the nearest-neighbor *interpolating function* can be expressed as:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x)=f_{\lfloor x\rceil}." id="nearestNeighborInterpolatingFunction"> (1)
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x)=f_{\lfloor x\rceil}." id="nearestNeighborInterpolatingFunction">       [1]
 </p>
 
-Here, equation (1(#nearestNeighborInterpolatingFunction)) simply says that, in order to obtain the nearest-neighbor interpolating function, we need to compute the nearest integer to <img src="https://render.githubusercontent.com/render/math?math=x">, that is, <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil"> and then pick up the function sample with the corresponding index. In C/C++ and CUDA, the value of <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil"> can be computed by `round(x)`.  
+Here, equation [1](#nearestNeighborInterpolatingFunction) simply says that, in order to obtain the nearest-neighbor interpolating function, we need to compute the nearest integer to <img src="https://render.githubusercontent.com/render/math?math=x">, that is, <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil"> and then pick up the function sample with the corresponding index. In C/C++ and CUDA, the value of <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil"> can be computed by `round(x)`.  
 Interpolation is typically a polynomial approximation of a function. The <img src="https://render.githubusercontent.com/render/math?math=^{(0)}"> superscript in <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x)"> indicates that nearest-neighbor interpolation exploits a polynomial of degree <img src="https://render.githubusercontent.com/render/math?math=0">.
 
 ### Nearest-neighbor interpolation: two-dimensional case
