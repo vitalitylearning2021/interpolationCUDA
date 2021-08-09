@@ -103,36 +103,32 @@ Interpolation is typically a polynomial approximation of a function. The <img sr
 Henceforth, for two-dimensional problems, we will assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x,y)"> we want to interpolate is a real function of two real variables sampled at the points of the two-dimensional Cartesian grid <img src="https://render.githubusercontent.com/render/math?math=((x_m,y_n)=(m,n)">, with <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1"> and <img src="https://render.githubusercontent.com/render/math?math=n=0,1,\ldots,N-1">. Analogously to the foregoing subsection, the interpolating function under the nearest-neighbor scheme is:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x,y)=f_{\lfloor x\rceil,\lfloor y\rceil}.." id="nearestNeighborInterpolatingFunction2D"> [2]
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x,y)=f_{\lfloor x\rceil,\lfloor y\rceil}." id="nearestNeighborInterpolatingFunction2D"> [2]
 </p>
 
 Now that we have revised the nearest-neighbor interpolation, let’s briefly review linear and bilinear interpolations in the next section.
 
-## Understanding linear and bilinear interpolations
+## Linear and bilinear interpolations
 
-Let’s now consider a more accurate form of interpolation, namely, linear
-interpolation. While nearest-neighbor interpolation does not combine
-function samples and approximates the function with the nearest sample,
-linear interpolation is the simplest way to combine function samples to
-provide interpolation values. One-dimensional linear interpolation is
-illustrated in the image in figure [1.7](#linearInterpolation1D):
+Let’s now consider a more accurate form of interpolation, namely, linear interpolation. While nearest-neighbor interpolation does not combine function samples and approximates the function with the nearest sample, linear interpolation is the simplest way to combine function samples to provide interpolation values. One-dimensional linear interpolation is illustrated in the image in figure [1.7](#linearInterpolation1D):
 
-![Linear interpolation: one-dimensional
-case.](/Chapter01/linearInterpolation.png)
+<p align="center">
+  <img src="linearInterpolation.png" width="512" id="linearInterpolation1D">
+  <br>
+     <em>Figure 7. Linear interpolation: one-dimensional case.</em>
+</p>
 
-The yellow segments connect the red samples and represent the broken
-line providing the linear approximation to \(f(x)\).  
-The two-dimensional case is illustrated in figure
-[1.8](#linearInterpolation2D) below:
+The yellow segments connect the red samples and represent the broken line providing the linear approximation to <img src="https://render.githubusercontent.com/render/math?math=f(x)">.  
+The two-dimensional case is illustrated in figure [1.8](#linearInterpolation2D) below:
 
-![Linear interpolation: two-dimensional
-case.](/Chapter01/linearInterpolation2D.png)
+<p align="center">
+  <img src="linearInterpolation2D.png" width="512" id="linearInterpolation2D">
+  <br>
+     <em>Figure 8. Linear interpolation: two-dimensional case.</em>
+</p>
 
-As it can be seen, the interpolating function is now represented by
-facets having the samples as vertices.  
-The two-dimensional case is typically referred to as *bilinear
-interpolation*. Let’s learn about one-dimensional and two-dimensional
-cases for linear interpolation in the next section.
+As it can be seen, the interpolating function is now represented by facets having the samples as vertices.  
+The two-dimensional case is typically referred to as *bilinear interpolation*. Let’s review the one-dimensional and two-dimensional cases for linear interpolation in the next section.
 
 ### Linear interpolation: one-dimensional case
 
