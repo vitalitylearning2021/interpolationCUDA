@@ -88,20 +88,14 @@ Let’s address one-dimensional and two-dimensional cases for nearest-neighbor i
 
 ### Nearest-neighbor interpolation: one-dimensional case
 
-Throughout this chapter and for one-dimensional problems, we will assume
-that the function \(f(x)\) we want to interpolate is a real function of
-a real argument sampled at the points \(x_m=m\), \(m=0,1,\ldots,M-1\)
-and that the corresponding function samples are \(f_m=f(x_m)\).  
-Henceforth, we assume that the function \(f(x)\) is required in the
-interval \((0,M-1)\) and we indicate by \(\lfloor x\rceil\) the nearest
-integer to the generic interpolation point \(x\). Accordingly, the
-nearest-neighbor *interpolating function* can be expressed as:
+Throughout this chapter and for one-dimensional problems, we will assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x)"> we want to interpolate is a real function of a real argument sampled at the points <img src="https://render.githubusercontent.com/render/math?math=x_m=m">, <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1"> and that the corresponding function samples are <img src="https://render.githubusercontent.com/render/math?math=f_m=f(x_m)">.  
+Henceforth, we assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x)"> is required in the interval <img src="https://render.githubusercontent.com/render/math?math=(0,M-1)"> and we indicate by <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil"> the nearest integer to the generic interpolation point <img src="https://render.githubusercontent.com/render/math?math=x">. Accordingly, the nearest-neighbor *interpolating function* can be expressed as:
 
-\[\label{nearestNeighborInterpolatingFunction}
-f^{(0)}(x)=f_{\lfloor x\rceil}.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x)=f_{\lfloor x\rceil}." id="nearestNeighborInterpolatingFunction">
+</p>
 
-Here, equation
-([\[nearestNeighborInterpolatingFunction\]](#nearestNeighborInterpolatingFunction))
+Here, equation ([\[nearestNeighborInterpolatingFunction\]](#nearestNeighborInterpolatingFunction))
 simply says that, in order to obtain the nearest-neighbor interpolating
 function, we need to compute the nearest integer to \(x\), that is,
 \(\lfloor x\rceil\) and then pick up the function sample with the
