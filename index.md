@@ -132,27 +132,15 @@ The two-dimensional case is typically referred to as *bilinear interpolation*. L
 
 ### Linear interpolation: one-dimensional case
 
-In the one-dimensional case, when the interpolation point \(x\) lies
-between the \(m\)-th and the \(m+1\)-th samples, namely,
-\(m\leq x\leq m+1\), linear interpolation consists of linearly
-approximating \(f(x)\) using samples \(f_m\) and \(f_{m+1}\) as
+In the one-dimensional case, when the interpolation point <img src="https://render.githubusercontent.com/render/math?math=x"> lies between the <img src="https://render.githubusercontent.com/render/math?math=m">-th and the <img src="https://render.githubusercontent.com/render/math?math=m+1">-th samples, namely,
+<img src="https://render.githubusercontent.com/render/math?math=m\leq x\leq m+1">, linear interpolation consists of linearly approximating <img src="https://render.githubusercontent.com/render/math?math=f(x)"> using samples <img src="https://render.githubusercontent.com/render/math?math=f_m"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m+1}"> as
 
-\[\label{linearInterpolationEQ}
-f^{(1)}(x)=(1-\alpha)f_m+\alpha f_{m+1},\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(x)=(1-\alpha)f_m+\alpha f_{m+1}," id="linearInterpolationEQ"> [3]
+</p>
 
-where \(\alpha=x-m\) and \(m\) coincides with the nearest integer not
-larger than \(x\). The superscript \(^{(1)}\) in \(f^{(1)}(x)\)
-indicates that linear interpolation exploits a polynomial of degree
-\(1\). It should be noticed that \(m\) is different from
-\(\lfloor x\rceil\). While \(\lfloor x\rceil\) is the nearest integer to
-\(x\), \(m\) is the nearest integer *not larger* than \(x\), a quantity
-that in C/C++ and CUDA can be computed by `floor(x)`.  
-From equation ([\[linearInterpolationEQ\]](#linearInterpolationEQ)), it
-is seen that linear interpolation explicitly requires \(2\) memory
-accesses to recover \(f_m\) and \(f_{m+1}\) and a linear combination to
-compute \(f^{(1)}(x)\). Nevertheless, as it will be seen next, texture
-memory is specifically designed to perform those operations directly in
-hardware.
+where <img src="https://render.githubusercontent.com/render/math?math=\alpha=x-m"> and <img src="https://render.githubusercontent.com/render/math?math=m"> coincides with the nearest integer not larger than <img src="https://render.githubusercontent.com/render/math?math=x">. The superscript <img src="https://render.githubusercontent.com/render/math?math=^{(1)}"> in <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(x)"> indicates that linear interpolation exploits a polynomial of degree <img src="https://render.githubusercontent.com/render/math?math=1">. It should be noticed that <img src="https://render.githubusercontent.com/render/math?math=m"> is different from <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil\">. While <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil\"> is the nearest integer to <img src="https://render.githubusercontent.com/render/math?math=x">, <img src="https://render.githubusercontent.com/render/math?math=m"> is the nearest integer *not larger* than <img src="https://render.githubusercontent.com/render/math?math=x">, a quantity that in C/C++ and CUDA can be computed by `floor(x)`.  
+From equation ([\[3\]](#linearInterpolationEQ)), it is seen that linear interpolation explicitly requires <img src="https://render.githubusercontent.com/render/math?math=2"> memory accesses to recover <img src="https://render.githubusercontent.com/render/math?math=f_m"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m+1}"> and a linear combination to compute <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(x)">. Nevertheless, as it will be seen next, texture memory is specifically designed to perform those operations directly in hardware.
 
 ### Linear interpolation: two-dimensional case
 
