@@ -144,9 +144,7 @@ From equation [\[3\]](#linearInterpolationEQ), it is seen that linear interpolat
 
 ### Linear interpolation: two-dimensional case
 
-Linear interpolation in the two-dimensional case can be thought of as a
-combination of linear one-dimensional interpolations along the \(x\) and
-\(y\) axes. Figure [1.9](#linearInterpolation2Dsamples) below
+Linear interpolation in the two-dimensional case can be thought of as a combination of linear one-dimensional interpolations along the <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> axes. Figure [1.9](#linearInterpolation2Dsamples) below
 illustrates the linear interpolation in the two-dimensional case:
 
 ![Illustrating the bilinear interpolation as a combination of
