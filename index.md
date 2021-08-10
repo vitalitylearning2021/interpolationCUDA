@@ -20,7 +20,7 @@ Different common interpolation techniques for PGM images are implemented with cu
 Interpolation consists of approximately reconstructing the values of a function by properly combining its samples. The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. Figure [1](#interpolationProblem) below shows an example of the interpolation problem:
 
 <p align="center">
-  <img src="interpolationProblem.png" width="512" id="interpolationProblem">
+  <img src="interpolationProblem.png" width="400" id="interpolationProblem">
   <br>
      <em>Figure 1. The interpolation problem.</em>
 </p>
@@ -32,7 +32,7 @@ To clarify the application significance, in the framework of image manipulation,
 [2](#increasingResolution):
 
 <p align="center">
-  <img src="increasingResolution.jpg" width="512" id="increasingResolution">
+  <img src="increasingResolution.jpg" width="400" id="increasingResolution">
   <br>
      <em>Figure 2. Applications of interpolation: increasing image resolution.</em>
 </p>
@@ -41,7 +41,7 @@ As it can be seen from figure [2](#increasingResolution), interpolation enables 
 Alternatively, one may want to perform the so-called *image inpainting*, namely, recovering damaged samples. The image inpainting is displayed below in Figure [3](#imageInpainting):
 
 <p align="center">
-  <img src="imageInpainting.png" width="512" id="imageInpainting">
+  <img src="imageInpainting.png" width="400" id="imageInpainting">
   <br>
      <em>Figure 3. Applications of interpolation: image inpainting.</em>
 </p>
@@ -66,7 +66,7 @@ We will discuss nearest-neighbor interpolation with one-dimensional and two-dime
 One-dimensional interpolation consists of having samples of a function acquired on the real line and returning interpolated values on the real line, as shown below. One-dimensional interpolation is important *per se* because it frequently appears in applications and it is a preliminary step to learn two-dimensional.Figure [5](#nearestNeighborInterpolation) below illustrates one-dimensional interpolation:
 
 <p align="center">
-  <img src="nearestNeighborInterpolation.png" width="512" id="nearestNeighborInterpolation">
+  <img src="nearestNeighborInterpolation.png" width="400" id="nearestNeighborInterpolation">
   <br>
      <em>Figure 5. Nearest-neighbor interpolation: one-dimensional
 case.</em>
@@ -77,7 +77,7 @@ The two-dimensional case consists of producing a two-dimensional map of interpol
 Next, figure [6](#nearestNeighborInterpolation2D) shows two-dimensional nearest-neighbor interpolation:
 
 <p align="center">
-  <img src="nearestNeighborInterpolation2D.png" width="512" id="nearestNeighborInterpolation2D">
+  <img src="nearestNeighborInterpolation2D.png" width="400" id="nearestNeighborInterpolation2D">
   <br>
      <em>Figure 6. Nearest-neighbor interpolation: two-dimensional
 case.</em>
@@ -113,7 +113,7 @@ Now that we have revised the nearest-neighbor interpolation, let’s briefly rev
 Let’s now consider a more accurate form of interpolation, namely, linear interpolation. While nearest-neighbor interpolation does not combine function samples and approximates the function with the nearest sample, linear interpolation is the simplest way to combine function samples to provide interpolation values. One-dimensional linear interpolation is illustrated in the image in figure [7](#linearInterpolation1D):
 
 <p align="center">
-  <img src="linearInterpolation.png" width="512" id="linearInterpolation1D">
+  <img src="linearInterpolation.png" width="400" id="linearInterpolation1D">
   <br>
      <em>Figure 7. Linear interpolation: one-dimensional case.</em>
 </p>
@@ -122,7 +122,7 @@ The yellow segments connect the red samples and represent the broken line provid
 The two-dimensional case is illustrated in figure [8](#linearInterpolation2D) below:
 
 <p align="center">
-  <img src="linearInterpolation2D.png" width="512" id="linearInterpolation2D">
+  <img src="linearInterpolation2D.png" width="400" id="linearInterpolation2D">
   <br>
      <em>Figure 8. Linear interpolation: two-dimensional case.</em>
 </p>
