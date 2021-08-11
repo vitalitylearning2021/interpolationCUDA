@@ -158,38 +158,25 @@ More formally, the interpolating function at the interpolation point denoted wit
 result is achieved by first constructing the virtual sample represented by the upper empty circle in figure [9](#linearInterpolation2Dsamples) and computed as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n %2B 1}"> along the <img src="https://render.githubusercontent.com/render/math?math=x"> axis, namely:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=f_{x,n %2B 1}=(1-\alpha_x)f_{m,n %2B 1}+\alpha_x f_{m %2B 1,n %2B 1}," id="partialLinearInterpolation2D"> [4]
+  <img src="https://render.githubusercontent.com/render/math?math=f_{x,n %2B 1}=(1-\alpha_x)f_{m,n %2B 1} %2B \alpha_x f_{m %2B 1,n %2B 1}," id="partialLinearInterpolation2D"> [4]
 </p>
 
-\[\label{partialLinearInterpolation2D}
-f_{x,n+1}=(1-\alpha_x)f_{m,n+1}+\alpha_x f_{m+1,n+1},\]
+where <img src="https://render.githubusercontent.com/render/math?math=\alpha_x=x-m">. Later on, the virtual sample <img src="https://render.githubusercontent.com/render/math?math=f_{x,n}"> corresponding to the lower empty circle in figure [9](#linearInterpolation2Dsamples) is constructed and worked out as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{m,n}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m+1,n}"> along the <img src="https://render.githubusercontent.com/render/math?math=x"> axis, that is:
 
-where \(\alpha_x=x-m\). Later on, the virtual sample \(f_{x,n}\)
-corresponding to the lower empty circle in figure
-[1.9](#linearInterpolation2Dsamples) is constructed and worked out as a
-linear interpolation of \(f_{m,n}\) and \(f_{m+1,n}\) along the \(x\)
-axis, that is:
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f_{x,n}=(1-\alpha_x)f_{m,n} %2B \alpha_x f_{m %2B 1,n}," id="partialLinearInterpolation2D_v2"> [5]
+</p>
 
-\[\label{partialLinearInterpolation2D_v2}
-f_{x,n}=(1-\alpha_x)f_{m,n}+\alpha_x f_{m+1,n}.\]
+Finally, the desired value <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(x,y)"> is achieved as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{x,n}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{x,n %2B 1}"> along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis, namely,
 
-Finally, the desired value \(f^{(1)}(x,y)\) is achieved as a linear
-interpolation of \(f_{x,n}\) and \(f_{x,n+1}\) along the \(y\)-axis,
-namely,
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(x,y)=(1-\alpha_y)f_{x,n} %2B \alpha_y f_{x,n %2B 1}," id="linearInterpolation2Dfull">, [6]
+</p>
 
-\[\label{linearInterpolation2Dfull}
-f^{(1)}(x,y)=(1-\alpha_y)f_{x,n}+\alpha_y f_{x,n+1},\]
-
-where \(\alpha_y=y-n\).  
-The final bilinear interpolation formula can be obtained by substituting
-equations
-([\[partialLinearInterpolation2D\]](#partialLinearInterpolation2D)) and
-([\[partialLinearInterpolation2D\_v2\]](#partialLinearInterpolation2D_v2))
-in ([\[linearInterpolation2Dfull\]](#linearInterpolation2Dfull)), but
-its expression is not really needed and is here omitted for the sake of
-brevity.  
-Let’s pause with theory and temporarily go towards practice,
-illustrating how the texture memory works in CUDA.
+where <img src="https://render.githubusercontent.com/render/math?math=\alpha_y=y-n">.  
+The final bilinear interpolation formula can be obtained by substituting equations ([\[4\]](#partialLinearInterpolation2D)) and ([\[5\]](#partialLinearInterpolation2D_v2))
+in ([\[6\]](#linearInterpolation2Dfull)), but its expression is not really needed and is here omitted for the sake of brevity.  
+Let’s pause with theory and temporarily go towards practice, illustrating how the texture memory works in CUDA.
 
 ## Towards practice: CUDA texture memory
 
