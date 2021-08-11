@@ -144,27 +144,18 @@ From equation [\[3\]](#linearInterpolationEQ), it is seen that linear interpolat
 
 ### Linear interpolation: two-dimensional case
 
-Linear interpolation in the two-dimensional case can be thought of as a combination of linear one-dimensional interpolations along the <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> axes. Figure [1.9](#linearInterpolation2Dsamples) below
-illustrates the linear interpolation in the two-dimensional case:
+Linear interpolation in the two-dimensional case can be thought of as a combination of linear one-dimensional interpolations along the <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> axes. Figure [9](#linearInterpolation2Dsamples) below illustrates the linear interpolation in the two-dimensional case:
 
-![Illustrating the bilinear interpolation as a combination of
-one-dimensional ones.](/Chapter01/linearInterpolation2Dsamples.png)
+<p align="center">
+  <img src="linearInterpolation2Dsamples.png" width="400" id="linearInterpolation2Dsamples">
+  <br>
+     <em>Figure 9. Illustrating the bilinear interpolation as a combination of one-dimensional ones.</em>
+</p>
 
-The previous figure illustrates that two “virtual” samples are first
-reconstructed at the yellow dot locations from the four samples at the
-four red dot locations. Each of the two virtual samples is reconstructed
-by one-dimensional linear interpolations along the \(x\)-axis. Then, the
-interpolation value at the yellow cross-location is determined from the
-two virtual samples by a one-dimensional linear interpolation along the
-\(y\)-axis.  
-More formally, the interpolating function at the interpolation point
-denoted with a cross in figure [1.9](#linearInterpolation2Dsamples) and
-having coordinates \((x,y)\) is achieved from \(4\) samples:
-\(f_{m,n}\), \(f_{m+1,n}\), \(f_{m,n+1}\) and \(f_{m+1,n+1}\). The final
-result is achieved by first constructing the virtual sample represented
-by the upper empty circle in figure [1.9](#linearInterpolation2Dsamples)
-and computed as a linear interpolation of \(f_{m,n+1}\) and
-\(f_{m+1,n+1}\) along the \(x\) axis, namely:
+The previous figure illustrates that two “virtual” samples are first reconstructed at the yellow dot locations from the four samples at the four red dot locations. Each of the two virtual samples is reconstructed by one-dimensional linear interpolations along the <img src="https://render.githubusercontent.com/render/math?math=x">-axis. Then, the
+interpolation value at the yellow cross-location is determined from the two virtual samples by a one-dimensional linear interpolation along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis. 
+More formally, the interpolating function at the interpolation point denoted with a cross in figure [9](#linearInterpolation2Dsamples) and having coordinates <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> is achieved from <img src="https://render.githubusercontent.com/render/math?math=4"> samples: <img src="https://render.githubusercontent.com/render/math?math=f_{m,n}">, <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n}">, <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n %2B 1}">. The final
+result is achieved by first constructing the virtual sample represented by the upper empty circle in figure [9](#linearInterpolation2Dsamples) and computed as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n %2B 1}"> along the <img src="https://render.githubusercontent.com/render/math?math=x"> axis, namely:
 
 \[\label{partialLinearInterpolation2D}
 f_{x,n+1}=(1-\alpha_x)f_{m,n+1}+\alpha_x f_{m+1,n+1},\]
