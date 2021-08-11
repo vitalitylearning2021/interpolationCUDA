@@ -199,74 +199,39 @@ hardware circuitry, therefore it is worked out very fast.
 Nonetheless, speed is paid with accuracy in the linear case since interpolation coefficients are stored in a fixed point format having <img src="https://render.githubusercontent.com/render/math?math=9">-bit overall with <img src="https://render.githubusercontent.com/render/math?math=8"> bits of fractional value.  
 Figures [11](#textureNearestNeighbor) and [12](#textureLinear) are not a mere repetition of Figures [5](#nearestNeighborInterpolation) and [7](#linearInterpolation1D), but they illustrate how interpolation is achieved with texture filtering in the one-dimensional case and when un-normalized coordinates are employed (the term “un-normalized coordinates” will be clear in a while). In particular, they show the behavior of the `tex1D()` function which is the CUDA function performing texture filtering in a one-dimensional case both for the nearest-neighbor and linear interpolations. For nearest-neighbor interpolation, <img src="https://render.githubusercontent.com/render/math?math=tex1D(x)=f_m">, <img src="https://render.githubusercontent.com/render/math?math=m\leq x < m %2B 1">, <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1">, while, for linear interpolation, `tex1D()` is the result of the linear interpolation between <img src="https://render.githubusercontent.com/render/math?math=f_m"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1}">, for <img src="https://render.githubusercontent.com/render/math?math=m %2B 0.5\leq x\leq m %2B 1 %2B 0.5"> and <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-2">. In both cases, it can be seen that
 
-\[\label{generalInterpolationTex}
-f^{(p)}(x)=tex1D(x+0.5), \;\; p=0,1.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(p)}(x)=tex1D(x %2B 0.5), \;\; p=0,1," id="generalInterpolationTex">, [7]
+</p>
 
-Nearest-neighbor interpolation using texture filtering is illustrated in
-figure [1.11](#textureNearestNeighbor) below:
+Nearest-neighbor interpolation using texture filtering is illustrated in figure [11](#textureNearestNeighbor) below:
 
-![Interpolation is performed by texture filtering:
-nearest-neighbor.](/Chapter01/textureNearestNeighbor.png)
+<p align="center">
+  <img src="textureNearestNeighbor.png" width="400" id="textureNearestNeighbor">
+  <br>
+     <em>Figure 11. Interpolation is performed by texture filtering: nearest-neighbor.</em>
+</p>
 
-Figure [1.11](#textureNearestNeighbor) represents the hardware
-implementation of Figure [1.5](#nearestNeighborInterpolation). The
-difference between them is that the interpolation function is not
-constant around each interpolation sample, but rather between two
-consecutive interpolation samples which are responsible for the \(0.5\)
-shift.  
-On the other side, figure [1.12](#textureLinear) below illustrates
-linear interpolation using texture filtering:
+Figure [11](#textureNearestNeighbor) represents the hardware implementation of Figure [5](#nearestNeighborInterpolation). The difference between them is that the interpolation function is not constant around each interpolation sample, but rather between two consecutive interpolation samples which are responsible for the <img src="https://render.githubusercontent.com/render/math?math=0.5"> shift.  
+On the other side, figure [12](#textureLinear) below illustrates linear interpolation using texture filtering:
 
-![Interpolation is performed by texture filtering:
-nearest-neighbor.](/Chapter01/textureLinear.png)
+<p align="center">
+  <img src="textureLinear.png" width="400" id="textureLinear">
+  <br>
+     <em>Figure 12. Interpolation is performed by texture filtering: nearest-neighbor.</em>
+</p>
 
-Figure [1.12](#textureLinear) represents the hardware implementation of
-Figure [1.7](#linearInterpolation1D). In figure [1.12](#textureLinear),
-the interpolation function is not linear between samples as in figure
-[1.7](#linearInterpolation1D), but there is again a \(0.5\) shift.  
-According to equation
-([\[generalInterpolationTex\]](#generalInterpolationTex)), we should
-remember to take care of the \(0.5\) shift needed to use texture
-filtering in the sequel. The need for such a shift also occurs for the
-two-dimensional case. Indications on how using texture memory for
-filtering are now in order.  
-Texture memory must be associated, at run-time and by proper function
-calls, to a memory region, the texture, before being available to use in
-a kernel. Furthermore, a texture has several attributes which we will
-need to use:
+Figure [12](#textureLinear) represents the hardware implementation of Figure [7](#linearInterpolation1D). In figure [12](#textureLinear), the interpolation function is not linear between samples as in figure [7](#linearInterpolation1D), but there is again a <img src="https://render.githubusercontent.com/render/math?math=0.5"> shift.  
+According to equation ([\[7\]](#generalInterpolationTex)), we should remember to take care of the <img src="https://render.githubusercontent.com/render/math?math=0.5"> shift needed to use texture filtering in the sequel. The need for such a shift also occurs for the two-dimensional case. Indications on how using texture memory for filtering are now in order.  
+Texture memory must be associated, at run-time and by proper function calls, to a memory region, the texture, before being available to use in a kernel. Furthermore, a texture has several attributes which we will need to use:
 
-  - *dimensionality*: it indicates if the texture is accessed as a
-    one-dimensional array by one coordinate, a two-dimensional array by
-    two coordinates, or a three-dimensional array by three coordinates;
-
+  - *dimensionality*: it indicates if the texture is accessed as a one-dimensional array by one coordinate, a two-dimensional array by two coordinates, or a three-dimensional array by three coordinates;
   - *types*: these are input and output data types;
+  - *coordinate scaling*: figures [11](#textureNearestNeighbor) and [12](#textureLinear) show texture filtering in the case of un-normalized coordinates; in other words, the coordinate by which texture is accessed belongs to the interval <img src="https://render.githubusercontent.com/render/math?math=[0,M[">; a different possibility is using *normalized coordinates* in which the <img src="https://render.githubusercontent.com/render/math?math=[0,M["> interval is compressed to <img src="https://render.githubusercontent.com/render/math?math=[0,1[">; in the present project, we will use un-normalized coordinates;
+  - *filtering mode*: it specifies whether interpolation is the nearest-neighbor or linear;
+  - *address mode*: it specifies the “boundary conditions”, namely, what texture filtering returns when the access coordinate is outside <img src="https://render.githubusercontent.com/render/math?math=[0,M[">; for example, the texture values can be prolonged by zeros, or periodically, or with the last sample or by a mirroring of the <img src="https://render.githubusercontent.com/render/math?math=[0,M["> interval.
 
-  - *coordinate scaling*: figures [1.11](#textureNearestNeighbor) and
-    [1.12](#textureLinear) show texture filtering in the case of
-    un-normalized coordinates; in other words, the coordinate by which
-    texture is accessed belongs to the interval \([0,M[\); a different
-    possibility is using *normalized coordinates* in which the \([0,M[\)
-    interval is compressed to \([0,1[\); in the present project, we will
-    use un-normalized coordinates;
-
-  - *filtering mode*: it specifies whether interpolation is the
-    nearest-neighbor or linear;
-
-  - *address mode*: it specifies the “boundary conditions”, namely, what
-    texture filtering returns when the access coordinate is outside
-    \([0,M[\); for example, the texture values can be prolonged by
-    zeros, or periodically, or with the last sample or by a mirroring of
-    the \([0,M[\) interval .
-
-A very important thing to remember when using textures is that texture
-cache is not coherent. This means that texture fetching from addresses
-that have been modified by global stores return undefined data if both
-the operations are performed in the same kernel call. In other words, a
-thread can consistently texture fetch a memory location if the location
-has been updated by a previous kernel call or memory copy, i.e., outside
-the current kernel call.  
-Now that we have a picture of what texture memory and texture filtering
-are, let’s investigate how the latter is implemented in CUDA.
+A very important thing to remember when using textures is that texture cache is not coherent. This means that texture fetching from addresses that have been modified by global stores return undefined data if both the operations are performed in the same kernel call. In other words, a thread can consistently texture fetch a memory location if the location has been updated by a previous kernel call or memory copy, i.e., outside the current kernel call.  
+Now that we have a picture of what texture memory and texture filtering are, let’s investigate how the latter is implemented in CUDA.
 
 ## Getting familiar with texture filtering in the one-dimensional case
 
