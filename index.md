@@ -180,26 +180,16 @@ Let’s pause with theory and temporarily go towards practice, illustrating how 
 
 ## Towards practice: CUDA texture memory
 
-Programmers with experience in graphics may already know texture memory
-since texture units are designed and typically employed for rendering
-pipelines in OpenGL and DirectX. Nevertheless, texture memory is also
-much useful for High-Performance Computing (HPC).  
-Programmers who are involved in non-graphics applications (like the
-industrial and scientific HPC applications covered in the present book)
-use texture memory as a read-only cache. Such a memory is located
-on-chip, namely, on the same chip of the processing units (the GPU cores
-in our case), to decrease latency for frequently used data.  
-This can help improve memory access performance when global memory data
-reads have certain access patterns. Global memory is indeed located
-off-chip, namely, on a chip different from that of the processing units
-while texture caches are conceived having in mind applications where
-memory access shows much *spatial locality*.  
-To understand this point, figure [1.10](#textureMemory) illustrates an
-example which refers to \(4\) threads accessing neighboring pixels of a
-two-dimensional image:
+Programmers with experience in graphics may already know texture memory since texture units are designed and typically employed for rendering pipelines in OpenGL and DirectX. Nevertheless, texture memory is also much useful for High-Performance Computing (HPC).  
+Programmers who are involved in non-graphics applications (like industrial and scientific HPC applications) use texture memory as a read-only cache. Such a memory is located on-chip, namely, on the same chip of the processing units (the GPU cores in our case), to decrease latency for frequently used data.  
+This can help improve memory access performance when global memory data reads have certain access patterns. Global memory is indeed located off-chip, namely, on a chip different from that of the processing units while texture caches are conceived having in mind applications where memory access shows much *spatial locality*.  
+To understand this point, figure [10](#textureMemory) illustrates an example which refers to <img src="https://render.githubusercontent.com/render/math?math=4"> threads accessing neighboring pixels of a two-dimensional image:
 
-![“Local” thread accesses to global
-memory.](/Chapter01/textureMemory.png)
+<p align="center">
+  <img src="textureMemory.png" width="400" id="textureMemory">
+  <br>
+     <em>Figure 10. “Local” thread accesses to global memory.</em>
+</p>
 
 Figure [1.10](#textureMemory) illustrates how, in a typical CPU caching
 scheme, the \(4\) accessed memory locations would not be stored at
