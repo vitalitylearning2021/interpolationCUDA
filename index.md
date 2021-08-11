@@ -191,41 +191,13 @@ To understand this point, figure [10](#textureMemory) illustrates an example whi
      <em>Figure 10. “Local” thread accesses to global memory.</em>
 </p>
 
-Figure [1.10](#textureMemory) illustrates how, in a typical CPU caching
-scheme, the \(4\) accessed memory locations would not be stored at
-consecutive memory addresses so that they would not be cached together.
-On the other side, texture caches those global memory locations together
-to accelerate access patterns such as the illustrated one. This result
-is achieved by transferring the two-dimensional spatial locality through
-a mapping based on a *z-curve*-like concept.  
-We will overlook further details on z-curve-like caching, which is not
-of strict interest for the present project. The interested Reader can
-refer to  for some details. Actually, in this project, we will not use
-texture memory to speed up memory fetches, but rather to perform fast
-interpolations, also known as *texture filtering* .  
-Indeed, when the texture is accessed using non-integer indices, it
-returns the interpolation between neighboring stored values. Such
-interpolation can be a nearest-neighbor or linear, namely, of the two
-types discussed above. Performing interpolation using texture memory has
-the indubitable advantage that such operation is performed by dedicated
+Figure [10](#textureMemory) illustrates how, in a typical CPU caching scheme, the <img src="https://render.githubusercontent.com/render/math?math=4"> accessed memory locations would not be stored at consecutive memory addresses so that they would not be cached together. On the other side, texture caches those global memory locations together
+to accelerate access patterns such as the illustrated one. This result is achieved by transferring the two-dimensional spatial locality through a mapping based on a *z-curve*-like concept.  
+We will overlook further details on z-curve-like caching, which is not of strict interest for the present project. Actually, in this project, we will not use texture memory to speed up memory fetches, but rather to perform fast interpolations, also known as *texture filtering* .  
+Indeed, when the texture is accessed using non-integer indices, it returns the interpolation between neighboring stored values. Such interpolation can be a nearest-neighbor or linear, namely, of the two types discussed above. Performing interpolation using texture memory has the indubitable advantage that such operation is performed by dedicated
 hardware circuitry, therefore it is worked out very fast.  
-Nonetheless, speed is paid with accuracy in the linear case since
-interpolation coefficients are stored in a fixed point format having
-\(9\)-bit overall with \(8\) bits of fractional value.  
-Figures [1.11](#textureNearestNeighbor) and [1.12](#textureLinear) are
-not a mere repetition of Figures [1.5](#nearestNeighborInterpolation)
-and [1.7](#linearInterpolation1D), but they illustrate how interpolation
-is achieved with texture filtering in the one-dimensional case and when
-un-normalized coordinates are employed (the term “un-normalized
-coordinates” will be clear in a while). In particular, they show the
-behavior of the `tex1D()` function which is the CUDA function performing
-texture filtering in a one-dimensional case both for the
-nearest-neighbor and linear interpolations. For nearest-neighbor
-interpolation, \(tex1D(x)=f_m\), \(m\leq x < m+1\),
-\(m=0,1,\ldots,M-1\), while, for linear interpolation, `tex1D()` is the
-result of the linear interpolation between \(f_m\) and \(f_{m+1}\), for
-\(m+0.5\leq x\leq m+1+0.5\) and \(m=0,1,\ldots,M-2\). In both cases, it
-can be seen that
+Nonetheless, speed is paid with accuracy in the linear case since interpolation coefficients are stored in a fixed point format having <img src="https://render.githubusercontent.com/render/math?math=9">-bit overall with <img src="https://render.githubusercontent.com/render/math?math=8"> bits of fractional value.  
+Figures [11](#textureNearestNeighbor) and [12](#textureLinear) are not a mere repetition of Figures [5](#nearestNeighborInterpolation) and [7](#linearInterpolation1D), but they illustrate how interpolation is achieved with texture filtering in the one-dimensional case and when un-normalized coordinates are employed (the term “un-normalized coordinates” will be clear in a while). In particular, they show the behavior of the `tex1D()` function which is the CUDA function performing texture filtering in a one-dimensional case both for the nearest-neighbor and linear interpolations. For nearest-neighbor interpolation, <img src="https://render.githubusercontent.com/render/math?math=tex1D(x)=f_m">, <img src="https://render.githubusercontent.com/render/math?math=m\leq x < m %2B 1">, <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1">, while, for linear interpolation, `tex1D()` is the result of the linear interpolation between <img src="https://render.githubusercontent.com/render/math?math=f_m"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1}">, for <img src="https://render.githubusercontent.com/render/math?math=m %2B 0.5\leq x\leq m %2B 1 %2B 0.5"> and <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-2">. In both cases, it can be seen that
 
 \[\label{generalInterpolationTex}
 f^{(p)}(x)=tex1D(x+0.5), \;\; p=0,1.\]
