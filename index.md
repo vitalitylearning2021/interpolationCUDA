@@ -157,6 +157,10 @@ interpolation value at the yellow cross-location is determined from the two virt
 More formally, the interpolating function at the interpolation point denoted with a cross in figure [9](#linearInterpolation2Dsamples) and having coordinates <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> is achieved from <img src="https://render.githubusercontent.com/render/math?math=4"> samples: <img src="https://render.githubusercontent.com/render/math?math=f_{m,n}">, <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n}">, <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n %2B 1}">. The final
 result is achieved by first constructing the virtual sample represented by the upper empty circle in figure [9](#linearInterpolation2Dsamples) and computed as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n %2B 1}"> along the <img src="https://render.githubusercontent.com/render/math?math=x"> axis, namely:
 
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f_{x,n %2B 1}=(1-\alpha_x)f_{m,n %2B 1}+\alpha_x f_{m %2B 1,n %2B 1}," id="partialLinearInterpolation2D"> [4]
+</p>
+
 \[\label{partialLinearInterpolation2D}
 f_{x,n+1}=(1-\alpha_x)f_{m,n+1}+\alpha_x f_{m+1,n+1},\]
 
