@@ -434,15 +434,8 @@ Once we have made practice on texture filtering in a simplified setting, we are 
 
 ## Practice: Nearest-neighbor and linear interpolations of a PGM image
 
-We are now ready to move a step forward towards the project of interest.
-In particular, we will read a PGM (Portable Gray Map) image from a file,
-we will perform the nearest-neighbor and linear interpolations and,
-finally, we will save the result again in a PGM image. The choice of the
-PGM format is due to the fact that it is designed to be extremely easy
-to learn and manipulate. It is nevertheless convenient to provide a
-short recall.  
-A PGM image is a grayscale image whose pixels, or “dots” on the screen,
-are encoded with one or two bytes (\(8\) or \(16\) bits). A PGM file
+We are now ready to move a step forward towards the project of interest. In particular, we will read a PGM (Portable Gray Map) image from a file, we will perform the nearest-neighbor and linear interpolations and, finally, we will save the result again in a PGM image. The choice of the PGM format is due to the fact that it is designed to be extremely easy to learn and manipulate. It is nevertheless convenient to provide a short recall.  
+A PGM image is a grayscale image whose pixels, or “dots” on the screen, are encoded with one or two bytes (\(8\) or \(16\) bits). A PGM file
 provides for a header containing information on the file itself and on
 the image and an array of numbers representing the different shades of
 gray of the generic pixel, ranging from black (\(0\)) to white (up to
