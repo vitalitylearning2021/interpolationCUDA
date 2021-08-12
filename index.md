@@ -174,7 +174,7 @@ Finally, the desired value <img src="https://render.githubusercontent.com/render
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\alpha_y=y-n">.  
-The final bilinear interpolation formula can be obtained by substituting equations ([\[4\]](#partialLinearInterpolation2D)) and ([\[5\]](#partialLinearInterpolation2D_v2))
+The final bilinear interpolation formula can be obtained by substituting equations [\[4\]](#partialLinearInterpolation2D) and [\[5\]](#partialLinearInterpolation2D_v2)
 in ([\[6\]](#linearInterpolation2Dfull)), but its expression is not really needed and is here omitted for the sake of brevity.  
 Let’s pause with theory and temporarily go towards practice, illustrating how the texture memory works in CUDA.
 
@@ -341,52 +341,35 @@ void textureFiltering(float *h_samples, float *d_samples, float
      <em>Listing 3. The `textureFiltering()` function of the getting-started texture code.</em>
 </p>
 
-To explain Listing [3]](#texture_3), let us mention that CUDA textures are bound to CUDA arrays which are opaque memory layouts having dimensionality one, two, or three and optimized for texture fetching. After having defined the `cudaArray` and transferred the host data, `cudaBindTexture()` is used to bind the texture reference to the memory buffer. This informs the CUDA runtime of the following:
+To explain Listing [3](#texture_3), let us mention that CUDA textures are bound to CUDA arrays which are opaque memory layouts having dimensionality one, two, or three and optimized for texture fetching. After having defined the `cudaArray` and transferred the host data, `cudaBindTexture()` is used to bind the texture reference to the memory buffer. This informs the CUDA runtime of the following:
 
   - we mean using the buffer specified in `cudaArray` as a texture;
   - we mean using the texture reference at hand as the “texture’s name”.
 
-We furthermore notify CUDA that we intend to use un-normalized
-coordinates, as mentioned above, by `tex.normalized = false`. We also
-inform CUDA on how to prolong the data outside the sampling interval. As
-already said, different possibilities are available. In the above
-example, we use `tex.addressMode[0] = cudaAddressModeClamp`. This means
+We furthermore notify CUDA that we intend to use un-normalized coordinates, as mentioned above, by `tex.normalized = false`. We also inform CUDA on how to prolong the data outside the sampling interval. As already said, different possibilities are available. In the above example, we use `tex.addressMode[0] = cudaAddressModeClamp`. This means
 that the samples are prolonged as follows:
 
-\[f_m=f_0, \;\; m<0\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f_m=f_0, m<0,">, [10]
+</p>
 
 and
 
-\[f_m=f_{M-1}, \;\; m\geq M.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f_m=f_{M-1}, m\geq M,">. [11]
+</p>
 
-The `textureFiltering()` function is set up to easily change the
-prolongation modality. It is enough to just comment the currently
-running line and uncomment the desired address mode. It should be
-noticed that `tex.addressMode` is indexed. For the current example, only
-one index is of interest, being the texture one-dimensional, but, in
-principle, for two or three-dimensional textures different address modes
-can be chosen for different dimensions (see exercise
-[\[addressModes\]](#addressModes)).  
-Finally, the desired filtering type should be chosen. Nearest-neighbor
-interpolation is achieved by launching the
-`textureFilteringKernelNerp()` kernel and setting `tex.filterMode =
-cudaFilterModePoint`.
+The `textureFiltering()` function is set up to easily change the prolongation modality. It is enough to just comment the currently running line and uncomment the desired address mode. It should be noticed that `tex.addressMode` is indexed. For the current example, only one index is of interest, being the texture one-dimensional, but, in principle, for two or three-dimensional textures different address modes can be chosen for different dimensions (see exercise [\[addressModes\]](#addressModes)).  
+Finally, the desired filtering type should be chosen. Nearest-neighbor interpolation is achieved by launching the `textureFilteringKernelNerp()` kernel and setting `tex.filterMode = cudaFilterModePoint`.
 
-The name of the kernel function contains the “nickname” *NERP* typically
-used to denote nearest-neighbor interpolation.
+The name of the kernel function contains the “nickname” *NERP* typically used to denote nearest-neighbor interpolation.
 
-Later on, linear interpolation is obtained by launching the
-`textureFilteringKernelLerp()` kernel function and setting
-`tex.filterMode = cudaFilterModeLinear`.
+Later on, linear interpolation is obtained by launching the `textureFilteringKernelLerp()` kernel function and setting `tex.filterMode = cudaFilterModeLinear`.
 
-Also the name of the latter kernel function contains the “nickname”
-*LERP* typically used to indicate linear interpolation.
+Also the name of the latter kernel function contains the “nickname” *LERP* typically used to indicate linear interpolation.
 
-In both the cases of nearest-neighbor and linear interpolations, once
-`tex.filterMode` has been defined, our texture is set up and ready to be
-used.  
-Let us analyze first the `textureFilteringKernelNerp()` kernel function
-reported in Listing [\[texture\_4\]](#texture_4):
+In both the cases of nearest-neighbor and linear interpolations, once `tex.filterMode` has been defined, our texture is set up and ready to be used.  
+Let us analyze first the `textureFilteringKernelNerp()` kernel function reported in Listing [4](#texture_4):
 
 ``` c++
 __global__ void textureFilteringKernelNerp(const float * 
@@ -404,35 +387,24 @@ __global__ void textureFilteringKernelNerp(const float *
     printf("argument = %f; texture = %f; nearest-neighbor = 
         %f\n", d_xCoord[tidx], tex1D(tex, (d_xCoord[tidx]) + 0.5), nn);}
 ```
+<p align="center" id="texture_4" >
+     <em>Listing 4. The `textureFilteringKernelNerp()` kernel function of the getting-started texture code.</em>
+</p>
 
-This kernel function prints the results of nearest-neighbor texture
-filtering by invoking `tex1D` `(tex,(d_xCoord[tidx])+0.5)` which
-evaluates \(f^{(0)}\) at `d_xCoord[tidx]`. The need for the \(0.5\)
-shift has been already explained above. The value of nearest-neighbor
-texture filtering is compared with an analogous “manual” interpolation.
-Manual nerp is simply achieved by picking up the sample with index
-nearest to `d_xCoord[tidx]`, by calling the `round()` function.  
-The `if...else` conditions are just needed to check whether
-`d_xCoord[tidx]` falls within the interpolation interval and, if not,
-clamping is used. In other words, if `d_xCoord[tidx]` is located at the
-left of the interpolation interval, `d_samples[0]` is taken as
-nearest-neighbor interpolation value. Opposite to that, if
-`d_xCoord[tidx]` is on the right side of the interpolation interval,
-`d_xCoord[M-1]` is picked up.  
-The results of both nearest-neighbor and linear filterings for the
-considered example are illustrated in figure
-[1.13](#interpolationExample) below:
+This kernel function prints the results of nearest-neighbor texture filtering by invoking `tex1D` `(tex,(d_xCoord[tidx])+0.5)` which evaluates <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}"> at `d_xCoord[tidx]`. The need for the <img src="https://render.githubusercontent.com/render/math?math=0.5">
+shift has been already explained above. The value of nearest-neighbor texture filtering is compared with an analogous “manual” interpolation. Manual nerp is simply achieved by picking up the sample with index nearest to `d_xCoord[tidx]`, by calling the `round()` function.  
+The `if...else` conditions are just needed to check whether `d_xCoord[tidx]` falls within the interpolation interval and, if not, clamping is used. In other words, if `d_xCoord[tidx]` is located at the left of the interpolation interval, `d_samples[0]` is taken as nearest-neighbor interpolation value. Opposite to that, if `d_xCoord[tidx]` is on the right side of the interpolation interval, `d_xCoord[M-1]` is picked up.  
+The results of both nearest-neighbor and linear filterings for the considered example are illustrated in figure [1.13](#interpolationExample) below:
 
-![Interpolation as performed by texture filtering for the
-nearest-neighbor and linear cases.](/Chapter01/interpolationExample.png)
+<p align="center">
+  <img src="interpolationExample.png" width="400" id="interpolationExample">
+  <br>
+     <em>Figure 13. Interpolation as performed by texture filtering for the
+nearest-neighbor and linear cases.</em>
+</p>
 
-The red dots refer to the samples, the black dots are the results of
-nearest-neighbor interpolation and the green dots are the results of
-linear interpolation. The green dots surrounded by a black circumference
-mean that the results of the nearest-neighbor and linear interpolation
-coincide.  
-Let us now consider the kernel function performing the linear texture
-filtering reported in Listing [\[texture\_5\]](#texture_5):
+The red dots refer to the samples, the black dots are the results of nearest-neighbor interpolation and the green dots are the results of linear interpolation. The green dots surrounded by a black circumference mean that the results of the nearest-neighbor and linear interpolation coincide.  
+Let us now consider the kernel function performing the linear texture filtering reported in Listing [5](#texture_5):
 
 ``` c++
 __global__ void textureFilteringKernelLerp(const float * 
@@ -451,26 +423,14 @@ __global__ void textureFilteringKernelLerp(const float *
     printf("argument = %f; texture = %f; linear = %f\n", d_xCoord[tidx],
     tex1D(tex, (d_xCoord[tidx]) + 0.5), ll);}
 ```
+<p align="center" id="texture_5" >
+     <em>Listing 5. The `textureFilteringKernelLerp()` kernel function of the getting-started texture code.</em>
+</p>
 
-The kernel function is constructed symmetrically with respect to the
-foregoing one. It shows the results of the linear interpolation by
-invoking `tex1D(tex, d_xCoord[tidx] + 0.5)` which, this time, performs a
-linear interpolation instead of nearest-neighbor interpolation since we
-have used `tex.filterMode = cudaFilterModeLinear`. Texture filtering is
-once again compared with “manual” linear interpolation. A relevant thing
-to note is that the largest index of the sample not larger than the
-interpolation point `d_xCoord[tidx]` is obtained by using the `floor()`
-function. The result of linear texture filtering for the considered
-example is shown in figure [1.13](#interpolationExample).  
-Finally, let us observe that, when running the full example, a
-difference between the texture filtering result and that associated with
-the “exact” linear interpolation according to equation
-([\[linearInterpolationEQ\]](#linearInterpolationEQ)) can be
-appreciated. Such a difference is related to the lower accuracy of
-texture filtering, as already above mentioned.  
-Once we have made practice on texture filtering in a simplified setting,
-we are ready to face interpolation using texture filtering on a full
-image.
+The kernel function is constructed symmetrically with respect to the foregoing one. It shows the results of the linear interpolation by invoking `tex1D(tex, d_xCoord[tidx] + 0.5)` which, this time, performs a linear interpolation instead of nearest-neighbor interpolation since we have used `tex.filterMode = cudaFilterModeLinear`. Texture filtering is
+once again compared with “manual” linear interpolation. A relevant thing to note is that the largest index of the sample not larger than the interpolation point `d_xCoord[tidx]` is obtained by using the `floor()` function. The result of linear texture filtering for the considered example is shown in figure [13](#interpolationExample).  
+Finally, let us observe that, when running the full example, a difference between the texture filtering result and that associated with the “exact” linear interpolation according to equation [\[3\]](#linearInterpolationEQ) can be appreciated. Such a difference is related to the lower accuracy of texture filtering, as already above mentioned.  
+Once we have made practice on texture filtering in a simplified setting, we are ready to face interpolation using texture filtering on a full image.
 
 ## Practice: Nearest-neighbor and linear interpolations of a PGM image
 
