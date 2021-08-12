@@ -435,23 +435,10 @@ Once we have made practice on texture filtering in a simplified setting, we are 
 ## Practice: Nearest-neighbor and linear interpolations of a PGM image
 
 We are now ready to move a step forward towards the project of interest. In particular, we will read a PGM (Portable Gray Map) image from a file, we will perform the nearest-neighbor and linear interpolations and, finally, we will save the result again in a PGM image. The choice of the PGM format is due to the fact that it is designed to be extremely easy to learn and manipulate. It is nevertheless convenient to provide a short recall.  
-A PGM image is a grayscale image whose pixels, or “dots” on the screen, are encoded with one or two bytes (\(8\) or \(16\) bits). A PGM file
-provides for a header containing information on the file itself and on
-the image and an array of numbers representing the different shades of
-gray of the generic pixel, ranging from black (\(0\)) to white (up to
-\(65,536\)). PGM images are typically stored as ASCII files, but we will
-here deal with a binary representation. Binary PGM files are encoded
-with a single byte.  
-The first line contains the header which reports the format: “P2” for
-text or “P5” for binary. In our case, the format type should be “P5”.
-The second line optionally contains a comment. The line is a comment if
-it starts with “\#”. In the case the second line is a comment, the next
-line contains the image size in terms of `width x height` along with the
+A PGM image is a grayscale image whose pixels, or “dots” on the screen, are encoded with one or two bytes (<img src="https://render.githubusercontent.com/render/math?math=8"> or <img src="https://render.githubusercontent.com/render/math?math=16"> bits). A PGM file provides for a header containing information on the file itself and on the image and an array of numbers representing the different shades of gray of the generic pixel, ranging from black (<img src="https://render.githubusercontent.com/render/math?math=0">) to white (up to <img src="https://render.githubusercontent.com/render/math?math=65,536">). PGM images are typically stored as ASCII files, but we will here deal with a binary representation. Binary PGM files are encoded with a single byte.  
+The first line contains the header which reports the format: “P2” for text or “P5” for binary. In our case, the format type should be “P5”. The second line optionally contains a comment. The line is a comment if it starts with “\#”. In the case the second line is a comment, the next line contains the image size in terms of `width x height` along with the
 maximum number of shades.  
-The latter number is \(255\) for binary PGM images. In the case the
-second line is not a comment, then it is the second line that contains
-that information. After that, the image is represented by an array of
-grey shades, one per each pixel.  
+The latter number is <img src="https://render.githubusercontent.com/render/math?math=255"> for binary PGM images. In the case the second line is not a comment, then it is the second line that contains that information. After that, the image is represented by an array of grey shades, one per each pixel.  
 An example of binary PGM image is shown below:
 
 ``` c++
@@ -476,9 +463,11 @@ P2
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255
 ```
+<p align="center" id="texture_6" >
+     <em>Listing 6. An example of PGM image file.</em>
+</p>
 
-It defines a `16x16` black and white image with black background (the
-`0`’s) and white diagonal (the `255`’s).  
+It defines a `16x16` black and white image with black background (the `0`’s) and white diagonal (the `255`’s).  
 Many PGM images that can be used to play with the codes in this project
 can be downloaded from
 <http://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html>.  
