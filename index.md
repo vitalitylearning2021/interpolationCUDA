@@ -235,14 +235,10 @@ Now that we have a picture of what texture memory and texture filtering are, let
 
 ## Getting familiar with texture filtering in the one-dimensional case
 
-To get familiar with the nearest-neighbor and linear interpolations with
-texture filtering, we will now consider a simple one-dimensional case.
-We will illustrate a getting-started code as a sequence of code
-snippets. For the sake of clarity, the sequence of code snippets will
-not be the same as they appear in the full code.  
-Let’s begin with the first part of the code defining the texture
-reference in Listing [\[texture\_1\]](#texture_1):
+To get familiar with the nearest-neighbor and linear interpolations with texture filtering, we will now consider a simple one-dimensional case. We will illustrate a getting-started code as a sequence of code snippets. For the sake of clarity, the sequence of code snippets will not be the same as they appear in the full code.  
+Let’s begin with the first part of the code defining the texture reference in Listing [\[texture\_1\]](#texture_1):
 
+<p align="center">
 ``` c++
 #include <stdio.h>
 
@@ -256,7 +252,11 @@ inline void checkAssert(cudaError_t errorCode, const char *file,
         fprintf(stderr, "Check assert: %s %s %d\n",
            cudaGetErrorString(errorCode), file, line);
         if (abort) exit(errorCode);}}
-```
+```  <br>
+     <em>Listing 1. Interpolation is performed by texture filtering: nearest-neighbor.</em>
+</p>
+
+
 
 As can be seen, one-dimensional, float-type texture memory is declared.
 Relevantly, such a declaration does not allocate storages and does not
