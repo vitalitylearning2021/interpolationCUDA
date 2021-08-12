@@ -236,9 +236,8 @@ Now that we have a picture of what texture memory and texture filtering are, let
 ## Getting familiar with texture filtering in the one-dimensional case
 
 To get familiar with the nearest-neighbor and linear interpolations with texture filtering, we will now consider a simple one-dimensional case. We will illustrate a getting-started code as a sequence of code snippets. For the sake of clarity, the sequence of code snippets will not be the same as they appear in the full code.  
-Let’s begin with the first part of the code defining the texture reference in Listing [\[texture\_1\]](#texture_1):
+Let’s begin with the first part of the code defining the texture reference in Listing [1](#texture_1):
 
-<p align="center">
 ``` c++
 #include <stdio.h>
 
@@ -252,25 +251,16 @@ inline void checkAssert(cudaError_t errorCode, const char *file,
         fprintf(stderr, "Check assert: %s %s %d\n",
            cudaGetErrorString(errorCode), file, line);
         if (abort) exit(errorCode);}}
-```  <br>
-     <em>Listing 1. Interpolation is performed by texture filtering: nearest-neighbor.</em>
+```  
+
+<p align="center" id="texture_1" >
+     <em>Listing 1. First part of the getting started texture code: texture memory declaration and CUDA error checking.</em>
 </p>
 
-
-
-As can be seen, one-dimensional, float-type texture memory is declared.
-Relevantly, such a declaration does not allocate storages and does not
-associate storage with the textured handle.  
-Then, the number of threads per block to be used in the subsequent
-kernel calls is defined and, finally, the `cudaCHECK()` function appears
-. Such a function enables performing the error check either on CUDA
-kernel invocations or on CUDA API calls. Indeed, CUDA APIs return an
-error code providing information on possible errors. By decorating CUDA
-APIs with `cudaCHECK()`, it is possible to “read” such error codes. The
-use of `cudaCHECK()` or of other error check functions is of the utmost
-importance when coding in CUDA.  
-Let’s now jump to the `main()` function in Listing
-[\[texture\_2\]](#texture_2):
+As can be seen, one-dimensional, float-type texture memory is declared. Relevantly, such a declaration does not allocate storages and does not associate storage with the textured handle.  
+Then, the number of threads per block to be used in the subsequent kernel calls is defined and, finally, the `cudaCHECK()` function appears. Such a function enables performing the error check either on CUDA kernel invocations or on CUDA API calls. Indeed, CUDA APIs return an error code providing information on possible errors. By decorating CUDA
+APIs with `cudaCHECK()`, it is possible to “read” such error codes. The use of `cudaCHECK()` or of other error check functions is of the utmost importance when coding in CUDA.  
+Let’s now jump to the `main()` function in Listing [2](#texture_2):
 
 ``` c++
 int main(){
@@ -301,21 +291,24 @@ int main(){
        numOutSamples);
     return 0;}
 ```
+<p align="center" id="texture_2" >
+     <em>Listing 2. `main` function of the getting-started texture code.</em>
+</p>
 
-As it can be seen, the sequence `h_samples` is made of \(5\) samples:
-\(0, 0.2, 0.4, 0.6, 0.8\). In other words,
+As it can be seen, the sequence `h_samples` is made of <img src="https://render.githubusercontent.com/render/math?math=5"> samples: <img src="https://render.githubusercontent.com/render/math?math=0, 0.2, 0.4, 0.6, 0.8">. In other words, 
 
-\[f_m=m \times 0.2, \;\; m=0,\ldots,4.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f_m=m \times 0.2, m=0,\ldots,4,">, [8]
+</p>
 
-The coordinates of \(7\) interpolation points `h_x` are then defined:
+The coordinates of <img src="https://render.githubusercontent.com/render/math?math=7"> interpolation points `h_x` are then defined:
 
-\[x_0=-0.6, x_1=-0.1, x_2=0.6, x_3=1.5, x_4=2.1, x_5=2.9, x_6=4.7.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=x_0=-0.6, x_1=-0.1, x_2=0.6, x_3=1.5, x_4=2.1, x_5=2.9, x_6=4.7,">, [9]
+</p>
 
-These arrays are then transferred to the GPU memory. Finally, the
-`textureFiltering()` function performs the texture-based interpolations
-and displays the results.  
-The `textureFiltering()` function is shown in Listing
-[\[texture\_3\]](#texture_3) below:
+These arrays are then transferred to the GPU memory. Finally, the `textureFiltering()` function performs the texture-based interpolations and displays the results.  
+The `textureFiltering()` function is shown in Listing [3](#texture_3) below:
 
 ``` c++
 void textureFiltering(float *h_samples, float *d_samples, float 
@@ -344,16 +337,13 @@ void textureFiltering(float *h_samples, float *d_samples, float
     cudaCHECK(cudaPeekAtLastError());
     cudaCHECK(cudaDeviceSynchronize());}
 ```
+<p align="center" id="texture_3" >
+     <em>Listing 3. The `textureFiltering()` function of the getting-started texture code.</em>
+</p>
 
-To explain Listing [\[texture\_3\]](#texture_3), let us mention that
-CUDA textures are bound to CUDA arrays which are opaque memory layouts
-having dimensionality one, two, or three and optimized for texture
-fetching. After having defined the `cudaArray` and transferred the host
-data, `cudaBindTexture()` is used to bind the texture reference to the
-memory buffer. This informs the CUDA runtime of the following:
+To explain Listing [3]](#texture_3), let us mention that CUDA textures are bound to CUDA arrays which are opaque memory layouts having dimensionality one, two, or three and optimized for texture fetching. After having defined the `cudaArray` and transferred the host data, `cudaBindTexture()` is used to bind the texture reference to the memory buffer. This informs the CUDA runtime of the following:
 
   - we mean using the buffer specified in `cudaArray` as a texture;
-
   - we mean using the texture reference at hand as the “texture’s name”.
 
 We furthermore notify CUDA that we intend to use un-normalized
