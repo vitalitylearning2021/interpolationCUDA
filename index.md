@@ -597,24 +597,16 @@ We will explore these instructions on a step-by-step basis in the following sect
 
 ### Cubic interpolation
 
-To begin with, figure [1.20](#interpolationCubic) below illustrates
-cubic interpolation:
+To begin with, figure [20](#interpolationCubic) below illustrates cubic interpolation:
 
-![Cubic interpolation.](/Chapter01/interpolationCubic.png)
+<p align="center">
+  <img src="interpolationCubic.png" width="400" id="interpolationCubic">
+  <br>
+     <em>Figure 20. Cubic interpolation.</em>
+</p>
 
-The above figure shows that, in order to know the function at the
-interpolation point represented by the cross, we need two samples on its
-left and two samples on its right.  
-Let us recall that, in the one-dimensional case, nearest-neighbor
-interpolation used only one sample per interpolation interval
-\((m,m+1)\), being represented by a zero-th order polynomial. Moreover,
-linear interpolation used two samples per interpolation interval
-\((m,m+1)\), being represented by a first-order polynomial. As it can be
-seen from figure [1.20](#interpolationCubic), cubic interpolation uses
-four samples per interpolation interval, being represented by a
-third-order polynomial. In particular, to reconstruct the function
-\(f(x)\) in \((m,m+1)\), the four samples \(m-1\), \(m\), \(m+1\) and
-\(m+2\) are now needed.  
+The above figure shows that, in order to know the function at the interpolation point represented by the cross, we need two samples on its left and two samples on its right.  
+Let us recall that, in the one-dimensional case, nearest-neighbor interpolation used only one sample per interpolation interval <img src="https://render.githubusercontent.com/render/math?math=(m, m %2B 1)">, being represented by a zero-th order polynomial. Moreover, linear interpolation used two samples per interpolation interval <img src="https://render.githubusercontent.com/render/math?math=(m, m %2B 1)">, being represented by a first-order polynomial. As it can be seen from figure [20](#interpolationCubic), cubic interpolation uses four samples per interpolation interval, being represented by a third-order polynomial. In particular, to reconstruct the function <img src="https://render.githubusercontent.com/render/math?math=f(x)"> in <img src="https://render.githubusercontent.com/render/math?math=(m, m %2B 1)">, the four samples <img src="https://render.githubusercontent.com/render/math?math=m-1">, <img src="https://render.githubusercontent.com/render/math?math=m">, <img src="https://render.githubusercontent.com/render/math?math=m %2B 1"> and <img src="https://render.githubusercontent.com/render/math?math=(m, m %2B 2)"> are now needed.  
 We now proceed towards cubic B-spline interpolation.
 
 ### Cubic B-spline interpolation
