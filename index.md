@@ -468,18 +468,9 @@ P2
 </p>
 
 It defines a `16x16` black and white image with black background (the `0`’s) and white diagonal (the `255`’s).  
-Many PGM images that can be used to play with the codes in this project
-can be downloaded from
-<http://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html>.  
-In the project at hand, the function `loadPGMImageAndInitTexture()`
-loads the PGM image to be interpolated, while the function
-`writePGMImage()` writes the interpolated image. We will not go through
-the details of PGM image read-writes and essentially use those functions
-as black-boxes. Nevertheless, `loadPGMImageAndInitTexture()` also
-initializes the texture which, in our relevant example, is a
-two-dimensional texture.  
-The initialization is performed by invoking the `initTexture()` function
-whose details are reported in Listing [\[texture\_6\]](#texture_6):
+Many PGM images that can be used to play with the codes in this project can be downloaded from <http://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html>.  
+In the project at hand, the function `loadPGMImageAndInitTexture()` loads the PGM image to be interpolated, while the function `writePGMImage()` writes the interpolated image. We will not go through the details of PGM image read-writes and essentially use those functions as black-boxes. Nevertheless, `loadPGMImageAndInitTexture()` also initializes the texture which, in our relevant example, is a two-dimensional texture.  
+The initialization is performed by invoking the `initTexture()` function whose details are reported in Listing [\[texture\_6\]](#texture_6):
 
 ``` c++
 void initTexture(int imageWidth, int imageHeight, unsigned char
@@ -505,16 +496,12 @@ void initTexture(int imageWidth, int imageHeight, unsigned char
     cudaCHECK(cudaBindTextureToArray(texReference, 
         d_imageArray));}
 ```
+<p align="center" id="texture_5" >
+     <em>Listing 7. The `initTexture()` function.</em>
+</p>
 
-As can be seen, the texture filtering mode is initialized to linear, but
-this setting will be changed in the sequel. Moreover, the address mode
-is *clamp* in the two dimensions. This setting will be kept fixed in the
-following examples. Finally, the un-normalized coordinates will be
-used.  
-After having loaded the PGM image and initialized the texture, we report
-in the following Listing [\[texture\_7\]](#texture_7) the kernel
-function that will be used for nearest-neighbor and linear
-interpolations:
+As can be seen, the texture filtering mode is initialized to linear, but this setting will be changed in the sequel. Moreover, the address mode is *clamp* in the two dimensions. This setting will be kept fixed in the following examples. Finally, the un-normalized coordinates will be used.  
+After having loaded the PGM image and initialized the texture, we report in the following Listing [\[texture\_7\]](#texture_7) the kernel function that will be used for nearest-neighbor and linear interpolations:
 
 ``` c++
 __global__ void nalKernel(unsigned char * __restrict__  d_interpSamples, 
@@ -530,96 +517,71 @@ __global__ void nalKernel(unsigned char * __restrict__  d_interpSamples,
         float outSample = tex2D(texReference, xNew + 0.5f, yNew + 0.5f);
         d_interpSamples[tidy * imWidth + tidx] = outSample * 0xff;}}
 ```
+<p align="center" id="texture_5" >
+     <em>Listing 8. The `nalKernel()` function to perform nearest-neighbor and linear texture-based interpolations.</em>
+</p>
 
-In the kernel above, `tidx` and `tidy` represent the `x` and `y`
-coordinates of each pixel, while `xNew` and `yNew` represent the new
-coordinates calculated after the translation and scaling operations.  
-The same kernel function is used for both the nearest-neighbor and
-linear texture-based interpolations. Indeed, it will be enough to change
-the address mode from `point` to `linear` to change the operation of
-such function from nearest-neighbor to linear. The name of the kernel
-function is evocative of that. Indeed, “nal” means Nerp And Lerp. In
-both cases, texture filtering is achieved by the `tex2D()` function and
-the `+0.5` shifts in the texture coordinates are due to the already
-mentioned texture convention related to how `text2D()` works.  
-The kernel function uses three parameters: `transl_x`, `transl_y` and
-`scaleFactor`. They define the translations along \(x\) and \(y\) and a
-scale factor, respectively. If `scaleFactor > 1`, the interpolation
-performs a zoom out, while if `scaleFactor < 1`, the interpolation
-performs a zoom in.  
-To better understand the meaning of the mentioned parameters, let us
-consider a practical example.  
-Figure [1.14](#Fig9a) below illustrates the `512x512` image (“*Basilica
-Julia*”) used here and in the following to analyze the performance of
-the developed interpolation codes:
+In the kernel above, `tidx` and `tidy` represent the `x` and `y` coordinates of each pixel, while `xNew` and `yNew` represent the new coordinates calculated after the translation and scaling operations. 
+The same kernel function is used for both the nearest-neighbor and linear texture-based interpolations. Indeed, it will be enough to change the address mode from `point` to `linear` to change the operation of such function from nearest-neighbor to linear. The name of the kernel function is evocative of that. Indeed, “nal” means Nerp And Lerp. In
+both cases, texture filtering is achieved by the `tex2D()` function and the `+0.5` shifts in the texture coordinates are due to the already mentioned texture convention related to how `text2D()` works.  
+The kernel function uses three parameters: `transl_x`, `transl_y` and `scaleFactor`. They define the translations along <img src="https://render.githubusercontent.com/render/math?math=x"> and <img src="https://render.githubusercontent.com/render/math?math=y"> and a scale factor, respectively. If `scaleFactor > 1`, the interpolation performs a zoom out, while if `scaleFactor < 1`, the interpolation performs a zoom in.  
+To better understand the meaning of the mentioned parameters, let us consider a practical example.  
+Figure [14](#Fig9a) below illustrates the `512x512` image (“*Basilica Julia*”) used here and in the following to analyze the performance of the developed interpolation codes:
 
-![The original “Basilica Julia” image
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig9a.png)
+<p align="center">
+  <img src="Fig9a.png" width="400" id="Fig9a">
+  <br>
+     <em>Figure 14. The original “Basilica Julia” image.</em>
+</p>
 
-Figure [1.15](#Fig9b) below shows the result of applying
-nearest-neighbor interpolation to the original image when `transl_x
-= 0`, `transl_y = 0` and `scaleFactor = 1`:
+Figure [15](#Fig9b) below shows the result of applying nearest-neighbor interpolation to the original image when `transl_x = 0`, `transl_y = 0` and `scaleFactor = 1`:
 
-![Nerp with `transl_x = 0`, `transl_y = 0`, `scaleFactor = 1`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig9b.png)
+<p align="center">
+  <img src="Fig9b.png" width="400" id="Fig9b">
+  <br>
+     <em>Figure 15. Nerp with `transl_x = 0`, `transl_y = 0`, `scaleFactor = 1`.</em>
+</p>
 
-These parameters correspond to zero translation and zoom, namely, to
-recompute the image exactly in the same `512x512` original points.
-Obviously, Figures [1.14](#Fig9a) and [1.15](#Fig9b) coincide.  
-Figure [1.16](#Fig9c) below refers to zero translation, namely,
-`transl_x = 0` and `transl_y = 0`, but `scaleFactor = 2`, namely, a
-double zoom out is performed:
+These parameters correspond to zero translation and zoom, namely, to recompute the image exactly in the same `512x512` original points. Obviously, Figures [14](#Fig9a) and [15](#Fig9b) coincide.  
+Figure [16](#Fig9c) below refers to zero translation, namely, `transl_x = 0` and `transl_y = 0`, but `scaleFactor = 2`, namely, a double zoom out is performed:
 
-![Nerp with `transl_x = 0`, `transl_y = 0`, `scaleFactor = 2`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig9c.png)
+<p align="center">
+  <img src="Fig9c.png" width="400" id="Fig9c">
+  <br>
+     <em>Figure 16. Nerp with `transl_x = 0`, `transl_y = 0`, `scaleFactor = 2`.</em>
+</p>
 
-In other words, we have changed `scaleFactor` from `1` to `2`, while
-keeping the original values of `transl_x` and `transl_y`.  
-A zoom-in appears with features outside the image due to the particular
-kind of chosen texture prolongation. As can be seen, the original image
-dimensions are now halved, while features appear on its exterior. The
-external features represent the prolongation of the image according to
-the address mode clamp. The image at the center appears smaller since
+In other words, we have changed `scaleFactor` from `1` to `2`, while keeping the original values of `transl_x` and `transl_y`.  
+A zoom-in appears with features outside the image due to the particular kind of chosen texture prolongation. As can be seen, the original image dimensions are now halved, while features appear on its exterior. The external features represent the prolongation of the image according to the address mode clamp. The image at the center appears smaller since
 the chosen parameters correspond to a `x2` decimation.  
-Figure [1.17](#Fig9d) below illustrates the reconstruction which
-corresponds again to `transl_x = 0` and `transl_y = 0`, but to
-`scaleFactor = 0.5` meaning a two-fold zoom in:
+Figure [17](#Fig9d) below illustrates the reconstruction which corresponds again to `transl_x = 0` and `transl_y = 0`, but to `scaleFactor = 0.5` meaning a two-fold zoom in:
 
-![Nerp with `transl_x = 0`, `transl_y = 0`, `scaleFactor = 0.5`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig9d.png)
+<p align="center">
+  <img src="Fig9d.png" width="400" id="Fig9d">
+  <br>
+     <em>Figure 17. Nerp with `transl_x = 0`, `transl_y = 0`, `scaleFactor = 0.5`.</em>
+</p>
 
-We have again changed `scaleFactor` from `2` to `0.5`, while keeping the
-original values of `transl_x` and `transl_y`. Indeed, the reconstruction
-now simply represents the central part of the Basilica Julia. A zoom-in
-effect appears. In this case, the original picture has been sampled by
-performing reconstructions also at points in between the original
-samples.  
-Let us conclude this tracking shot by considering the reconstruction
-with `transl_x = 100`, `transl_y = 100` and `scaleFactor = 1/8`. Figure
-[1.18](#Fig9e) below illustrates the result of such a reconstruction:
+We have again changed `scaleFactor` from `2` to `0.5`, while keeping the original values of `transl_x` and `transl_y`. Indeed, the reconstruction now simply represents the central part of the Basilica Julia. A zoom-in effect appears. In this case, the original picture has been sampled by performing reconstructions also at points in between the original samples.  
+Let us conclude this tracking shot by considering the reconstruction with `transl_x = 100`, `transl_y = 100` and `scaleFactor = 1/8`. Figure [18](#Fig9e) below illustrates the result of such a reconstruction:
 
-![Nerp with `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig9e.png)
+<p align="center">
+  <img src="Fig9e.png" width="400" id="Fig9e">
+  <br>
+     <em>Figure 18. Nerp with `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`.</em>
+</p>
 
-We have now changed both `transl_x` and `transl_y` from `0` to `100` and
-`scaleFactor` from `0.5` down to `1/8`.This means that we have performed
-an even larger magnification (`8 to 1`) and that we have translated the
-reconstruction window so to catch a detail of the Basilica Julia
-fringes.  
-As mentioned before, the same kernel can be used to perform linear
-interpolations also by simply changing the filtering modality. The
-smoothness/accuracy can be appreciated in figure [1.19](#Fig9f) below:
+We have now changed both `transl_x` and `transl_y` from `0` to `100` and `scaleFactor` from `0.5` down to `1/8`.This means that we have performed an even larger magnification (`8 to 1`) and that we have translated the reconstruction window so to catch a detail of the Basilica Julia fringes.  
+As mentioned before, the same kernel can be used to perform linear interpolations also by simply changing the filtering modality. The smoothness/accuracy can be appreciated in figure [19](#Fig9f) below:
 
-![Lerp with `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig9f.png)
+<p align="center">
+  <img src="Fig9f.png" width="400" id="Fig9f">
+  <br>
+     <em>Figure 19. Lerp with `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`.</em>
+</p>
 
-The `transl_x`, `transl_y`, and `scaleFactor` parameters are the same as
-before. In figure [1.19](#Fig9f) above, the same reconstruction of
-figure [1.18](#Fig9e) is shown, but now by performing a bilinear
-interpolation. The image appears smoother than before.  
-Following an interlude of practice, let us now come back to theory to
-make the last analytical effort and understand the details of cubic
-B-spline interpolation.
+The `transl_x`, `transl_y`, and `scaleFactor` parameters are the same as before. In figure [19](#Fig9f) above, the same reconstruction of figure [18](#Fig9e) is shown, but now by performing a bilinear interpolation. The image appears smoother than before.  
+Following an interlude of practice, let us now come back to theory to make the last analytical effort and understand the details of cubic B-spline interpolation.
 
 ## Understanding cubic B-spline interpolation
 
