@@ -583,32 +583,17 @@ As mentioned before, the same kernel can be used to perform linear interpolation
 The `transl_x`, `transl_y`, and `scaleFactor` parameters are the same as before. In figure [19](#Fig9f) above, the same reconstruction of figure [18](#Fig9e) is shown, but now by performing a bilinear interpolation. The image appears smoother than before.  
 Following an interlude of practice, let us now come back to theory to make the last analytical effort and understand the details of cubic B-spline interpolation.
 
-## Understanding cubic B-spline interpolation
+## Cubic B-spline interpolation
 
-From the mathematical point of view, nearest-neighbor and linear
-interpolations correspond to approximate a function whose samples are
-known using zero-th and first-order polynomials, respectively. Moreover,
-in the foregoing section, we have learned how linear interpolation is
-capable to improve the nearest-neighbor interpolation.  
-It can then be expected that increasing the degree of the interpolation
-polynomial leads to increased interpolation quality. In this section,
-with the aim of stepping forward, we will:
+From the mathematical point of view, nearest-neighbor and linear interpolations correspond to approximate a function whose samples are known using zero-th and first-order polynomials, respectively. Moreover, in the foregoing section, we have learned how linear interpolation is capable to improve the nearest-neighbor interpolation.  
+It can then be expected that increasing the degree of the interpolation polynomial leads to increased interpolation quality. In this section, with the aim of stepping forward, we will:
 
-1.  discuss cubic interpolation (based on third-order polynomials);
-    alternatively, for the sake of simplicity, we will again lead a
-    preliminary one-dimensional discussion;
+1.  discuss cubic interpolation (based on third-order polynomials); alternatively, for the sake of simplicity, we will again lead a preliminary one-dimensional discussion;
+2.  introduce cubic B-spline interpolation; this is the particular cubic interpolation of interest here;
+3.  show how cubic B-spline interpolation can be implemented as a texture filtering;
+4.  extend the one-dimensional scheme to two dimensions to solve the problem known as *bicubic interpolation*.
 
-2.  introduce cubic B-spline interpolation; this is the particular cubic
-    interpolation of interest here;
-
-3.  show how cubic B-spline interpolation can be implemented as a
-    texture filtering;
-
-4.  extend the one-dimensional scheme to two dimensions to solve the
-    problem known as *bicubic interpolation*.
-
-We will explore these instructions on a step-by-step basis in the
-following sections. Let us start with cubic interpolation.
+We will explore these instructions on a step-by-step basis in the following sections. Let us start with cubic interpolation.
 
 ### Cubic interpolation
 
