@@ -175,7 +175,7 @@ Finally, the desired value <img src="https://render.githubusercontent.com/render
 
 where <img src="https://render.githubusercontent.com/render/math?math=\alpha_y=y-n">.  
 The final bilinear interpolation formula can be obtained by substituting equations [\[4\]](#partialLinearInterpolation2D) and [\[5\]](#partialLinearInterpolation2D_v2)
-in ([\[6\]](#linearInterpolation2Dfull)), but its expression is not really needed and is here omitted for the sake of brevity.  
+in [\[6\]](#linearInterpolation2Dfull), but its expression is not really needed and is here omitted for the sake of brevity.  
 Let’s pause with theory and temporarily go towards practice, illustrating how the texture memory works in CUDA.
 
 ## Towards practice: CUDA texture memory
@@ -221,7 +221,7 @@ On the other side, figure [12](#textureLinear) below illustrates linear interpol
 </p>
 
 Figure [12](#textureLinear) represents the hardware implementation of Figure [7](#linearInterpolation1D). In figure [12](#textureLinear), the interpolation function is not linear between samples as in figure [7](#linearInterpolation1D), but there is again a <img src="https://render.githubusercontent.com/render/math?math=0.5"> shift.  
-According to equation ([\[7\]](#generalInterpolationTex)), we should remember to take care of the <img src="https://render.githubusercontent.com/render/math?math=0.5"> shift needed to use texture filtering in the sequel. The need for such a shift also occurs for the two-dimensional case. Indications on how using texture memory for filtering are now in order.  
+According to equation [\[7\]](#generalInterpolationTex), we should remember to take care of the <img src="https://render.githubusercontent.com/render/math?math=0.5"> shift needed to use texture filtering in the sequel. The need for such a shift also occurs for the two-dimensional case. Indications on how using texture memory for filtering are now in order.  
 Texture memory must be associated, at run-time and by proper function calls, to a memory region, the texture, before being available to use in a kernel. Furthermore, a texture has several attributes which we will need to use:
 
   - *dimensionality*: it indicates if the texture is accessed as a one-dimensional array by one coordinate, a two-dimensional array by two coordinates, or a three-dimensional array by three coordinates;
@@ -640,7 +640,7 @@ and
   <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)=\frac{1}{6}\alpha^3">. [16]
 </p>
 
-As it can be seen from equation ([\[cubicInterpolation\]](#cubicInterpolation)), for each interpolation point <img src="https://render.githubusercontent.com/render/math?math=x">, the number of operations to be performed increases with respect to lower-order interpolations as nearest-neighbor or linear. In other words, the better interpolation quality is paid with an increased computational burden. The increased burden can be undesirable, especially for large images and even more when the computations require a large number of interpolations on large images. 
+As it can be seen from equation [\[12\]](#cubicInterpolation), for each interpolation point <img src="https://render.githubusercontent.com/render/math?math=x">, the number of operations to be performed increases with respect to lower-order interpolations as nearest-neighbor or linear. In other words, the better interpolation quality is paid with an increased computational burden. The increased burden can be undesirable, especially for large images and even more when the computations require a large number of interpolations on large images. 
 In the next subsection, we will see how texture memory comes to aid again to speed up computations.
 
 ### Cubic B-spline interpolation implemented as texture filtering
