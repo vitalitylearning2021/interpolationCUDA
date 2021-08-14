@@ -611,50 +611,37 @@ We now proceed towards cubic B-spline interpolation.
 
 ### Cubic B-spline interpolation
 
-In this project, we will use a particular kind of cubic interpolation,
-namely, cubic B-spline interpolation . The word “spline” refers to
-special types of piecewise polynomial interpolations, while “B-” stands
-for “basis” and is related to its degree of regularity. At variance with
-full polynomial interpolation, spline interpolation can make the
-interpolation error small even when the spline adopts a low degree
-polynomial.  
-The linear interpolation seen above is a B-spline of order \(1\) . The
-nearest-neighbor interpolation, on the other side, almost coincides with
-a B-spline of order \(0\) .  
-In the case of one-dimensional cubic B-spline, the interpolating
-function can be written as:
+In this project, we will use a particular kind of cubic interpolation, namely, cubic B-spline interpolation . The word “spline” refers to special types of piecewise polynomial interpolations, while “B-” stands for “basis” and is related to its degree of regularity. At variance with full polynomial interpolation, spline interpolation can make the
+interpolation error small even when the spline adopts a low degree polynomial.  
+The linear interpolation seen above is a B-spline of order <img src="https://render.githubusercontent.com/render/math?math=1">. The nearest-neighbor interpolation, on the other side, almost coincides with a B-spline of order <img src="https://render.githubusercontent.com/render/math?math=0">.  
+In the case of one-dimensional cubic B-spline, the interpolating function can be written as:
 
-\[\label{cubicInterpolation}
-f^{(3)}(x)=w_0(\alpha)f_{m-1}+w_1(\alpha)f_m+w_2(\alpha)f_{m+1}+w_3(\alpha)f_{m+2}\;\;\;x\in(m,m+1)\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(3)}(x)=w_0(\alpha)f_{m-1} %2B w_1(\alpha)f_m %2B w_2(\alpha)f_{m %2B 1} %2B w_3(\alpha)f_{m %2B 2},x\in(m,m %2B 1)" id="cubicInterpolation">, [12]
+</p>
 
-where \(\alpha=x-m\) and \(w_i(\alpha)\), \(i=0,\ldots,3\) are
-interpolation functions equal to:
+where <img src="https://render.githubusercontent.com/render/math?math=\alpha=x-m"> and <img src="https://render.githubusercontent.com/render/math?math=w_i(\alpha)">, <img src="https://render.githubusercontent.com/render/math?math=i=0,\ldots,3"> are interpolation functions equal to:
 
-\[\label{w_0}
-w_0(\alpha)=\frac{1}{6}\left[-\alpha^3+3\alpha^2-3\alpha+1\right]\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)=\frac{1}{6}\left[-\alpha^3 %2B 3\alpha^2-3\alpha %2B 1\right]" id="w_0">, [13]
+</p>
 
-\[\label{w_1}
-w_1(\alpha)=\frac{1}{6}\left[3\alpha^3-6\alpha^2+4\right]\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_1(\alpha)=\frac{1}{6}\left[3\alpha^3-6\alpha^2 %2B 4\right]"  id="w_1">, [14]
+</p>
 
-\[\label{w_2}
-w_2(\alpha)=\frac{1}{6}\left[-3\alpha^3+3\alpha^2+3\alpha+1\right]\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)=\frac{1}{6}\left[-3\alpha^3 %2B 3\alpha^2 %2B 3\alpha %2B 1\right]"  id="w_2">, [15]
+</p>
 
 and
 
-\[\label{w_3}
-w_3(\alpha)=\frac{1}{6}\alpha^3.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)=\frac{1}{6}\alpha^3">. [16]
+</p>
 
-Further details on cubic B-spline interpolation can be found in .  
-As it can be seen from equation
-([\[cubicInterpolation\]](#cubicInterpolation)), for each interpolation
-point \(x\), the number of operations to be performed increases with
-respect to lower-order interpolations as nearest-neighbor or linear. In
-other words, the better interpolation quality is paid with an increased
-computational burden. The increased burden can be undesirable,
-especially for large images and even more when the computations require
-a large number of interpolations on large images.  
-In the next subsection, we will see how texture memory comes to aid
-again to speed up computations.
+As it can be seen from equation ([\[cubicInterpolation\]](#cubicInterpolation)), for each interpolation point <img src="https://render.githubusercontent.com/render/math?math=x">, the number of operations to be performed increases with respect to lower-order interpolations as nearest-neighbor or linear. In other words, the better interpolation quality is paid with an increased computational burden. The increased burden can be undesirable, especially for large images and even more when the computations require a large number of interpolations on large images. 
+In the next subsection, we will see how texture memory comes to aid again to speed up computations.
 
 ### Cubic B-spline interpolation implemented as texture filtering
 
