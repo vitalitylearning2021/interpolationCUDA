@@ -661,7 +661,7 @@ Let us now set:
 After using equation [\[18\]](#widetilde), equation [\[19\]](#linearCombination) becomes:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=af_i+bf_{i %2B 1}=(a %2B b)\left[(1-\widetilde{\alpha})f_i %2B \widetilde{\alpha}f_{i %2B 1})\right]"  id="linearCombinationTexture">. [19]
+  <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}=(a %2B b)\left[(1-\widetilde{\alpha})f_i %2B \widetilde{\alpha}f_{i %2B 1})\right]"  id="linearCombinationTexture">. [19]
 </p>
 
 Let us now compare equation [\[19\]](#linearCombinationTexture) and equation [\[3\]](#linearInterpolationEQ). Let us remember that, in equation [\[3\]](#linearInterpolationEQ),
@@ -686,7 +686,7 @@ where
 and
 
 <p align="center">
-  <img src="\left\{
+  <img src="https://render.githubusercontent.com/render/math?math=\left\{
     \begin{array}{lc}
       \widetilde{h}_0(\alpha)=\frac{w_1(\alpha)}{w_0(\alpha) %2B w_1(\alpha)} \\
       \widetilde{h}_1(\alpha)=\frac{w_3(\alpha)}{w_2(\alpha) %2B w_3(\alpha)} \\
@@ -697,13 +697,13 @@ It is possible to verify that <img src="https://render.githubusercontent.com/ren
 For better compatibility with other published work, equation [\[20\]](#cubicInterpolationTexture) is now rewritten as:
 
 <p align="center">
-  <img src="f^{(3)}(x)=g_0(\alpha)f^{(1)}(m %2B h_0(\alpha)) %2B g_1(\alpha)f^{(1)}(m %2B h_1(\alpha))"  id="eq6">, [23]
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(3)}(x)=g_0(\alpha)f^{(1)}(m %2B h_0(\alpha)) %2B g_1(\alpha)f^{(1)}(m %2B h_1(\alpha))"  id="eq6">, [23]
 </p>
 
 where
 
 <p align="center">
-  <img src="\left\{
+  <img src="https://render.githubusercontent.com/render/math?math=\left\{
     \begin{array}{lc}
       h_0(\alpha)=-1 %2B \frac{w_1(\alpha)}{w_0(\alpha) %2B w_1(\alpha)} \\
       h_1(\alpha)=1 %2B \frac{w_3(\alpha)}{w_2(\alpha) %2B w_3(\alpha)} \\
