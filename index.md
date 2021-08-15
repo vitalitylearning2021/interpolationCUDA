@@ -714,59 +714,57 @@ Up to here, we have considered the one-dimensional case for illustration purpose
 
 ### Understanding Bicubic interpolation
 
-Similarly to what is to be done when we have extended linear
-interpolation to bilinear, cubic interpolation can be constructed as a
-composition of one-dimensional cubic interpolations. One-dimensional
-cubic interpolations are illustrated in figure [1.21](#bSpline) below:
+Similarly to what is to be done when we have extended linear interpolation to bilinear, cubic interpolation can be constructed as a composition of one-dimensional cubic interpolations. One-dimensional cubic interpolations are illustrated in figure [21](#bSpline) below:
 
-![Bicubic B-spline interpolation.](/Chapter01/bSpline.png)
+<p align="center">
+  <img src="bSpline.png" width="400" id="bSpline">
+  <br>
+     <em>Figure 21. Bicubic B-spline interpolation.</em>
+</p>
 
-In the previous figure, the \(4\times 4=16\) samples needed to perform
-the bicubic interpolation as well as the interpolation point having
-coordinates \((x,y)\) can be seen. Figure [1.21](#bSpline) shows that
-bicubic interpolation can be imagined as constructed from
-one-dimensional cubic interpolations along the \(x\)-axis, denoted by
-empty circles and returning the virtual samples given by:
+In the previous figure, the <img src="https://render.githubusercontent.com/render/math?math=4\times 4=16"> samples needed to perform the bicubic interpolation as well as the interpolation point having coordinates <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> can be seen. Figure [21](#bSpline) shows that bicubic interpolation can be imagined as constructed from one-dimensional cubic interpolations along the <img src="https://render.githubusercontent.com/render/math?math=x">-axis, denoted by empty circles and returning the virtual samples given by:
 
-\[\label{partialInterpolationX}
-f_{x,j}=w_0(\alpha_x)f_{m-1,j}+w_1(\alpha_x)f_{m,j}+w_2(\alpha_x)f_{m+1,j}+w_3(\alpha_x)f_{m+2,j}\;\;\; j=n-1,\ldots,n+2,\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f_{x,j}=w_0(\alpha_x)f_{m-1,j} %2B w_1(\alpha_x)f_{m,j} %2B w_2(\alpha_x)f_{m %2B 1,j} %2B w_3(\alpha_x)f_{m %2B 2,j}, j=n-1,\ldots,n %2B 2"  id="partialInterpolationX">, [25]
+</p>
 
-where \(\alpha_x=x-m\).  
-After that, a one-dimensional cubic interpolation along the \(y\)-axis
-of the virtual samples \(f_{x,j}\), \(j=n-1,\ldots,n+2\) is performed,
+where <img src="https://render.githubusercontent.com/render/math?math=\alpha_x=x-m">.  
+After that, a one-dimensional cubic interpolation along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis of the virtual samples <img src="https://render.githubusercontent.com/render/math?math=f_{x,j}">, <img src="https://render.githubusercontent.com/render/math?math=j=n-1,\ldots,n+2"> is performed,
 obtaining
 
-\[\label{partialInterpolationY}
-f^{(3)}(x,y)=w_0(\alpha_y)f_{x,n-1}+w_1(\alpha_y)f_{x,n}+w_2(\alpha_y)f_{x,n+1}+w_3(\alpha_y)f_{x,n+2},\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(3)}(x,y)=w_0(\alpha_y)f_{x,n-1} %2B w_1(\alpha_y)f_{x,n} %2B w_2(\alpha_y)f_{x,n %2B 1} %2B w_3(\alpha_y)f_{x,n %2B 2}"  id="partialInterpolationY">, [26]
+</p>
 
-where \(\alpha_y=y-n\).  
-Also, in this case, linear in-hardware texture filtering can be
-exploited. Of course, this time the relevant texture filtering will be
-two-dimensional. Indeed, using the one-dimensional linear filtering
-trick along the \(x\)-axis, equation
-([\[partialInterpolationX\]](#partialInterpolationX)) can be rewritten
+
+where <img src="https://render.githubusercontent.com/render/math?math=\alpha_y=y-n">.  
+Also, in this case, linear in-hardware texture filtering can be exploited. Of course, this time the relevant texture filtering will be two-dimensional. Indeed, using the one-dimensional linear filtering trick along the <img src="https://render.githubusercontent.com/render/math?math=x">-axis, equation [\[25\]](#partialInterpolationX) can be rewritten
 as:
 
-\[f_{x,j}=g_0(\alpha_x)f^{(1)}(m+h_0(\alpha_x),j)+g_1(\alpha_x)f^{(1)}(m+h_1(\alpha_x),j), \;\;\; j=n-1,\ldots,n+2.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f_{x,j}=g_0(\alpha_x)f^{(1)}(m %2B h_0(\alpha_x),j) %2B g_1(\alpha_x)f^{(1)}(m %2B h_1(\alpha_x),j), j=n-1,\ldots,n %2B 2"  id="noLab1">. [27]
+</p>
 
-Now, using the same linear filtering trick now along the \(y\)-axis, we
-have:
+Now, using the same linear filtering trick now along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis, we have:
 
-\[f^{(3)}(x,y)=g_0(\alpha_y)A+g_1(\alpha_y)B,\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(3)}(x,y)=g_0(\alpha_y)A %2B g_1(\alpha_y)B"  id="noLab1">, [28]
+</p>
 
 where
 
-\[\label{equationA}
-A = g_0(\alpha_x)f^{(1)}(m+h_0(\alpha_x),n+h_0(\alpha_y))+g_1(\alpha_x)f^{(1)}(m+h_1(\alpha_x),n+h_0(\alpha_y))\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=A = g_0(\alpha_x)f^{(1)}(m %2B h_0(\alpha_x),n %2B h_0(\alpha_y)) %2B g_1(\alpha_x)f^{(1)}(m %2B h_1(\alpha_x),n %2B h_0(\alpha_y))"  id="equationA">, [29]
+</p>
 
 and
 
-\[\label{equationB}
-B = g_0(\alpha_y)f^{(1)}(m+h_0(\alpha_x),n+h_1(\alpha_y))+g_1(\alpha_y)f^{(1)}(m+h_1(\alpha_x),n+h_1(\alpha_y)).\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=B = g_0(\alpha_y)f^{(1)}(m %2B 0(\alpha_x),n %2B 1(\alpha_y)) %2B 1(\alpha_y)f^{(1)}(m %2B 1(\alpha_x),n %2B 1(\alpha_y))"  id="equationB>.[30
+</p>
 
-Following the above effort, we are now ready for some practice and to
-see how a PGM image can be interpolated by the Bicubic B-spline
-interpolation scheme using texture filtering.
+
+Following the above effort, we are now ready for some practice and to ee how a PGM image can be interpolated by the Bicubic B-spline nterpolation scheme using texture filtering.
 
 ## Practice: Bicubic B-spline interpolation of a PGM image
 
