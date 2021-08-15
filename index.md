@@ -637,7 +637,7 @@ where <img src="https://render.githubusercontent.com/render/math?math=\alpha=x-m
 and
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)=\frac{1}{6}\alpha^3">. [16]
+  <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)=\frac{1}{6}\alpha^3"  id="w_3">. [16]
 </p>
 
 As it can be seen from equation [\[12\]](#cubicInterpolation), for each interpolation point <img src="https://render.githubusercontent.com/render/math?math=x">, the number of operations to be performed increases with respect to lower-order interpolations as nearest-neighbor or linear. In other words, the better interpolation quality is paid with an increased computational burden. The increased burden can be undesirable, especially for large images and even more when the computations require a large number of interpolations on large images. 
@@ -645,99 +645,72 @@ In the next subsection, we will see how texture memory comes to aid again to spe
 
 ### Cubic B-spline interpolation implemented as texture filtering
 
-It is possible to exploit linear in-hardware texture filtering to also
-perform cubic B-spline interpolations. We will now present an approach
-originally introduced in ,  and .  
-Linear texture filtering can be exploited to compute a generic linear
-combination \(af_i+bf_{i+1}\) between two samples \(f_i\) and
-\(f_{i+1}\). Indeed, we have:
+It is possible to exploit linear in-hardware texture filtering to also perform cubic B-spline interpolations. 
+Linear texture filtering can be exploited to compute a generic linear combination <img src="https://render.githubusercontent.com/render/math?math=af_i+bf_{i %2B 1}"> between two samples <img src="https://render.githubusercontent.com/render/math?math=f_i"> and <img src="https://render.githubusercontent.com/render/math?math=f_{i %2B 1}">. Indeed, we have:
 
-\[\label{linearCombination}
-af_i+bf_{i+1}=(a+b)\left[\frac{a}{a+b}f_i+\frac{b}{a+b}f_{i+1}\right].\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}=(a %2B b)\left[\frac{a}{a %2B b}f_i %2B \frac{b}{a %2B b}f_{i %2B 1}\right]"  id="linearCombination">. [17]
+</p>
 
 Let us now set:
 
-\[\label{widetilde}
-\widetilde{\alpha}=\frac{b}{a+b}.\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\widetilde{\alpha}=\frac{b}{a %2B b}"  id="widetilde">. [18]
+</p>
 
-After using equation ([\[widetilde\]](#widetilde)), equation
-([\[linearCombination\]](#linearCombination)) becomes:
+After using equation [\[18\]](#widetilde), equation [\[19\]](#linearCombination) becomes:
 
-\[\label{linearCombinationTexture}
-af_i+bf_{i+1}=(a+b)\left[(1-\widetilde{\alpha})f_i+\widetilde{\alpha}f_{i+1})\right].\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=af_i+bf_{i %2B 1}=(a %2B b)\left[(1-\widetilde{\alpha})f_i %2B \widetilde{\alpha}f_{i %2B 1})\right]"  id="linearCombinationTexture">. [19]
+</p>
 
-Let us now compare equation
-([\[linearCombinationTexture\]](#linearCombinationTexture)) and equation
-([\[linearInterpolationEQ\]](#linearInterpolationEQ)). Let us remember
-that, in equation ([\[linearInterpolationEQ\]](#linearInterpolationEQ)),
-\(0\leq \alpha < 1\) must hold true because \(\alpha\) is that value
-that, summed to the integer part of \(x\), must return \(x\). Obviously,
-if \(0\leq \alpha < 1\), we have also \(0\leq 1-\alpha < 1\).
-Accordingly, if \(0\leq \widetilde{\alpha}=b/(a+b)\leq 1\), the linear
-combination in equation
-([\[linearCombinationTexture\]](#linearCombinationTexture)) can be
-computed using the same linear in-hardware texture filtering we have
-used before to compute equation ([1.7](#linearInterpolation1D)).  
-Then, instead of performing two global memory accesses and two
-multiplications to compute \(af_i+bf_{i+1}\), it is possible to simply
-perform a linear in-hardware texture filtering and a multiplication by
-\((a+b)\) according to equation
-([\[linearCombinationTexture\]](#linearCombinationTexture)). Obviously,
-condition \(0\leq b/(a+b)\leq 1\) is not necessarily met. Indeed, in the
-case when \(b=-3\) and \(a=1\), we have \(b/(a+b)=1.5\). Nevertheless,
-if \(a\) and \(b\) have the same sign, such a condition is obviously
-met.  
-Let us come back to the question of cubic B-spline interpolation and let
-us see how the above observation can be fruitfully used to reduce the
-computational complexity. To this end, let us rewrite equation
-([\[cubicInterpolation\]](#cubicInterpolation)) as:
+Let us now compare equation [\[19\]](#linearCombinationTexture) and equation [\[3\]](#linearInterpolationEQ). Let us remember that, in equation [\[3\]](#linearInterpolationEQ),
+<img src="https://render.githubusercontent.com/render/math?math=0\leq \alpha < 1"> must hold true because <img src="https://render.githubusercontent.com/render/math?math=\alpha"> is that value that, summed to the integer part of <img src="https://render.githubusercontent.com/render/math?math=x">, must return <img src="https://render.githubusercontent.com/render/math?math=x">. Obviously, if <img src="https://render.githubusercontent.com/render/math?math=0\leq \alpha < 1">, we have also <img src="https://render.githubusercontent.com/render/math?math=0\leq 1-\alpha < 1">. Accordingly, if <img src="https://render.githubusercontent.com/render/math?math=0\leq \widetilde{\alpha}=b/(a %2B b)\leq 1">, the linear combination in equation [\[19\]](#linearCombinationTexture) can be computed using the same linear in-hardware texture filtering we have used before to compute equation [\[7\]](#linearInterpolation1D).  
+Then, instead of performing two global memory accesses and two multiplications to compute <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}">, it is possible to simply perform a linear in-hardware texture filtering and a multiplication by <img src="https://render.githubusercontent.com/render/math?math=(a %2B b)"> according to equation [\[19\]](#linearCombinationTexture). Obviously, condition <img src="https://render.githubusercontent.com/render/math?math=0\leq b/(a %2B b)\leq 1"> is not necessarily met. Indeed, in the case when <img src="https://render.githubusercontent.com/render/math?math=b=-3"> and <img src="https://render.githubusercontent.com/render/math?math=a=1">, we have <img src="https://render.githubusercontent.com/render/math?math=b/(a %2B b)=1.5">. Nevertheless, if <img src="https://render.githubusercontent.com/render/math?math=a"> and <img src="https://render.githubusercontent.com/render/math?math=b"> have the same sign, such a condition is obviously met.  
+Let us come back to the question of cubic B-spline interpolation and let us see how the above observation can be fruitfully used to reduce the computational complexity. To this end, let us rewrite equation [\[12\]](#cubicInterpolation) as:
 
-\[\label{cubicInterpolationTexture}
-f^{(3)}(x)=g_0(\alpha)f^{(1)}(m-1+\widetilde{h}_0(\alpha))+g_1(\alpha)f^{(1)}(m+1+\widetilde{h}_1(\alpha)),\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=f^{(3)}(x)=g_0(\alpha)f^{(1)}(m-1 %2B \widetilde{h}_0(\alpha)) %2B g_1(\alpha)f^{(1)}(m %2B 1 %2B \widetilde{h}_1(\alpha))"  id="cubicInterpolationTexture">, [20]
+</p>
 
 where
 
-\[\left\{
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\left\{
     \begin{array}{lc}
-      g_0(\alpha)=w_0(\alpha)+w_1(\alpha) \\
-      g_1(\alpha)=w_2(\alpha)+w_3(\alpha) \\
-    \end{array}\right.
-  \label{g0g1}\]
+      g_0(\alpha)=w_0(\alpha) %2B w_1(\alpha) \\
+      g_1(\alpha)=w_2(\alpha) %2B w_3(\alpha) \\
+    \end{array}\right."  id="g0g1">, [21]
+</p>
 
 and
 
-\[\left\{
+<p align="center">
+  <img src="\left\{
     \begin{array}{lc}
-      \widetilde{h}_0(\alpha)=\frac{w_1(\alpha)}{w_0(\alpha)+w_1(\alpha)} \\
-      \widetilde{h}_1(\alpha)=\frac{w_3(\alpha)}{w_2(\alpha)+w_3(\alpha)} \\
-    \end{array}\right..
-  \label{eq5}\]
+      \widetilde{h}_0(\alpha)=\frac{w_1(\alpha)}{w_0(\alpha) %2B w_1(\alpha)} \\
+      \widetilde{h}_1(\alpha)=\frac{w_3(\alpha)}{w_2(\alpha) %2B w_3(\alpha)} \\
+    \end{array}\right."  id="eq5">. [22]
+</p>
 
-It is possible to verify that \(0\leq \widetilde{h}_0(\alpha) \leq 1\)
-and \(0\leq \widetilde{h}_1(\alpha) \leq 1\). This means that the
-quantities \(f^{(1)}(m-1+\widetilde{h}_0(\alpha))\) and
-\(f^{(1)}(m+1+\widetilde{h}_1(\alpha))\), and, consequently, the cubic
-B-spline interpolation, can be computed by linear in-hardware texture
-filtering. Indeed those quantities correspond to set \(i=m-1\) and
-\(i=m+1\), respectively, in equation
-([\[linearCombinationTexture\]](#linearCombinationTexture)).  
-For better compatibility with the original work , equation
-([\[cubicInterpolationTexture\]](#cubicInterpolationTexture)) is now
-rewritten as:
+It is possible to verify that <img src="https://render.githubusercontent.com/render/math?math=0\leq \widetilde{h}_0(\alpha) \leq 1"> and <img src="https://render.githubusercontent.com/render/math?math=0\leq \widetilde{h}_1(\alpha) \leq 1">. This means that the quantities <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(m-1 %2B \widetilde{h}_0(\alpha))"> and <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(m %2B 1 %2B \widetilde{h}_1(\alpha))">, and, consequently, the cubic B-spline interpolation, can be computed by linear in-hardware texture filtering. Indeed those quantities correspond to set <img src="https://render.githubusercontent.com/render/math?math=i=m-1"> and <img src="https://render.githubusercontent.com/render/math?math=i=m %2B 1">, respectively, in equation [\[19\]](#linearCombinationTexture).  
+For better compatibility with other published work, equation [\[20\]](#cubicInterpolationTexture) is now rewritten as:
 
-\[f^{(3)}(x)=g_0(\alpha)f^{(1)}(m+h_0(\alpha))+g_1(\alpha)f^{(1)}(m+h_1(\alpha)),\]
+<p align="center">
+  <img src="f^{(3)}(x)=g_0(\alpha)f^{(1)}(m %2B h_0(\alpha)) %2B g_1(\alpha)f^{(1)}(m %2B h_1(\alpha))"  id="eq6">, [23]
+</p>
 
 where
 
-\[\left\{
+<p align="center">
+  <img src="\left\{
     \begin{array}{lc}
-      h_0(\alpha)=-1+\frac{w_1(\alpha)}{w_0(\alpha)+w_1(\alpha)} \\
-      h_1(\alpha)=1+\frac{w_3(\alpha)}{w_2(\alpha)+w_3(\alpha)} \\
-    \end{array}\right..
-  \label{eq6}\]
+      h_0(\alpha)=-1 %2B \frac{w_1(\alpha)}{w_0(\alpha) %2B w_1(\alpha)} \\
+      h_1(\alpha)=1 %2B \frac{w_3(\alpha)}{w_2(\alpha) %2B w_3(\alpha)} \\
+    \end{array}\right."  id="eq7">. [24]
+</p>
 
-Up to here, we have considered the one-dimensional case for illustration
-purposes. Let us now go to two dimensions.
+Up to here, we have considered the one-dimensional case for illustration purposes. Let us now go to two dimensions.
 
 ### Understanding Bicubic interpolation
 
