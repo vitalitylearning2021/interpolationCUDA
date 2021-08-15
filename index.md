@@ -760,9 +760,8 @@ where
 and
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=B = g_0(\alpha_y)f^{(1)}(m %2B 0(\alpha_x),n %2B 1(\alpha_y)) %2B 1(\alpha_y)f^{(1)}(m %2B 1(\alpha_x),n %2B 1(\alpha_y))"  id="equationB>.[30
+  <img src="https://render.githubusercontent.com/render/math?math=B = g_0(\alpha_y)f^{(1)}(m %2B 0(\alpha_x),n %2B h_1(\alpha_y)) %2B g_1(\alpha_y)f^{(1)}(m %2B h_1(\alpha_x),n %2B h_1(\alpha_y))"  id="equationB>.[30]
 </p>
-
 
 Following the above effort, we are now ready for some practice and to ee how a PGM image can be interpolated by the Bicubic B-spline nterpolation scheme using texture filtering.
 
