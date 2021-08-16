@@ -767,7 +767,7 @@ Following the above effort, we are now ready for some practice and to ee how a P
 
 ## Practice: Bicubic B-spline interpolation of a PGM image
 
-In order to implement bicubic B-spline interpolation using in-hardware texture filtering, in Listing [\[texture\_7\]](#texture_7), consider the
+In order to implement bicubic B-spline interpolation using in-hardware texture filtering, in Listing [8](#texture_nalKernel), consider the
 following line:
 
 ``` c++
@@ -787,7 +787,7 @@ In the new line, the `__device__` function
 bicubicDeviceFiltering<unsigned char, float>(tex, xNew, yNew)
 ```
 
-is provided in Listing [\[texture\_8\]](#texture_8):
+is provided in Listing [9](#texture_8):
 
 ``` c++
 template<class inType, class outType>
@@ -815,16 +815,11 @@ __device__ outType bicubicDeviceFiltering(const texture<inType, 2,
          g1_x * tex2D(texReference, p_x + h1x, p_y + h1_y));
     return outR;}
 ```
+<p align="center" id="texture_8" >
+     <em>Listing 9. Bicubic interpolation with texture filtering `__device__` function.</em>
+</p>
 
-Listing [\[texture\_8\]](#texture_8) implements equations
-([\[equationA\]](#equationA)) and ([\[equationB\]](#equationB)) through
-its last line computing `outR`. The auxiliary functions appearing in
-Listing [\[texture\_8\]](#texture_8), namely, `g_0()`, `g_1()`, `h_0()`
-and `h_1()`, are defined in Listing [\[texture\_9\]](#texture_9). They
-implement, along with the functions `w_0()`, `w_1()`, `w_2()` and
-`w_3()` reported again in Listing [\[texture\_9\]](#texture_9) below,
-the auxiliary functions in equations
-([\[w\_0\]](#w_0))-([\[w\_3\]](#w_3)) and equation ([\[g0g1\]](#g0g1)):
+Listing [9](#texture_8) implements equations [\[equationA\]](#equationA) and [\[equationB\]](#equationB) through its last line computing `outR`. The auxiliary functions appearing in Listing [9](#texture_8), namely, `g_0()`, `g_1()`, `h_0()` and `h_1()`, are defined in Listing [10](#texture_9). They implement, along with the functions `w_0()`, `w_1()`, `w_2()` and `w_3()` reported again in Listing [10](#texture_9) below, the auxiliary functions in equations [\[13]](#w_0)-([\[16\]](#w_3)) and equation [\[21\]](#g0g1):
 
 ``` c++
 __device__ float g_0(float alpha) { return w_0(alpha) + w_1(alpha); }
@@ -842,19 +837,19 @@ __device__ float w_2(float alpha) { return (1.0f / 6.0f) *
 __device__ float w_3(float alpha) { return (1.0f / 6.0f) * 
     (alpha * alpha * alpha); }
 ```
+<p align="center" id="texture_9" >
+     <em>Listing 10. Auxiliary `__device__` functions for B-spline interpolation with texture filtering.</em>
+</p>
 
-The image interpolated by bicubic B-spline interpolation using
-in-hardware texture filtering is shown in figure [1.22](#Fig12) below:
+The image interpolated by bicubic B-spline interpolation using in-hardware texture filtering is shown in figure [22](#) below:
 
-![Bicubic B-spline interpolation using in-hardware texture filtering
-with `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig12.png)
+<p align="center">
+  <img src="Fig12.png" width="400" id="Fig12">
+  <br>
+     <em>Figure 22. Bicubic B-spline interpolation using in-hardware texture filtering with `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`.</em>
+</p>
 
-The image above is interpolated by bicubic B-spline interpolation using
-in-hardware texture filtering when `transl_x = 100`, `transl_y = 100`,
-`scaleFactor = 1/8` and, if compared with the reconstructions in figures
-[1.18](#Fig9e) and [1.19](#Fig9f), appears to be more accurate, as
-expected.
+The image above is interpolated by bicubic B-spline interpolation using in-hardware texture filtering when `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8` and, if compared with the reconstructions in figures [18](#Fig9e) and [19](#Fig9f), appears to be more accurate, as expected.
 
 ## Exercises
 
