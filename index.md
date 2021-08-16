@@ -501,7 +501,7 @@ void initTexture(int imageWidth, int imageHeight, unsigned char
 </p>
 
 As can be seen, the texture filtering mode is initialized to linear, but this setting will be changed in the sequel. Moreover, the address mode is *clamp* in the two dimensions. This setting will be kept fixed in the following examples. Finally, the un-normalized coordinates will be used.  
-After having loaded the PGM image and initialized the texture, we report in the following Listing [\[texture\_7\]](#texture_7) the kernel function that will be used for nearest-neighbor and linear interpolations:
+After having loaded the PGM image and initialized the texture, we report in the following Listing 7(#texture_7) the kernel function that will be used for nearest-neighbor and linear interpolations:
 
 ``` c++
 __global__ void nalKernel(unsigned char * __restrict__  d_interpSamples, 
@@ -767,8 +767,7 @@ Following the above effort, we are now ready for some practice and to ee how a P
 
 ## Practice: Bicubic B-spline interpolation of a PGM image
 
-In order to implement bicubic B-spline interpolation using in-hardware
-texture filtering, in Listing [\[texture\_7\]](#texture_7), consider the
+In order to implement bicubic B-spline interpolation using in-hardware texture filtering, in Listing [\[texture\_7\]](#texture_7), consider the
 following line:
 
 ``` c++
