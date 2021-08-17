@@ -859,7 +859,7 @@ This section offers the possibility of exercising ourselves on the above-learned
 Write a kernel function using texture lookup implementing formulas [\[4\]](#partialLinearInterpolation2D), [\[5\]](#partialLinearInterpolation2D_v2) and [\[6\]](#linearInterpolation2Dfull). What kind of `texReference.filterMode` is enough? What is the reconstructed image in the case when `transl_x = 100`, `transl_y = 100`, `scaleFactor
 = 1/8`? Is bilinear interpolation with texture lookup more or less precise than the version in Listing [8](#texture_nalKernel)?
 
-<span id="solution_1" label="Solution to exercise 1">\[exercise\_1\]</span> While, in Listing [8](#texture_nalKernel), function `nalKernel()` used the filtering features of texture memory, now the solution to exercise [1](#exercise_1) will include the following steps:
+<span id="solution_1" label="solution_1">\[Solution to Exercise 1\]</span> While, in Listing [8](#texture_nalKernel), function `nalKernel()` used the filtering features of texture memory, now the solution to exercise [1](#exercise_1) will include the following steps:
 
 1.  The texture must be only used to access the image samples so that texture is used as a simple cache;
 2.  The samples <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and \(f_{m %2B 1,n %2B 1}\) appearing in equation [\[4\]](#partialLinearInterpolation2D) must be accessed with calls like `tex2D(texReference, p_x, p_y + 1.0f)` and `tex2D(texReference, p_x + 1.0f, p_y + 1.0f)`, respectively;
