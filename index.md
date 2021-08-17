@@ -855,7 +855,7 @@ The image above is interpolated by bicubic B-spline interpolation using in-hardw
 
 This section offers the possibility of exercising ourselves on the above-learned concepts. In particular, we will develop our own bilinear and bicubic B-spline interpolations as well as a new bicubic interpolation scheme known as Catmul-Rom interpolation (described below), using texture lookups instead of texture filtering. Moreover, different address modes will be explored. Finally, the possibility of performing bicubic B-spline interpolation by texture filtering will be numerically verified.
 
-<span id="exercise_1" label="Exercise 1">\[exercise\_1\]</span> The `nalKernel()` shown above used in-hardware texture filtering.  
+<span id="exercise_1" label="exercise_1">\[Exercise 1\]</span> The `nalKernel()` shown above used in-hardware texture filtering.  
 Write a kernel function using texture lookup implementing formulas [\[4\]](#partialLinearInterpolation2D), [\[5\]](#partialLinearInterpolation2D_v2) and [\[6\]](#linearInterpolation2Dfull). What kind of `texReference.filterMode` is enough? What is the reconstructed image in the case when `transl_x = 100`, `transl_y = 100`, `scaleFactor
 = 1/8`? Is bilinear interpolation with texture lookup more or less precise than the version in Listing [8](#texture_nalKernel)?
 
