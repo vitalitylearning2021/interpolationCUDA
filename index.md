@@ -853,51 +853,19 @@ The image above is interpolated by bicubic B-spline interpolation using in-hardw
 
 ## Exercises
 
-This section offers the possibility of exercising ourselves on the
-above-learned concepts. In particular, we will develop our own bilinear
-and bicubic B-spline interpolations as well as a new bicubic
-interpolation scheme known as Catmul-Rom interpolation (described
-below), using texture lookups instead of texture filtering. Moreover,
-different address modes will be explored. Finally, the possibility of
-performing bicubic B-spline interpolation by texture filtering will be
-numerically verified.
+This section offers the possibility of exercising ourselves on the above-learned concepts. In particular, we will develop our own bilinear and bicubic B-spline interpolations as well as a new bicubic interpolation scheme known as Catmul-Rom interpolation (described below), using texture lookups instead of texture filtering. Moreover, different address modes will be explored. Finally, the possibility of performing bicubic B-spline interpolation by texture filtering will be numerically verified.
 
-<span id="exercise_1" label="exercise_1">\[exercise\_1\]</span> The
-`nalKernel()` shown above used in-hardware texture filtering.  
-Write a kernel function using texture lookup implementing formulas
-([\[partialLinearInterpolation2D\]](#partialLinearInterpolation2D)),
-([\[partialLinearInterpolation2D\_v2\]](#partialLinearInterpolation2D_v2))
-and ([\[linearInterpolation2Dfull\]](#linearInterpolation2Dfull)). What
-kind of `texReference.filterMode` is enough? What is the reconstructed
-image in the case when `transl_x = 100`, `transl_y = 100`, `scaleFactor
-= 1/8`? Is bilinear interpolation with texture lookup more or less
-precise than the version in Listing [\[texture\_7\]](#texture_7)?
+<span id="exercise_1" label="Exercise 1">\[exercise\_1\]</span> The `nalKernel()` shown above used in-hardware texture filtering.  
+Write a kernel function using texture lookup implementing formulas [\[4\]](#partialLinearInterpolation2D), [\[5\]](#partialLinearInterpolation2D_v2) and [\[6\]](#linearInterpolation2Dfull). What kind of `texReference.filterMode` is enough? What is the reconstructed image in the case when `transl_x = 100`, `transl_y = 100`, `scaleFactor
+= 1/8`? Is bilinear interpolation with texture lookup more or less precise than the version in Listing [8](#texture_nalKernel)?
 
-While, in Listing [\[texture\_7\]](#texture_7), function `nalKernel()`
-used the filtering features of texture memory, now the solution to
-exercise [\[exercise\_1\]](#exercise_1) will include the following
-steps:
+<span id="solution_1" label="Solution to exercise 1">\[exercise\_1\]</span> While, in Listing [8](#texture_nalKernel), function `nalKernel()` used the filtering features of texture memory, now the solution to exercise [1](#exercise_1) will include the following steps:
 
-1.  The texture must be only used to access the image samples so that
-    texture is used as a simple cache;
-
-2.  The samples \(f_{m,n+1}\) and \(f_{m+1,n+1}\) appearing in equation
-    ([\[partialLinearInterpolation2D\]](#partialLinearInterpolation2D))
-    must be accessed with calls like `tex2D(texReference, p_x, p_y
-    + 1.0f)` and `tex2D(texReference, p_x + 1.0f, p_y + 1.0f)`,
-    respectively;
-
-3.  The samples \(f_{m,n}\) and \(f_{m+1,n}\) appearing in equation
-    ([\[partialLinearInterpolation2D\_v2\]](#partialLinearInterpolation2D_v2))
-    must be accessed with calls like `tex2D(texReference, p_x, p_y)` and
-    `tex2D(texReference, p_x + 1.0f, p_y)`, respectively;
-
-4.  The linear combinations appearing in equations
-    ([\[partialLinearInterpolation2D\]](#partialLinearInterpolation2D)),
-    ([\[partialLinearInterpolation2D\_v2\]](#partialLinearInterpolation2D_v2))
-    and ([\[linearInterpolation2Dfull\]](#linearInterpolation2Dfull))
-    must be implemented by a proper `__device__` function, say
-    `lerpDevice`, reported below:
+1.  The texture must be only used to access the image samples so that texture is used as a simple cache;
+2.  The samples <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and \(f_{m %2B 1,n %2B 1}\) appearing in equation [\[4\]](#partialLinearInterpolation2D) must be accessed with calls like `tex2D(texReference, p_x, p_y + 1.0f)` and `tex2D(texReference, p_x + 1.0f, p_y + 1.0f)`, respectively;
+3.  The samples <img src="https://render.githubusercontent.com/render/math?math=f_{m,n}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n}"> appearing in equation [\[5\]](#partialLinearInterpolation2D_v2) must be accessed with calls like `tex2D(texReference, p_x, p_y)` and `tex2D(texReference, p_x + 1.0f, p_y)`, respectively;
+4.  The linear combinations appearing in equations [\[4\]](#partialLinearInterpolation2D), [\[5\]](#partialLinearInterpolation2D_v2) and [\[6\]](#linearInterpolation2Dfull)
+    must be implemented by a proper `__device__` function, say `lerpDevice`, reported below:
 
 <!-- end list -->
 
@@ -907,8 +875,7 @@ __host__ __device__ inline inType lerpDevice(inType v0, inType v1,
    inType t) { return (1 - t) * v0 + t * v1; }
 ```
 
-The exercise can be then solved by changing the following line in
-Listing [\[texture\_7\]](#texture_7):
+The exercise can be then solved by changing the following line in Listing [8](#texture_nalKernel):
 
 ``` c++
 float outSample = tex2D(texReference, xNew + 0.5f, yNew + 0.5f);
@@ -945,14 +912,10 @@ bilinearDeviceLookUp(const texture<inType, 2, cudaReadModeNormalizedFloat>
 }
 ```
 
-The `+0.5f` for both `xCoord` and `yCoord` is due to the texture
-coordinate convention. An optimized version of the `lerpDevice()`
-function can be found in .  
-Since we are using texture lookup, then `texReference.filterMode =
-cudaFilterModePoint` would be enough.
+The `+0.5f` for both `xCoord` and `yCoord` is due to the texture coordinate convention. 
+Since we are using texture lookup, then `texReference.filterMode = cudaFilterModePoint` would be enough.
 
-Let us now turn to a new exercise regarding the understanding of
-texture’s address modes.
+Let us now turn to a new exercise regarding the understanding of texture’s address modes.
 
 <span id="addressModes" label="addressModes">\[addressModes\]</span> In
 the example in section [1.7](#Practice), the two-dimensional NERP has
