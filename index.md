@@ -919,7 +919,7 @@ Since we are using texture lookup, then `texReference.filterMode = cudaFilterMod
 
 Let us now turn to a new exercise regarding the understanding of texture’s address modes.
 
-<span id="addressModes" label="addressModes">\[Exercise 2\]</span> In the example in the section on the practice on nearest-neighbor and linear interpolations of a PGM image (#Practice), the two-dimensional NERP has been implemented by considering `cudaAddressModeClamp` as *address mode*. What happens if the address mode is changed for one or both the dimensions?  
+<span id="addressModes" label="addressModes">\[Exercise 2\]</span> In the example in the section on the [practice on nearest-neighbor and linear interpolations of a PGM image](#Practice), the two-dimensional NERP has been implemented by considering `cudaAddressModeClamp` as *address mode*. What happens if the address mode is changed for one or both the dimensions?  
 Recall that `cudaAddressModeWrap` and `cudaAddressModeMirror` are only supported for normalized texture coordinates, while, in this project, we are dealing with un-normalized ones.  
 
 If we use the following in the `initTexture()` function:
