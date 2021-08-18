@@ -434,6 +434,8 @@ Once we have made practice on texture filtering in a simplified setting, we are 
 
 ## Practice: Nearest-neighbor and linear interpolations of a PGM image
 
+<p align="center" id="Practice" >
+</p>
 We are now ready to move a step forward towards the project of interest. In particular, we will read a PGM (Portable Gray Map) image from a file, we will perform the nearest-neighbor and linear interpolations and, finally, we will save the result again in a PGM image. The choice of the PGM format is due to the fact that it is designed to be extremely easy to learn and manipulate. It is nevertheless convenient to provide a short recall.  
 A PGM image is a grayscale image whose pixels, or “dots” on the screen, are encoded with one or two bytes (<img src="https://render.githubusercontent.com/render/math?math=8"> or <img src="https://render.githubusercontent.com/render/math?math=16"> bits). A PGM file provides for a header containing information on the file itself and on the image and an array of numbers representing the different shades of gray of the generic pixel, ranging from black (<img src="https://render.githubusercontent.com/render/math?math=0">) to white (up to <img src="https://render.githubusercontent.com/render/math?math=65,536">). PGM images are typically stored as ASCII files, but we will here deal with a binary representation. Binary PGM files are encoded with a single byte.  
 The first line contains the header which reports the format: “P2” for text or “P5” for binary. In our case, the format type should be “P5”. The second line optionally contains a comment. The line is a comment if it starts with “\#”. In the case the second line is a comment, the next line contains the image size in terms of `width x height` along with the
@@ -917,14 +919,8 @@ Since we are using texture lookup, then `texReference.filterMode = cudaFilterMod
 
 Let us now turn to a new exercise regarding the understanding of texture’s address modes.
 
-<span id="addressModes" label="addressModes">\[addressModes\]</span> In
-the example in section [1.7](#Practice), the two-dimensional NERP has
-been implemented by considering `cudaAddressModeClamp` as *address
-mode*. What happens if the address mode is changed for one or both the
-dimensions?  
-On recalling , `cudaAddressModeWrap` and `cudaAddressModeMirror` are
-only supported for normalized texture coordinates, while, in this
-project, we are dealing with un-normalized ones.  
+<span id="addressModes" label="addressModes">\[Exercise 2\]</span> In the example in the section on the practice on nearest-neighbor and linear interpolations of a PGM image (#Practice), the two-dimensional NERP has been implemented by considering `cudaAddressModeClamp` as *address mode*. What happens if the address mode is changed for one or both the dimensions?  
+Recall that `cudaAddressModeWrap` and `cudaAddressModeMirror` are only supported for normalized texture coordinates, while, in this project, we are dealing with un-normalized ones.  
 
 If we use the following in the `initTexture()` function:
 
@@ -933,22 +929,16 @@ texReference.addressMode[0] = cudaAddressModeClamp;
 texReference.addressMode[1] = cudaAddressModeBorder;
 ```
 
-and we use `transl_x = 0`, `transl_y = 0` and `scaleFactor = 2`, then
-the interpolated image is shown in figure [1.23](#Fig13). We compare
-figure [1.23](#Fig13) with figure [1.16](#Fig9c). Since we are using
-`cudaAddressModeBorder` instead of `cudaAddressModeClamp` for the second
-image dimension, now the image is prolonged upwards with zeros
-corresponding to the black regions on top and bottom of figure
-[1.23](#Fig13).
+and we use `transl_x = 0`, `transl_y = 0` and `scaleFactor = 2`, then the interpolated image is shown in figure [23](#Fig13). We compare figure [23](#Fig13) with figure [16](#Fig9c). Since we are using `cudaAddressModeBorder` instead of `cudaAddressModeClamp` for the second image dimension, now the image is prolonged upwards with zeros corresponding to the black regions on top and bottom of figure [23](#Fig13).
 
-![Nerp using different address modes for the two dimensions for the case
-`transl_x = 0`, `transl_y = 0` and `scaleFactor = 2`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig13.png)
+<p align="center">
+  <img src="Fig13.png" width="400" id="Fig13">
+  <br>
+     <em>Figure 23. Nerp using different address modes for the two dimensions for the case `transl_x = 0`, `transl_y = 0` and `scaleFactor = 2`.</em>
+</p>
 
-In the next exercise, we numerically verify whether the two conditions
-\(0\leq\widetilde{h}_0(\alpha)\leq 1\) and
-\(0\leq\widetilde{h}_1(\alpha)\leq 1\) after equation ([\[eq5\]](#eq5))
-are really met or not.
+In the next exercise, we numerically verify whether the two conditions <img src="https://render.githubusercontent.com/render/math?math=0\leq\widetilde{h}_0(\alpha)\leq 1">
+ and <img src="https://render.githubusercontent.com/render/math?math=0\leq\widetilde{h}_1(\alpha)\leq 1"> after equation [\[22\]](#eq5) are really met or not.
 
 <span id="exercise_3" label="exercise_3">\[exercise\_3\]</span> Write a
 Matlab or Python program to visually verify that:
