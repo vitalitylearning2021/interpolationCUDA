@@ -952,7 +952,7 @@ In the next exercise, we numerically verify whether the two conditions <img src=
 
 The exercise is solved by creating an array for the variable <img src="https://render.githubusercontent.com/render/math?math=\alpha"> whose values range from <img src="https://render.githubusercontent.com/render/math?math=0"> to <img src="https://render.githubusercontent.com/render/math?math=1">, extremes included, then defining
 four-vectors for the quantities <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)">, <img src="https://render.githubusercontent.com/render/math?math=w_1(\alpha)">, <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)"> and <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)"> in equations ([\[13\]](#w_0))-([\[16\]](#w_3)) and finally plotting <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)/(w_0(\alpha) %2B w_1(\alpha))"> and <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)/(w_2(\alpha) %2B w_3(\alpha))">. The task is simple if
-Matlab’s vectorized operations are exploited. The following code provides a solution in Matlab to exercise [\[Exercise 3\]](#exercise_3):
+Matlab’s vectorized operations are exploited. The following code provides a solution in Matlab to Exercise [3](#exercise_3):
 
 ``` matlab
 clear all
@@ -970,7 +970,7 @@ figure(2)
 plot(alphaVect, w2 ./ (w2 + w3));
 ```
 
-After having discussed, in [\[Exercise 2\]](#addressModes), the possibility to implement bilinear interpolation using texture lookup instead of texture filtering, the next exercise does something similar and deals with the possibility to likewise implement bicubic interpolation using texture lookup instead of texture filtering.
+After having discussed, in Exercise [2](#addressModes), the possibility to implement bilinear interpolation using texture lookup instead of texture filtering, the next exercise does something similar and deals with the possibility to likewise implement bicubic interpolation using texture lookup instead of texture filtering.
 
 <span id="bicubicExercise" label="bicubicExercise">\[bicubicExercise\]</span>
 The `bicubicDeviceFiltering()` `__device__` function shown above used
