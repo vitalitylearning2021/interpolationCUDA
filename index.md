@@ -940,26 +940,19 @@ and we use `transl_x = 0`, `transl_y = 0` and `scaleFactor = 2`, then the interp
 In the next exercise, we numerically verify whether the two conditions <img src="https://render.githubusercontent.com/render/math?math=0\leq\widetilde{h}_0(\alpha)\leq 1">
  and <img src="https://render.githubusercontent.com/render/math?math=0\leq\widetilde{h}_1(\alpha)\leq 1"> after equation [\[22\]](#eq5) are really met or not.
 
-<span id="exercise_3" label="exercise_3">\[exercise\_3\]</span> Write a
-Matlab or Python program to visually verify that:
+<span id="exercise_3" label="exercise_3">\[Exercise 3\]</span> Write a Matlab or Python program to visually verify that:
 
-\[\left\{
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=\[\left\{
     \begin{array}{lc}
-      0\leq \widetilde{h}_0(\alpha)=\frac{w_1(\alpha)}{w_0(\alpha)+w_1(\alpha)}\leq 1 \\
-      0\leq \widetilde{h}_1(\alpha)=\frac{w_3(\alpha)}{w_2(\alpha)+w_3(\alpha)}\leq 1 \\
-    \end{array}\right..
-  \label{conditionsToMeet}\]
+      0\leq \widetilde{h}_0(\alpha)=\frac{w_1(\alpha)}{w_0(\alpha) %2B w_1(\alpha)}\leq 1 \\
+      0\leq \widetilde{h}_1(\alpha)=\frac{w_3(\alpha)}{w_2(\alpha) %2B w_3(\alpha)}\leq 1 \\
+    \end{array}\right.."  id="conditionsToMeet">, [31]
+</p>
 
-The exercise is solved by creating an array for the variable \(\alpha\)
-whose values range from \(0\) to \(1\), extremes included, then defining
-four-vectors for the quantities \(w_0(\alpha)\), \(w_1(\alpha)\),
-\(w_2(\alpha)\) and \(w_3(\alpha)\) in equations
-([\[w\_0\]](#w_0))-([\[w\_3\]](#w_3)) and finally plotting
-\(w_0(\alpha)/(w_0(\alpha)+w_1(\alpha))\) and
-\(w_2(\alpha)/(w_2(\alpha)+w_3(\alpha))\). The task is simple if
-Matlab’s vectorized operations are exploited. The following code
-provides a solution in Matlab to exercise
-[\[exercise\_3\]](#exercise_3):
+The exercise is solved by creating an array for the variable <img src="https://render.githubusercontent.com/render/math?math=\alpha"> whose values range from <img src="https://render.githubusercontent.com/render/math?math=0"> to <img src="https://render.githubusercontent.com/render/math?math=1">, extremes included, then defining
+four-vectors for the quantities <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)">, <img src="https://render.githubusercontent.com/render/math?math=w_1(\alpha)">, <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)"> and <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)"> in equations ([\[13\]](#w_0))-([\[16\]](#w_3)) and finally plotting <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)/(w_0(\alpha) %2B w_1(\alpha))"> and <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)/(w_2(\alpha) %2B w_3(\alpha))">. The task is simple if
+Matlab’s vectorized operations are exploited. The following code provides a solution in Matlab to exercise [\[Exercise 3\]](#exercise_3):
 
 ``` matlab
 clear all
@@ -977,11 +970,7 @@ figure(2)
 plot(alphaVect, w2 ./ (w2 + w3));
 ```
 
-After having discussed, in exercise [\[addressModes\]](#addressModes),
-the possibility to implement bilinear interpolation using texture lookup
-instead of texture filtering, the next exercise does something similar
-and deals with the possibility to likewise implement bicubic
-interpolation using texture lookup instead of texture filtering.
+After having discussed, in [\[Exercise 2\]](#addressModes), the possibility to implement bilinear interpolation using texture lookup instead of texture filtering, the next exercise does something similar and deals with the possibility to likewise implement bicubic interpolation using texture lookup instead of texture filtering.
 
 <span id="bicubicExercise" label="bicubicExercise">\[bicubicExercise\]</span>
 The `bicubicDeviceFiltering()` `__device__` function shown above used
