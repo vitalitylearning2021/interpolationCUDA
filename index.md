@@ -1,5 +1,7 @@
 # Writing CUDA kernels for interpolation
 
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](YOUR_EMAIL_CODE)
+
 In this project, we use CUDA for a simple yet common problem like image interpolation and we get familiar with the functions running on the GPU, the *kernel functions*. Being interpolation very common in technical and scientific applications, the code permits having a tool that can be reused when needed.  
 We cover the following topics:
 
@@ -922,7 +924,7 @@ Let us now turn to a new exercise regarding the understanding of texture’s add
 <span id="addressModes" label="addressModes">\[Exercise 2\]</span> In the example in the section on the [practice on nearest-neighbor and linear interpolations of a PGM image](#Practice), the two-dimensional NERP has been implemented by considering `cudaAddressModeClamp` as *address mode*. What happens if the address mode is changed for one or both the dimensions?  
 Recall that `cudaAddressModeWrap` and `cudaAddressModeMirror` are only supported for normalized texture coordinates, while, in this project, we are dealing with un-normalized ones.  
 
-If we use the following in the `initTexture()` function:
+<span id="solution_2" label="solution_2">\[Solution to Exercise 2\]</span> If we use the following in the `initTexture()` function:
 
 ``` c++
 texReference.addressMode[0] = cudaAddressModeClamp;
@@ -950,7 +952,7 @@ In the next exercise, we numerically verify whether the two conditions <img src=
     \end{array}\right.."  id="conditionsToMeet">, [31]
 </p>
 
-The exercise is solved by creating an array for the variable <img src="https://render.githubusercontent.com/render/math?math=\alpha"> whose values range from <img src="https://render.githubusercontent.com/render/math?math=0"> to <img src="https://render.githubusercontent.com/render/math?math=1">, extremes included, then defining
+<span id="solution_3" label="solution_3">\[Solution to Exercise 3\]</span> The exercise is solved by creating an array for the variable <img src="https://render.githubusercontent.com/render/math?math=\alpha"> whose values range from <img src="https://render.githubusercontent.com/render/math?math=0"> to <img src="https://render.githubusercontent.com/render/math?math=1">, extremes included, then defining
 four-vectors for the quantities <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)">, <img src="https://render.githubusercontent.com/render/math?math=w_1(\alpha)">, <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)"> and <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)"> in equations ([\[13\]](#w_0))-([\[16\]](#w_3)) and finally plotting <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)/(w_0(\alpha) %2B w_1(\alpha))"> and <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)/(w_2(\alpha) %2B w_3(\alpha))">. The task is simple if
 Matlab’s vectorized operations are exploited. The following code provides a solution in Matlab to Exercise [3](#exercise_3):
 
@@ -972,30 +974,15 @@ plot(alphaVect, w2 ./ (w2 + w3));
 
 After having discussed, in Exercise [2](#addressModes), the possibility to implement bilinear interpolation using texture lookup instead of texture filtering, the next exercise does something similar and deals with the possibility to likewise implement bicubic interpolation using texture lookup instead of texture filtering.
 
-<span id="bicubicExercise" label="bicubicExercise">\[bicubicExercise\]</span>
-The `bicubicDeviceFiltering()` `__device__` function shown above used
-in-hardware texture filtering to implement bicubic B-spline
-interpolation. Write a `__device__` function using texture lookup
-implementing formulas from equations
-([\[partialInterpolationX\]](#partialInterpolationX)) and
-([\[partialInterpolationY\]](#partialInterpolationY)).  
-What is the reconstructed image in the case when `transl_x = 100`,
-`transl_y = 100`, `scaleFactor = 1/8`?
+<span id="bicubicExercise" label="bicubicExercise">\[Exercise 4\]</span>
+The `bicubicDeviceFiltering()` `__device__` function shown above used in-hardware texture filtering to implement bicubic B-spline interpolation. Write a `__device__` function using texture lookup implementing formulas from equations [\[25\]](#partialInterpolationX) and [\[26\]](#partialInterpolationY).  
+What is the reconstructed image in the case when `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`?
 
-The point is to implement equations
-([\[partialInterpolationX\]](#partialInterpolationX)) and
-([\[partialInterpolationY\]](#partialInterpolationY)) which require
-accessing the involved samples using texture lookup.
+<span id="solution_1" label="solution_4">\[Solution to Exercise 4\]</span> The point is to implement equations [\[25\]](#partialInterpolationX) and [\[partialInterpolationY\]](#partialInterpolationY) which require accessing the involved samples using texture lookup.
 
-Note that this is different from what is done above in Listing
-[\[texture\_8\]](#texture_8) and [\[texture\_9\]](#texture_9) which
-implement equations ([\[equationA\]](#equationA)) and
-([\[equationB\]](#equationB)) using texture filtering. Remember that you
-have already used texture lookup instead of texture filtering when
-solving exercise 2.
+Note that this is different from what is done above in Listings [9](#texture_8) and [10](#texture_9) which implement equations [\[29\]](#equationA) and [\[30\]](#equationB) using texture filtering. Remember that you have already used texture lookup instead of texture filtering when solving Exercise [2](#addressModes).
 
-The function performing one-dimensional cubic interpolation is
-implemented as a `__device__` function and is reported in the following:
+The function performing one-dimensional cubic interpolation is implemented as a `__device__` function and is reported in the following:
 
 ``` c++
 template<class inOutType> __device__ inOutType cubicInterp(float xCoord,
@@ -1006,11 +993,9 @@ template<class inOutType> __device__ inOutType cubicInterp(float xCoord,
    return outR;}
 ```
 
-Functions \(w_0(x)\), \(w_1(x)\), \(w_2(x)\) and \(w_3(x)\) are the same
-as those in Listing [\[texture\_9\]](#texture_9).
+Func1ions <img src="https://render.githubusercontent.com/render/math?math=w_0(x)"><img src="https://render.githubusercontent.com/render/math?math=w_0(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_1(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_2(x)"> and <img src="https://render.githubusercontent.com/render/math?math=w_3(x)"> are the same as those in Listing [9](#texture_9).
 
-In the following code snippet, the `__device__` function implementing
-two-dimensional interpolation using texture lookup:
+In the following code snippet, the `__device__` function implementing two-dimensional interpolation using texture lookup:
 
 ``` c++
 template<class inType, class outType>
@@ -1052,53 +1037,45 @@ __device__ outType bicubicDeviceLookUp(const texture<inType, 2,
 f_x_n_plus_1, f_x_n_plus_2);}
 ```
 
-In the `__device__` function above, `f_x_n_minus_1`, `f_x_n`,
-`f_x_n_plus_1` and `f_x_n_plus_2` correspond to the virtual samples
-discussed in equation
-([\[partialInterpolationX\]](#partialInterpolationX)). Furthermore, the
-last line is the implementation of equation
-([\[partialInterpolationY\]](#partialInterpolationY)).  
-The reconstructed image is reported in the next figure, namely, figure
-[1.24](#Fig14).
+In the `__device__` function above, `f_x_n_minus_1`, `f_x_n`, `f_x_n_plus_1` and `f_x_n_plus_2` correspond to the virtual samples discussed in equation [\[25\]](#partialInterpolationX). Furthermore, the last line is the implementation of equation [\[26\]](#partialInterpolationY).  
+The reconstructed image is reported in the next figure, namely, figure [24](#Fig14).
 
-![Bicubic interpolation with texture lookup with `transl_x = 100`,
-`transl_y = 100`, `scaleFactor = 1/8`
-([https://commons.wikimedia.org/wiki/File:BasilicaJuliaset-StripeAverageColoring.png](https://commons.wikimedia.org/wiki/File:Basilica_Julia_set_-_Stripe_Average_Coloring.png)).](/Chapter01/Fig14.png)
+<p align="center">
+  <img src="Fig14.png" width="400" id="Fig14">
+  <br>
+     <em>Figure 24. Bicubic interpolation with texture lookup with `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`</em>
+</p>
 
-Comparing figure [1.24](#Fig14) with figure [1.22](#Fig12): the two
-interpolated images appear of the same quality, although bicubic
-interpolation with texture filtering should be more approximated. This
-means that texture filtering does not visually impair bicubic
-interpolation quality.
+Comparing figure [24](#Fig14) with figure [22](#Fig12): the two interpolated images appear of the same quality, although bicubic interpolation with texture filtering should be more approximated. This means that texture filtering does not visually impair bicubic interpolation quality.
 
-Another kind of cubic interpolation, much used in the applications, is
-Catmull-Rom interpolation, so shortly dealing with it is worthwhile. In
-the next exercise, we briefly discuss its implementation.
+Another kind of cubic interpolation, much used in the applications, is Catmull-Rom interpolation, so shortly dealing with it is worthwhile. In the next exercise, we briefly discuss its implementation.
 
-Catmull-Rom interpolation  is another form of spline interpolation for
-which:
+<span id="exercise_5" label="exercise_5">\[Exercise 5\]</span> Catmull-Rom interpolation  is another form of spline interpolation for which:
 
-\[w_0(\alpha)=\frac{1}{2}\left[-\alpha+2\alpha^2-\alpha^3\right]\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)=\frac{1}{2}\left[-\alpha+2\alpha^2-\alpha^3\right]">, [32]
+</p>
 
-\[w_1(\alpha)=\frac{1}{2}\left[2-5\alpha^2+3\alpha^3\right]\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_1(\alpha)=\frac{1}{2}\left[2-5\alpha^2+3\alpha^3\right]">, [33]
+</p>
 
-\[w_2(\alpha)=\frac{1}{2}\left[\alpha+4\alpha^2-3\alpha^3\right]\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)=\frac{1}{2}\left[\alpha+4\alpha^2-3\alpha^3\right]">, [34]
+</p>
 
 and
 
-\[w_3(\alpha)=\frac{1}{2}\left[-\alpha^2+\alpha^3\right]\]
+<p align="center">
+  <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)=\frac{1}{2}\left[-\alpha^2+\alpha^3\right]">. [35]
+</p>
 
-Write a Matlab program to check if the conditions
-([\[conditionsToMeet\]](#conditionsToMeet)) are met.  
-If the above inequalities are not met, then write a texture lookup based
-approach for Catmull-Rom interpolation.
+Write a Matlab program to check if the above conditions are met.  
+If the above inequalities are not met, then write a texture lookup based approach for Catmull-Rom interpolation.
 
-The inequalities are not met.  
-The code for Catmull-Rom interpolation using texture lookup is
-essentially the same as that for exercise
-[\[bicubicExercise\]](#bicubicExercise) with the only difference that
-now functions \(w_0(x)\), \(w_1(x)\), \(w_2(x)\) and \(w_3(x)\) must be
-changed into:
+<span id="solution_5" label="solution_5">\[Solution to Exercise 5\]</span> The inequalities are not met.  
+The code for Catmull-Rom interpolation using texture lookup is essentially the same as that for Exercise [4](#bicubicExercise) with the only difference that
+now functions <img src="https://render.githubusercontent.com/render/math?math=w_0(x)"><img src="https://render.githubusercontent.com/render/math?math=w_0(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_1(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_2(x)"> and <img src="https://render.githubusercontent.com/render/math?math=w_3(x)"> must be changed into:
 
 ``` c++
 __device__ float catRom_w_0(float a) 
@@ -1111,147 +1088,45 @@ __device__ float catRom_w_3(float a)
    { return a * a * (-0.5f + 0.5f * a); }
 ```
 
-In conclusion, Catmull-Rom bicubic interpolation cannot benefit from
-texture filtering but must be implemented with texture lookup.
+In conclusion, Catmull-Rom bicubic interpolation cannot benefit from texture filtering but must be implemented with texture lookup.
 
 ## Summary
 
-In this Chapter, the image interpolation problem has been dealt with by
-considering, also in the analytical detail, the most common types of
-interpolations, namely, nearest-neighbor, bilinear, bicubic B-spline and
-Catmull-Rom.  
-We learned how nearest-neighbor, bilinear and bicubic interpolations can
-be implemented by exploiting the filtering features of texture memory,
-which has permitted to experience us writing customized CUDA kernel
-functions and to get familiar with the use of texture memory in general
-and of its hardware filtering features in particular from different
+In this project, the image interpolation problem has been dealt with by considering, also in the analytical detail, the most common types of interpolations, namely, nearest-neighbor, bilinear, bicubic B-spline and Catmull-Rom.  
+We learned how nearest-neighbor, bilinear and bicubic interpolations can be implemented by exploiting the filtering features of texture memory, which has permitted to experience us writing customized CUDA kernel functions and to get familiar with the use of texture memory in general and of its hardware filtering features in particular from different
 points of view.  
-We have also learned how bilinear, bicubic B-spline and Catmull-Rom can
-be implemented by using texture lookup, i.e., texture memory as a simple
-cache without employing its filtering features. Two-dimensional
-interpolation examples in this chapter have regarded zooming in/out and
-translating images, for example, when we use our fingers to magnify
+We have also learned how bilinear, bicubic B-spline and Catmull-Rom can be implemented by using texture lookup, i.e., texture memory as a simple cache without employing its filtering features. Two-dimensional interpolation examples in this chapter have regarded zooming in/out and translating images, for example, when we use our fingers to magnify
 images on our smartphones.  
-In the next Chapter, a likewise common problem in numerical approaches,
-namely, numerical integration, will be considered. We will see how the
-tools to be employed will be significantly different from those here
-detailed for interpolation.
+In the next Chapter, a likewise common problem in numerical approaches, namely, numerical integration, will be considered. We will see how the tools to be employed will be significantly different from those here detailed for interpolation.
 
 ## Assessment
 
 ### Questions
 
 1.  What is interpolation?
-
 2.  What are possible applications of interpolation?
-
-3.  What are one-dimensional and two-dimensional nearest-neighbor
-    interpolation?
-
+3.  What are one-dimensional and two-dimensional nearest-neighbor interpolation?
 4.  What are one-dimensional and two-dimensional linear interpolation?
-
 5.  What is texture caching? What is texture filtering?
-
-6.  How can nearest-neighbor interpolation be implemented by texture
-    filtering?
-
+6.  How can nearest-neighbor interpolation be implemented by texture filtering?
 7.  How can linear interpolation be implemented by texture filtering?
-
-8.  How many samples are needed for one-dimensional cubic interpolation
-    to compute the function at the interpolation point?
-
-9.  What kind of texture filtering is needed to implement
-    one-dimensional cubic interpolation and how many filterings are
-    needed per interpolation point?
-
-10. How can texture be used as texture cache instead of texture
-    filtering?
-
-11. How the image is prolonged when accessed by the texture outside the
-    image boundaries?
-
+8.  How many samples are needed for one-dimensional cubic interpolation to compute the function at the interpolation point?
+9.  What kind of texture filtering is needed to implement one-dimensional cubic interpolation and how many filterings are needed per interpolation point?
+10. How can texture be used as texture cache instead of texture filtering?
+11. How the image is prolonged when accessed by the texture outside the image boundaries?
 12. Can Catmul-Rom interpolation be implemented by texture filtering?
 
 ### Answers
 
-1.  Interpolation is the reconstruction of a function within its
-    sampling region by properly combining its samples.
-
-2.  They are increasing image resolution, image inpainting and image
-    warping.
-
-3.  Nearest-neighbor interpolation, in both one and two dimensions,
-    consists of evaluating the function at the interpolation point using
-    the closests function sample.
-
-4.  Linear interpolation, in both one and two dimensions, consists of
-    evaluating the function at the interpolation point using the two
-    closests function samples in one-dimension and the four closest
-    function samples in two-dimensions.
-
-5.  The texture cache enables to cache global memory data exhibiting
-    “spatial locality”. Texture filtering permits to perform, directly
-    in hardware, nearest-neighbor or linear interpolation. Being
-    in-hardware, they are faster but are less precise.
-
-6.  Using `tex1D` for one-dimension and `tex2D` for two dimensions and
-    setting `filterMode` as `cudaFilterModePoint`.
-
-7.  Using `tex1D` for one-dimension and `tex2D` for two dimensions and
-    setting `filterMode` as `cudaFilterModeLinear`.
-
-8.  \(4\).
-
-9.  Linear. \(2\).
-
-10. By setting `filterMode` to `cudaFilterModePoint`, then, by reading
-    from any coordinate within a pixel, `tex1D` or `tex2D` return the
-    texture sample value for that pixel.
-
-11. Texture prolongs the image according to the `addressMode`. Examples
-    are `cudaAddressModeClamp` and `cudaAddressModeWrap`.
-
+1.  Interpolation is the reconstruction of a function within its sampling region by properly combining its samples.
+2.  They are increasing image resolution, image inpainting and image warping.
+3.  Nearest-neighbor interpolation, in both one and two dimensions, consists of evaluating the function at the interpolation point using the closests function sample.
+4.  Linear interpolation, in both one and two dimensions, consists of evaluating the function at the interpolation point using the two closests function samples in one-dimension and the four closest function samples in two-dimensions.
+5.  The texture cache enables to cache global memory data exhibiting “spatial locality”. Texture filtering permits to perform, directly in hardware, nearest-neighbor or linear interpolation. Being in-hardware, they are faster but are less precise.
+6.  Using `tex1D` for one-dimension and `tex2D` for two dimensions and setting `filterMode` as `cudaFilterModePoint`.
+7.  Using `tex1D` for one-dimension and `tex2D` for two dimensions and setting `filterMode` as `cudaFilterModeLinear`.
+8.  <img src="https://render.githubusercontent.com/render/math?math=4">.
+9.  Linear. <img src="https://render.githubusercontent.com/render/math?math=2">.
+10. By setting `filterMode` to `cudaFilterModePoint`, then, by reading from any coordinate within a pixel, `tex1D` or `tex2D` return the texture sample value for that pixel.
+11. Texture prolongs the image according to the `addressMode`. Examples are `cudaAddressModeClamp` and `cudaAddressModeWrap`.
 12. No.
-
-
-## Welcome to GitHub Pages
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](YOUR_EMAIL_CODE)
-
-Testo
-
-You can use the [editor on GitHub](https://github.com/vitalitylearning2021/interpolationCUDA/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/vitalitylearning2021/interpolationCUDA/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
