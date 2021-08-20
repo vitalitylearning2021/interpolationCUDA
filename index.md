@@ -36,7 +36,7 @@ To clarify the application significance, in the framework of image manipulation,
 </p>
 
 As it can be seen from figure [2](#increasingResolution), interpolation enables zooming parts of an image.  
-Alternatively, one may want to perform the so-called *image inpainting*, namely, recovering damaged samples. The image inpainting is displayed below in Figure [3](#imageInpainting):
+Alternatively, one may want to perform the so-called *image inpainting*, namely, recovering damaged samples. The image inpainting is displayed below in figure [3](#imageInpainting):
 
 <p align="center">
   <img src="imageInpainting.png" width="400" id="imageInpainting">
@@ -45,7 +45,7 @@ Alternatively, one may want to perform the so-called *image inpainting*, namely,
 </p>
 
 In other words, image inpainting enables reconstructing the image at the locations occupied by the “jetphotos.net” banner by exploiting the knowledge of the image at all the other surrounding locations.  
-Finally, one may wish to perform geometrical transformations to achieve, for example, the so-called *image warping*. Image warping is illustrated below in Figure [4](#imageWarping):
+Finally, one may wish to perform geometrical transformations to achieve, for example, the so-called *image warping*. Image warping is illustrated below in figure [4](#imageWarping):
 
 <p align="center">
   <img src="imageWarping.jpg" width="200" id="imageWarping">
@@ -61,7 +61,7 @@ We will also discuss how more complex interpolations, like cubic B-spline interp
 
 Nearest-neighbor interpolation is the simplest possible form of interpolation and amounts to use the closest sample to interpolate a function at a certain interpolation point. Being the simplest interpolation, rather than calculating a combination of the samples, it simply approximates function values by the nearest-neighboring sample.  
 We will discuss nearest-neighbor interpolation with one-dimensional and two-dimensional interpolation.  
-One-dimensional interpolation consists of having samples of a function acquired on the real line and returning interpolated values on the real line, as shown below. One-dimensional interpolation is important *per se* because it frequently appears in applications and it is a preliminary step to learn two-dimensional.Figure [5](#nearestNeighborInterpolation) below illustrates one-dimensional interpolation:
+One-dimensional interpolation consists of having samples of a function acquired on the real line and returning interpolated values on the real line, as shown below. One-dimensional interpolation is important *per se* because it frequently appears in applications and it is a preliminary step to learn two-dimensional. Figure [5](#nearestNeighborInterpolation) below illustrates one-dimensional interpolation:
 
 <p align="center">
   <img src="nearestNeighborInterpolation.png" width="400" id="nearestNeighborInterpolation">
@@ -86,7 +86,7 @@ Let’s address one-dimensional and two-dimensional cases for nearest-neighbor i
 
 ### Nearest-neighbor interpolation: one-dimensional case
 
-Throughout this chapter and for one-dimensional problems, we will assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x)"> we want to interpolate is a real function of a real argument sampled at the points <img src="https://render.githubusercontent.com/render/math?math=x_m=m">, <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1"> and that the corresponding function samples are <img src="https://render.githubusercontent.com/render/math?math=f_m=f(x_m)">.  
+Throughout this project and for one-dimensional problems, we will assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x)"> we want to interpolate is a real function of a real argument sampled at the points <img src="https://render.githubusercontent.com/render/math?math=x_m=m">, <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1"> and that the corresponding function samples are <img src="https://render.githubusercontent.com/render/math?math=f_m=f(x_m)">.  
 Henceforth, we assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x)"> is required in the interval <img src="https://render.githubusercontent.com/render/math?math=(0,M-1)"> and we indicate by <img src="https://render.githubusercontent.com/render/math?math=\lfloor x\rceil"> the nearest integer to the generic interpolation point <img src="https://render.githubusercontent.com/render/math?math=x">. Accordingly, the nearest-neighbor *interpolating function* can be expressed as:
 
 <p align="center">
@@ -98,7 +98,7 @@ Interpolation is typically a polynomial approximation of a function. The <img sr
 
 ### Nearest-neighbor interpolation: two-dimensional case
 
-Henceforth, for two-dimensional problems, we will assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x,y)"> we want to interpolate is a real function of two real variables sampled at the points of the two-dimensional Cartesian grid <img src="https://render.githubusercontent.com/render/math?math=((x_m,y_n)=(m,n)">, with <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1"> and <img src="https://render.githubusercontent.com/render/math?math=n=0,1,\ldots,N-1">. Analogously to the foregoing subsection, the interpolating function under the nearest-neighbor scheme is:
+Henceforth, for two-dimensional problems, we will assume that the function <img src="https://render.githubusercontent.com/render/math?math=f(x,y)"> we want to interpolate is a real function of two real variables sampled at the points of the two-dimensional Cartesian grid <img src="https://render.githubusercontent.com/render/math?math=(x_m,y_n)=(m,n)">, with <img src="https://render.githubusercontent.com/render/math?math=m=0,1,\ldots,M-1"> and <img src="https://render.githubusercontent.com/render/math?math=n=0,1,\ldots,N-1">. Analogously to the foregoing subsection, the interpolating function under the nearest-neighbor scheme is:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}(x,y)=f_{\lfloor x\rceil,\lfloor y\rceil}." id="nearestNeighborInterpolatingFunction2D"> [2]
@@ -130,7 +130,7 @@ The two-dimensional case is typically referred to as *bilinear interpolation*. L
 
 ### Linear interpolation: one-dimensional case
 
-In the one-dimensional case, when the interpolation point <img src="https://render.githubusercontent.com/render/math?math=x"> lies between the <img src="https://render.githubusercontent.com/render/math?math=m">-th and the <img src="https://render.githubusercontent.com/render/math?math=m+1">-th samples, namely,
+In the one-dimensional case, when the interpolation point <img src="https://render.githubusercontent.com/render/math?math=x"> lies between the <img src="https://render.githubusercontent.com/render/math?math=m">-th and the <img src="https://render.githubusercontent.com/render/math?math=m %2B 1">-th samples, namely,
 <img src="https://render.githubusercontent.com/render/math?math=m\leq x\leq m %2B 1">, linear interpolation consists of linearly approximating <img src="https://render.githubusercontent.com/render/math?math=f(x)"> using samples <img src="https://render.githubusercontent.com/render/math?math=f_m"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1}"> as
 
 <p align="center">
@@ -150,7 +150,7 @@ Linear interpolation in the two-dimensional case can be thought of as a combinat
      <em>Figure 9. Illustrating the bilinear interpolation as a combination of one-dimensional ones.</em>
 </p>
 
-The previous figure illustrates that two “virtual” samples are first reconstructed at the yellow dot locations from the four samples at the four red dot locations. Each of the two virtual samples is reconstructed by one-dimensional linear interpolations along the <img src="https://render.githubusercontent.com/render/math?math=x">-axis. Then, the
+The previous figure shows that two “virtual” samples are first reconstructed at the yellow dot locations from the four samples at the four red dot locations. Each of the two virtual samples is reconstructed by one-dimensional linear interpolations along the <img src="https://render.githubusercontent.com/render/math?math=x">-axis. Then, the
 interpolation value at the yellow cross-location is determined from the two virtual samples by a one-dimensional linear interpolation along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis. 
 More formally, the interpolating function at the interpolation point denoted with a cross in figure [9](#linearInterpolation2Dsamples) and having coordinates <img src="https://render.githubusercontent.com/render/math?math=(x,y)"> is achieved from <img src="https://render.githubusercontent.com/render/math?math=4"> samples: <img src="https://render.githubusercontent.com/render/math?math=f_{m,n}">, <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n}">, <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n %2B 1}">. The final
 result is achieved by first constructing the virtual sample represented by the upper empty circle in figure [9](#linearInterpolation2Dsamples) and computed as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{m,n %2B 1}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m %2B 1,n %2B 1}"> along the <img src="https://render.githubusercontent.com/render/math?math=x"> axis, namely:
@@ -162,7 +162,7 @@ result is achieved by first constructing the virtual sample represented by the u
 where <img src="https://render.githubusercontent.com/render/math?math=\alpha_x=x-m">. Later on, the virtual sample <img src="https://render.githubusercontent.com/render/math?math=f_{x,n}"> corresponding to the lower empty circle in figure [9](#linearInterpolation2Dsamples) is constructed and worked out as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{m,n}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{m+1,n}"> along the <img src="https://render.githubusercontent.com/render/math?math=x"> axis, that is:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=f_{x,n}=(1-\alpha_x)f_{m,n} %2B \alpha_x f_{m %2B 1,n}," id="partialLinearInterpolation2D_v2"> [5]
+  <img src="https://render.githubusercontent.com/render/math?math=f_{x,n}=(1-\alpha_x)f_{m,n} %2B \alpha_x f_{m %2B 1,n}." id="partialLinearInterpolation2D_v2"> [5]
 </p>
 
 Finally, the desired value <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(x,y)"> is achieved as a linear interpolation of <img src="https://render.githubusercontent.com/render/math?math=f_{x,n}"> and <img src="https://render.githubusercontent.com/render/math?math=f_{x,n %2B 1}"> along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis, namely,
@@ -191,7 +191,7 @@ To understand this point, figure [10](#textureMemory) illustrates an example whi
 
 Figure [10](#textureMemory) illustrates how, in a typical CPU caching scheme, the <img src="https://render.githubusercontent.com/render/math?math=4"> accessed memory locations would not be stored at consecutive memory addresses so that they would not be cached together. On the other side, texture caches those global memory locations together
 to accelerate access patterns such as the illustrated one. This result is achieved by transferring the two-dimensional spatial locality through a mapping based on a *z-curve*-like concept.  
-We will overlook further details on z-curve-like caching, which is not of strict interest for the present project. Actually, in this project, we will not use texture memory to speed up memory fetches, but rather to perform fast interpolations, also known as *texture filtering* .  
+We will overlook further details on z-curve-like caching, which is not of strict interest for the present project. Actually, in this project, we will not use texture memory to speed up memory fetches, but rather to perform fast interpolations, also known as *texture filtering*.  
 Indeed, when the texture is accessed using non-integer indices, it returns the interpolation between neighboring stored values. Such interpolation can be a nearest-neighbor or linear, namely, of the two types discussed above. Performing interpolation using texture memory has the indubitable advantage that such operation is performed by dedicated
 hardware circuitry, therefore it is worked out very fast.  
 Nonetheless, speed is paid with accuracy in the linear case since interpolation coefficients are stored in a fixed point format having <img src="https://render.githubusercontent.com/render/math?math=9">-bit overall with <img src="https://render.githubusercontent.com/render/math?math=8"> bits of fractional value.  
@@ -296,13 +296,13 @@ int main(){
 As it can be seen, the sequence `h_samples` is made of <img src="https://render.githubusercontent.com/render/math?math=5"> samples: <img src="https://render.githubusercontent.com/render/math?math=0, 0.2, 0.4, 0.6, 0.8">. In other words, 
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=f_m=m \times 0.2, m=0,\ldots,4,">, [8]
+  <img src="https://render.githubusercontent.com/render/math?math=f_m=m \times 0.2, m=0,\ldots,4."> [8]
 </p>
 
 The coordinates of <img src="https://render.githubusercontent.com/render/math?math=7"> interpolation points `h_x` are then defined:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=x_0=-0.6, x_1=-0.1, x_2=0.6, x_3=1.5, x_4=2.1, x_5=2.9, x_6=4.7,">, [9]
+  <img src="https://render.githubusercontent.com/render/math?math=x_0=-0.6, x_1=-0.1, x_2=0.6, x_3=1.5, x_4=2.1, x_5=2.9, x_6=4.7."> [9]
 </p>
 
 These arrays are then transferred to the GPU memory. Finally, the `textureFiltering()` function performs the texture-based interpolations and displays the results.  
@@ -348,16 +348,16 @@ We furthermore notify CUDA that we intend to use un-normalized coordinates, as m
 that the samples are prolonged as follows:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=f_m=f_0, m<0,">, [10]
+  <img src="https://render.githubusercontent.com/render/math?math=f_m=f_0, m<0,"> [10]
 </p>
 
 and
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=f_m=f_{M-1}, m\geq M,">. [11]
+  <img src="https://render.githubusercontent.com/render/math?math=f_m=f_{M-1}, m\geq M."> [11]
 </p>
 
-The `textureFiltering()` function is set up to easily change the prolongation modality. It is enough to just comment the currently running line and uncomment the desired address mode. It should be noticed that `tex.addressMode` is indexed. For the current example, only one index is of interest, being the texture one-dimensional, but, in principle, for two or three-dimensional textures different address modes can be chosen for different dimensions (see exercise [\[addressModes\]](#addressModes)).  
+The `textureFiltering()` function is set up to easily change the prolongation modality. It is enough to just comment the currently running line and uncomment the desired address mode. It should be noticed that `tex.addressMode` is indexed. For the current example, only one index is of interest, being the texture one-dimensional, but, in principle, for two or three-dimensional textures different address modes can be chosen for different dimensions (see Exercise [2](#addressModes)).  
 Finally, the desired filtering type should be chosen. Nearest-neighbor interpolation is achieved by launching the `textureFilteringKernelNerp()` kernel and setting `tex.filterMode = cudaFilterModePoint`.
 
 The name of the kernel function contains the “nickname” *NERP* typically used to denote nearest-neighbor interpolation.
@@ -392,7 +392,7 @@ __global__ void textureFilteringKernelNerp(const float *
 This kernel function prints the results of nearest-neighbor texture filtering by invoking `tex1D` `(tex,(d_xCoord[tidx])+0.5)` which evaluates <img src="https://render.githubusercontent.com/render/math?math=f^{(0)}"> at `d_xCoord[tidx]`. The need for the <img src="https://render.githubusercontent.com/render/math?math=0.5">
 shift has been already explained above. The value of nearest-neighbor texture filtering is compared with an analogous “manual” interpolation. Manual nerp is simply achieved by picking up the sample with index nearest to `d_xCoord[tidx]`, by calling the `round()` function.  
 The `if...else` conditions are just needed to check whether `d_xCoord[tidx]` falls within the interpolation interval and, if not, clamping is used. In other words, if `d_xCoord[tidx]` is located at the left of the interpolation interval, `d_samples[0]` is taken as nearest-neighbor interpolation value. Opposite to that, if `d_xCoord[tidx]` is on the right side of the interpolation interval, `d_xCoord[M-1]` is picked up.  
-The results of both nearest-neighbor and linear filterings for the considered example are illustrated in figure [1.13](#interpolationExample) below:
+The results of both nearest-neighbor and linear filterings for the considered example are illustrated in figure [13](#interpolationExample) below:
 
 <p align="center">
   <img src="interpolationExample.png" width="400" id="interpolationExample">
@@ -470,7 +470,7 @@ P2
 It defines a `16x16` black and white image with black background (the `0`’s) and white diagonal (the `255`’s).  
 Many PGM images that can be used to play with the codes in this project can be downloaded from <http://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html>.  
 In the project at hand, the function `loadPGMImageAndInitTexture()` loads the PGM image to be interpolated, while the function `writePGMImage()` writes the interpolated image. We will not go through the details of PGM image read-writes and essentially use those functions as black-boxes. Nevertheless, `loadPGMImageAndInitTexture()` also initializes the texture which, in our relevant example, is a two-dimensional texture.  
-The initialization is performed by invoking the `initTexture()` function whose details are reported in Listing [\[texture\_6\]](#texture_6):
+The initialization is performed by invoking the `initTexture()` function whose details are reported in Listing [7](#texture_5):
 
 ``` c++
 void initTexture(int imageWidth, int imageHeight, unsigned char
@@ -646,7 +646,7 @@ In the next subsection, we will see how texture memory comes to aid again to spe
 ### Cubic B-spline interpolation implemented as texture filtering
 
 It is possible to exploit linear in-hardware texture filtering to also perform cubic B-spline interpolations. 
-Linear texture filtering can be exploited to compute a generic linear combination <img src="https://render.githubusercontent.com/render/math?math=af_i+bf_{i %2B 1}"> between two samples <img src="https://render.githubusercontent.com/render/math?math=f_i"> and <img src="https://render.githubusercontent.com/render/math?math=f_{i %2B 1}">. Indeed, we have:
+Linear texture filtering can be exploited to compute a generic linear combination <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}"> between two samples <img src="https://render.githubusercontent.com/render/math?math=f_i"> and <img src="https://render.githubusercontent.com/render/math?math=f_{i %2B 1}">. Indeed, we have:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}=(a %2B b)\left[\frac{a}{a %2B b}f_i %2B \frac{b}{a %2B b}f_{i %2B 1}\right]"  id="linearCombination">. [17]
@@ -658,7 +658,7 @@ Let us now set:
   <img src="https://render.githubusercontent.com/render/math?math=\widetilde{\alpha}=\frac{b}{a %2B b}"  id="widetilde">. [18]
 </p>
 
-After using equation [\[18\]](#widetilde), equation [\[19\]](#linearCombination) becomes:
+After using equation [\[18\]](#widetilde), equation [\[17\]](#linearCombination) becomes:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}=(a %2B b)\left[(1-\widetilde{\alpha})f_i %2B \widetilde{\alpha}f_{i %2B 1})\right]"  id="linearCombinationTexture">. [19]
@@ -729,7 +729,7 @@ In the previous figure, the <img src="https://render.githubusercontent.com/rende
 </p>
 
 where <img src="https://render.githubusercontent.com/render/math?math=\alpha_x=x-m">.  
-After that, a one-dimensional cubic interpolation along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis of the virtual samples <img src="https://render.githubusercontent.com/render/math?math=f_{x,j}">, <img src="https://render.githubusercontent.com/render/math?math=j=n-1,\ldots,n+2"> is performed,
+After that, a one-dimensional cubic interpolation along the <img src="https://render.githubusercontent.com/render/math?math=y">-axis of the virtual samples <img src="https://render.githubusercontent.com/render/math?math=f_{x,j}">, <img src="https://render.githubusercontent.com/render/math?math=j=n-1,\ldots,n %2B 2"> is performed,
 obtaining
 
 <p align="center">
@@ -819,7 +819,7 @@ __device__ outType bicubicDeviceFiltering(const texture<inType, 2,
      <em>Listing 9. Bicubic interpolation with texture filtering `__device__` function.</em>
 </p>
 
-Listing [9](#texture_8) implements equations [\[equationA\]](#equationA) and [\[equationB\]](#equationB) through its last line computing `outR`. The auxiliary functions appearing in Listing [9](#texture_8), namely, `g_0()`, `g_1()`, `h_0()` and `h_1()`, are defined in Listing [10](#texture_9). They implement, along with the functions `w_0()`, `w_1()`, `w_2()` and `w_3()` reported again in Listing [10](#texture_9) below, the auxiliary functions in equations [\[13]](#w_0)-([\[16\]](#w_3)) and equation [\[21\]](#g0g1):
+Listing [9](#texture_8) implements equations [\[29\]](#equationA) and [\[30\]](#equationB) through its last line computing `outR`. The auxiliary functions appearing in Listing [9](#texture_8), namely, `g_0()`, `g_1()`, `h_0()` and `h_1()`, are defined in Listing [10](#texture_9). They implement, along with the functions `w_0()`, `w_1()`, `w_2()` and `w_3()` reported again in Listing [10](#texture_9) below, the auxiliary functions in equations [\[13\]](#w_0)-[\[16\]](#w_3) and equation [\[21\]](#g0g1):
 
 ``` c++
 __device__ float g_0(float alpha) { return w_0(alpha) + w_1(alpha); }
@@ -841,7 +841,7 @@ __device__ float w_3(float alpha) { return (1.0f / 6.0f) *
      <em>Listing 10. Auxiliary `__device__` functions for B-spline interpolation with texture filtering.</em>
 </p>
 
-The image interpolated by bicubic B-spline interpolation using in-hardware texture filtering is shown in figure [22](#) below:
+The image interpolated by bicubic B-spline interpolation using in-hardware texture filtering is shown in figure [22](#Fig12) below:
 
 <p align="center">
   <img src="Fig12.png" width="400" id="Fig12">
@@ -945,7 +945,7 @@ In the next exercise, we numerically verify whether the two conditions <img src=
     \begin{array}{lc}
       0\leq \widetilde{h}_0(\alpha)=\frac{w_1(\alpha)}{w_0(\alpha) %2B w_1(\alpha)}\leq 1 \\
       0\leq \widetilde{h}_1(\alpha)=\frac{w_3(\alpha)}{w_2(\alpha) %2B w_3(\alpha)}\leq 1 \\
-    \end{array}\right.."  id="conditionsToMeet">, [31]
+    \end{array}\right.."  id="conditionsToMeet"> [31]
 </p>
 
 <span id="solution_3" label="solution_3">\[Solution to Exercise 3\]</span> The exercise is solved by creating an array for the variable <img src="https://render.githubusercontent.com/render/math?math=\alpha"> whose values range from <img src="https://render.githubusercontent.com/render/math?math=0"> to <img src="https://render.githubusercontent.com/render/math?math=1">, extremes included, then defining
@@ -974,7 +974,7 @@ After having discussed, in Exercise [2](#addressModes), the possibility to imple
 The `bicubicDeviceFiltering()` `__device__` function shown above used in-hardware texture filtering to implement bicubic B-spline interpolation. Write a `__device__` function using texture lookup implementing formulas from equations [\[25\]](#partialInterpolationX) and [\[26\]](#partialInterpolationY).  
 What is the reconstructed image in the case when `transl_x = 100`, `transl_y = 100`, `scaleFactor = 1/8`?
 
-<span id="solution_1" label="solution_4">\[Solution to Exercise 4\]</span> The point is to implement equations [\[25\]](#partialInterpolationX) and [\[partialInterpolationY\]](#partialInterpolationY) which require accessing the involved samples using texture lookup.
+<span id="solution_1" label="solution_4">\[Solution to Exercise 4\]</span> The point is to implement equations [\[25\]](#partialInterpolationX) and [\[26\]](#partialInterpolationY) which require accessing the involved samples using texture lookup.
 
 Note that this is different from what is done above in Listings [9](#texture_8) and [10](#texture_9) which implement equations [\[29\]](#equationA) and [\[30\]](#equationB) using texture filtering. Remember that you have already used texture lookup instead of texture filtering when solving Exercise [2](#addressModes).
 
@@ -989,7 +989,7 @@ template<class inOutType> __device__ inOutType cubicInterp(float xCoord,
    return outR;}
 ```
 
-Func1ions <img src="https://render.githubusercontent.com/render/math?math=w_0(x)"><img src="https://render.githubusercontent.com/render/math?math=w_0(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_1(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_2(x)"> and <img src="https://render.githubusercontent.com/render/math?math=w_3(x)"> are the same as those in Listing [9](#texture_9).
+Functions <img src="https://render.githubusercontent.com/render/math?math=w_0(x)"><img src="https://render.githubusercontent.com/render/math?math=w_0(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_1(x)">, <img src="https://render.githubusercontent.com/render/math?math=w_2(x)"> and <img src="https://render.githubusercontent.com/render/math?math=w_3(x)"> are the same as those in Listing [10](#texture_9).
 
 In the following code snippet, the `__device__` function implementing two-dimensional interpolation using texture lookup:
 
@@ -1049,21 +1049,21 @@ Another kind of cubic interpolation, much used in the applications, is Catmull-R
 <span id="exercise_5" label="exercise_5">\[Exercise 5\]</span> Catmull-Rom interpolation  is another form of spline interpolation for which:
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)=\frac{1}{2}\left[-\alpha+2\alpha^2-\alpha^3\right]">, [32]
+  <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)=\frac{1}{2}\left[-\alpha %2B 2\alpha^2-\alpha^3\right]">, [32]
 </p>
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=w_1(\alpha)=\frac{1}{2}\left[2-5\alpha^2+3\alpha^3\right]">, [33]
+  <img src="https://render.githubusercontent.com/render/math?math=w_1(\alpha)=\frac{1}{2}\left[2-5\alpha^2 %2B 3\alpha^3\right]">, [33]
 </p>
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)=\frac{1}{2}\left[\alpha+4\alpha^2-3\alpha^3\right]">, [34]
+  <img src="https://render.githubusercontent.com/render/math?math=w_2(\alpha)=\frac{1}{2}\left[\alpha %2B 4\alpha^2-3\alpha^3\right]">, [34]
 </p>
 
 and
 
 <p align="center">
-  <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)=\frac{1}{2}\left[-\alpha^2+\alpha^3\right]">. [35]
+  <img src="https://render.githubusercontent.com/render/math?math=w_3(\alpha)=\frac{1}{2}\left[-\alpha^2 %2B \alpha^3\right]">. [35]
 </p>
 
 Write a Matlab program to check if the above conditions are met.  
