@@ -1,7 +1,7 @@
 # Writing CUDA kernels for interpolation
 
 <p align="center">
-  <img src="chapter01image.png" width="400">
+  <img src="chapter01image.jpg" width="400">
 </p>
 
 In this project, we use CUDA for a simple yet common problem like image interpolation and we get familiar with the functions running on the GPU, the *kernel functions*. Being interpolation very common in technical and scientific applications, the code permits having a tool that can be reused when needed.  
