@@ -1,5 +1,9 @@
 # Writing CUDA kernels for interpolation
 
+<p align="center">
+  <img src="chapter01image.png" width="400">
+</p>
+
 In this project, we use CUDA for a simple yet common problem like image interpolation and we get familiar with the functions running on the GPU, the *kernel functions*. Being interpolation very common in technical and scientific applications, the code permits having a tool that can be reused when needed.  
 We cover the following topics:
 
@@ -14,6 +18,10 @@ We cover the following topics:
   - Catmull-Rom interpolation.
 
 Different common interpolation techniques for PGM images are implemented with customized CUDA kernels, also using CUDA texture memory.
+
+## Technical requirements
+
+The main prerequisites regard the fundamentals of C/C++ and CUDA programming and basic elements of calculus, especially function approximation. 
 
 ## The interpolation problem
 
