@@ -1136,3 +1136,30 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 10. By setting `filterMode` to `cudaFilterModePoint`, then, by reading from any coordinate within a pixel, `tex1D` or `tex2D` return the texture sample value for that pixel.
 11. Texture prolongs the image according to the `addressMode`. Examples are `cudaAddressModeClamp` and `cudaAddressModeWrap`.
 12. No.
+
+# REFERENCES
+<p align="center" id="BURDEN_FAIRES" >
+</p>
+[1] R.L. Burden, J.D. Faires, Numerical Analysis Ed. 9, Boston, MA, Brooks/Cole Cengage Learning, 2011.
+
+<p align="center" id="Z_CURVE" >
+</p>
+[2] Y. Sugimoto, F. Ino, K. Hagihara, "Improving cache locality for GPU-based volume rendering," Parallel Computing, vol. 40, n. 5-6, pp. 59-69, May 2014 [link](http://www-ppl.ist.osaka-u.ac.jp/research/papers/201405_sugimoto_pc.pdf).
+
+<p align="center" id="TEXTURE_FETCHING" >
+</p>
+[3] NVIDIA Corporation, "CUDA Programming Guide, Texture Fetching and Filtering," [link](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#texture-fetching).
+
+<p align="center" id="ADDRESSING_MODES" >
+</p>
+[4] The different addressing modes of CUDA textures, StackOverflow, Sept. 2013, [link](https://stackoverflow.com/questions/19020963/the-different-addressing-modes-of-cuda-textures).
+
+<p align="center" id="CUDA_ERROR_CHECKING" >
+</p>
+[5] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, [link](https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api).
+
+<p align="center" id="INTERPOLATION_REVISITED" >
+</p>
+[6] P. Thévenaz, T. Blu, M. Unser, "Interpolation revisited," IEEE Trans. Medical Imaging, vol. 19, n. 7, pp. 739-758, Jul. 2000.
+
+
