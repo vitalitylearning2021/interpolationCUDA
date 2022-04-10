@@ -1162,4 +1162,20 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 </p>
 [6] P. Thévenaz, T. Blu, M. Unser, "Interpolation revisited," IEEE Trans. Medical Imaging, vol. 19, n. 7, pp. 739-758, Jul. 2000.
 
+<p align="center" id="INTERPOLATION_REVISITED" >
+</p>
+[7] P. Thévenaz, T. Blu, M. Unser, "Interpolation revisited," IEEE Trans. Medical Imaging, vol. 19, n. 7, pp. 739-758, Jul. 2000.
+
+@article{GPU_GEMS_3_INTERPOLATION,
+	%address = {City},
+    %note = "\url{https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api}",
+	publisher = {in GPU Gems 2, Programming Techniques for High-Performance Graphics and General-Purpose Computation, Randima Fernando Ed.},
+	author = {C. Sigg, M. Hadwiger},
+	title = {Fast third-order texture filtering},
+	year = {2004},
+	%volume = {19},
+	%number = {7},
+	%pages = {739--758},
+	%month = {Jul}
+}
 
