@@ -1059,7 +1059,7 @@ Comparing figure [24](#Fig14) with figure [22](#Fig12): the two interpolated ima
 
 Another kind of cubic interpolation, much used in the applications, is Catmull-Rom interpolation, so shortly dealing with it is worthwhile. In the next exercise, we briefly discuss its implementation.
 
-<span id="exercise_5" label="exercise_5">\[Exercise 5\]</span> Catmull-Rom interpolation [\[11\]](#CATMULL_ROM_INTERPOLATION) is another form of spline interpolation for which:
+<span id="exercise_5" label="exercise_5">\[Exercise 5\]</span> Catmull-Rom interpolation [\[12\]](#CATMULL_ROM_INTERPOLATION) is another form of spline interpolation for which:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)=\frac{1}{2}\left[-\alpha %2B 2\alpha^2-\alpha^3\right]">, [32]
@@ -1187,7 +1187,7 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 
 <p align="center" id="CATMULL_ROM_INTERPOLATION" >
 </p>
-[11] J. Li, S. Chen, "The Cubic <img src="https://render.githubusercontent.com/render/math?math=\alpha">-Catmull-Rom Spline," Math. and Comput. Appl., vol. 21, n. 33, pp. 1-14, 2016.
+[12] J. Li, S. Chen, "The Cubic <img src="https://render.githubusercontent.com/render/math?math=\alpha">-Catmull-Rom Spline," Math. and Comput. Appl., vol. 21, n. 33, pp. 1-14, 2016.
 
 
 
