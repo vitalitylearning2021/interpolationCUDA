@@ -22,10 +22,13 @@ Different common interpolation techniques for PGM images are implemented with cu
 ## Technical requirements
 
 The main prerequisites regard the fundamentals of C/C++ and CUDA programming and basic elements of calculus, especially function approximation. 
+Concerning CUDA, a reference introductory book is [\[1\]](#id="CUDA_BY_EXAMPLE") while a reference advanced book is [\[2\]](#id="HWU"). The GitHub link for all the code files is: [https://github.com/vitalitylearning2021/interpolationCUDA](https://github.com/vitalitylearning2021/interpolationCUDA).
 
 ## The interpolation problem
 
-Interpolation consists of approximately reconstructing the values of a function by properly combining its samples. The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. Figure [1](#interpolationProblem) below shows an example of the interpolation problem:
+Interpolation [\[3\]](#id="BURDEN_FAIRES" ) consists of approximately reconstructing the values of a function by properly combining its samples. 
+The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. 
+Figure [1](#interpolationProblem) below shows an example of the interpolation problem:
 
 <p align="center">
   <img src="interpolationProblem.png" width="400" id="interpolationProblem">
@@ -71,7 +74,7 @@ We will also discuss how more complex interpolations, like cubic B-spline interp
 
 Nearest-neighbor interpolation is the simplest possible form of interpolation and amounts to use the closest sample to interpolate a function at a certain interpolation point. Being the simplest interpolation, rather than calculating a combination of the samples, it simply approximates function values by the nearest-neighboring sample.  
 We will discuss nearest-neighbor interpolation with one-dimensional and two-dimensional interpolation.  
-One-dimensional interpolation consists of having samples of a function acquired on the real line and returning interpolated values on the real line, as shown below. One-dimensional interpolation is important *per se* because it frequently appears in applications and it is a preliminary step to learn two-dimensional. Figure [5](#nearestNeighborInterpolation) below illustrates one-dimensional interpolation:
+One-dimensional interpolation consists of having samples of a function acquired on the real line and returning interpolated values on the real line, as shown below. One-dimensional interpolation is important *per se* because it frequently appears in applications and it is a preliminary step to learn two-dimensional interpolation. Figure [5](#nearestNeighborInterpolation) below illustrates one-dimensional interpolation:
 
 <p align="center">
   <img src="nearestNeighborInterpolation.png" width="400" id="nearestNeighborInterpolation">
@@ -200,8 +203,8 @@ To understand this point, figure [10](#textureMemory) illustrates an example whi
 </p>
 
 Figure [10](#textureMemory) illustrates how, in a typical CPU caching scheme, the <img src="https://render.githubusercontent.com/render/math?math=4"> accessed memory locations would not be stored at consecutive memory addresses so that they would not be cached together. On the other side, texture caches those global memory locations together
-to accelerate access patterns such as the illustrated one. This result is achieved by transferring the two-dimensional spatial locality through a mapping based on a *z-curve*-like concept.  
-We will overlook further details on z-curve-like caching, which is not of strict interest for the present project. Actually, in this project, we will not use texture memory to speed up memory fetches, but rather to perform fast interpolations, also known as *texture filtering*.  
+to accelerate access patterns such as the illustrated one. This result is achieved by transferring the two-dimensional spatial locality through a mapping based on a *z-curve*-like concept [\[4\]](#Z_CURVE).  
+We will overlook further details on z-curve-like caching, which is not of strict interest for the present project. Actually, in this project, we will not use texture memory to speed up memory fetches, but rather to perform fast interpolations, also known as *texture filtering* [\[5\]](#TEXTURE_FETCHING).  
 Indeed, when the texture is accessed using non-integer indices, it returns the interpolation between neighboring stored values. Such interpolation can be a nearest-neighbor or linear, namely, of the two types discussed above. Performing interpolation using texture memory has the indubitable advantage that such operation is performed by dedicated
 hardware circuitry, therefore it is worked out very fast.  
 Nonetheless, speed is paid with accuracy in the linear case since interpolation coefficients are stored in a fixed point format having <img src="https://render.githubusercontent.com/render/math?math=9">-bit overall with <img src="https://render.githubusercontent.com/render/math?math=8"> bits of fractional value.  
@@ -236,7 +239,7 @@ Texture memory must be associated, at run-time and by proper function calls, to 
   - *types*: these are input and output data types;
   - *coordinate scaling*: figures [11](#textureNearestNeighbor) and [12](#textureLinear) show texture filtering in the case of un-normalized coordinates; in other words, the coordinate by which texture is accessed belongs to the interval <img src="https://render.githubusercontent.com/render/math?math=[0,M[">; a different possibility is using *normalized coordinates* in which the <img src="https://render.githubusercontent.com/render/math?math=[0,M["> interval is compressed to <img src="https://render.githubusercontent.com/render/math?math=[0,1[">; in the present project, we will use un-normalized coordinates;
   - *filtering mode*: it specifies whether interpolation is the nearest-neighbor or linear;
-  - *address mode*: it specifies the “boundary conditions”, namely, what texture filtering returns when the access coordinate is outside <img src="https://render.githubusercontent.com/render/math?math=[0,M[">; for example, the texture values can be prolonged by zeros, or periodically, or with the last sample or by a mirroring of the <img src="https://render.githubusercontent.com/render/math?math=[0,M["> interval.
+  - *address mode*: it specifies the “boundary conditions”, namely, what texture filtering returns when the access coordinate is outside <img src="https://render.githubusercontent.com/render/math?math=[0,M[">; for example, the texture values can be prolonged by zeros, or periodically, or with the last sample or by a mirroring of the <img src="https://render.githubusercontent.com/render/math?math=[0,M["> interval [\[6\]](#ADDRESSING_MODES).
 
 A very important thing to remember when using textures is that texture cache is not coherent. This means that texture fetching from addresses that have been modified by global stores return undefined data if both the operations are performed in the same kernel call. In other words, a thread can consistently texture fetch a memory location if the location has been updated by a previous kernel call or memory copy, i.e., outside the current kernel call.  
 Now that we have a picture of what texture memory and texture filtering are, let’s investigate how the latter is implemented in CUDA.
@@ -266,7 +269,7 @@ inline void checkAssert(cudaError_t errorCode, const char *file,
 </p>
 
 As can be seen, one-dimensional, float-type texture memory is declared. Relevantly, such a declaration does not allocate storages and does not associate storage with the textured handle.  
-Then, the number of threads per block to be used in the subsequent kernel calls is defined and, finally, the `cudaCHECK()` function appears. Such a function enables performing the error check either on CUDA kernel invocations or on CUDA API calls. Indeed, CUDA APIs return an error code providing information on possible errors. By decorating CUDA
+Then, the number of threads per block to be used in the subsequent kernel calls is defined and, finally, the `cudaCHECK()` function appears [\[7\]](#CUDA_ERROR_CHECKING). Such a function enables performing the error check either on CUDA kernel invocations or on CUDA API calls. Indeed, CUDA APIs return an error code providing information on possible errors. By decorating CUDA
 APIs with `cudaCHECK()`, it is possible to “read” such error codes. The use of `cudaCHECK()` or of other error check functions is of the utmost importance when coding in CUDA.  
 Let’s now jump to the `main()` function in Listing [2](#texture_2):
 
@@ -621,9 +624,9 @@ We now proceed towards cubic B-spline interpolation.
 
 ### Cubic B-spline interpolation
 
-In this project, we will use a particular kind of cubic interpolation, namely, cubic B-spline interpolation . The word “spline” refers to special types of piecewise polynomial interpolations, while “B-” stands for “basis” and is related to its degree of regularity. At variance with full polynomial interpolation, spline interpolation can make the
+In this project, we will use a particular kind of cubic interpolation, namely, cubic B-spline interpolation [\[8\]](#INTERPOLATION_REVISITED). The word “spline” refers to special types of piecewise polynomial interpolations, while “B-” stands for “basis” and is related to its degree of regularity. At variance with full polynomial interpolation, spline interpolation can make the
 interpolation error small even when the spline adopts a low degree polynomial.  
-The linear interpolation seen above is a B-spline of order <img src="https://render.githubusercontent.com/render/math?math=1">. The nearest-neighbor interpolation, on the other side, almost coincides with a B-spline of order <img src="https://render.githubusercontent.com/render/math?math=0">.  
+The linear interpolation seen above is a B-spline of order <img src="https://render.githubusercontent.com/render/math?math=1"> [\[8\]](#INTERPOLATION_REVISITED). The nearest-neighbor interpolation, on the other side, almost coincides with a B-spline of order <img src="https://render.githubusercontent.com/render/math?math=0"> [\[8\]](#INTERPOLATION_REVISITED).  
 In the case of one-dimensional cubic B-spline, the interpolating function can be written as:
 
 <p align="center">
@@ -656,7 +659,7 @@ In the next subsection, we will see how texture memory comes to aid again to spe
 ### Cubic B-spline interpolation implemented as texture filtering
 
 It is possible to exploit linear in-hardware texture filtering to also perform cubic B-spline interpolations. 
-Linear texture filtering can be exploited to compute a generic linear combination <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}"> between two samples <img src="https://render.githubusercontent.com/render/math?math=f_i"> and <img src="https://render.githubusercontent.com/render/math?math=f_{i %2B 1}">. Indeed, we have:
+Linear texture filtering can be exploited to compute a generic linear combination <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}"> between two samples <img src="https://render.githubusercontent.com/render/math?math=f_i"> and <img src="https://render.githubusercontent.com/render/math?math=f_{i %2B 1}"> [\[9\]](#GPU_GEMS_2_INTERPOLATION), [\[10\]](#RUIJTERS), [\[11\]](#INTERPOLATION_CUDA_SAMPLE). Indeed, we have:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=af_i %2B bf_{i %2B 1}=(a %2B b)\left[\frac{a}{a %2B b}f_i %2B \frac{b}{a %2B b}f_{i %2B 1}\right]"  id="linearCombination">. [17]
@@ -704,7 +707,7 @@ and
 </p>
 
 It is possible to verify that <img src="https://render.githubusercontent.com/render/math?math=0\leq \widetilde{h}_0(\alpha) \leq 1"> and <img src="https://render.githubusercontent.com/render/math?math=0\leq \widetilde{h}_1(\alpha) \leq 1">. This means that the quantities <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(m-1 %2B \widetilde{h}_0(\alpha))"> and <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(m %2B 1 %2B \widetilde{h}_1(\alpha))">, and, consequently, the cubic B-spline interpolation, can be computed by linear in-hardware texture filtering. Indeed those quantities correspond to set <img src="https://render.githubusercontent.com/render/math?math=i=m-1"> and <img src="https://render.githubusercontent.com/render/math?math=i=m %2B 1">, respectively, in equation [\[19\]](#linearCombinationTexture).  
-For better compatibility with other published work, equation [\[20\]](#cubicInterpolationTexture) is now rewritten as:
+For better compatibility with other published work [\[9\]](#GPU_GEMS_2_INTERPOLATION, equation [\[20\]](#cubicInterpolationTexture) is now rewritten as:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=f^{(3)}(x)=g_0(\alpha)f^{(1)}(m %2B h_0(\alpha)) %2B g_1(\alpha)f^{(1)}(m %2B h_1(\alpha))"  id="eq6">, [23]
@@ -928,7 +931,7 @@ Since we are using texture lookup, then `texReference.filterMode = cudaFilterMod
 Let us now turn to a new exercise regarding the understanding of texture’s address modes.
 
 <span id="addressModes" label="addressModes">\[Exercise 2\]</span> In the example in the section on the [practice on nearest-neighbor and linear interpolations of a PGM image](#Practice), the two-dimensional NERP has been implemented by considering `cudaAddressModeClamp` as *address mode*. What happens if the address mode is changed for one or both the dimensions?  
-Recall that `cudaAddressModeWrap` and `cudaAddressModeMirror` are only supported for normalized texture coordinates, while, in this project, we are dealing with un-normalized ones.  
+Recall that [\[5\]](#TEXTURE_FETCHING) `cudaAddressModeWrap` and `cudaAddressModeMirror` are only supported for normalized texture coordinates, while, in this project, we are dealing with un-normalized ones.  
 
 <span id="solution_2" label="solution_2">\[Solution to Exercise 2\]</span> If we use the following in the `initTexture()` function:
 
@@ -1056,7 +1059,7 @@ Comparing figure [24](#Fig14) with figure [22](#Fig12): the two interpolated ima
 
 Another kind of cubic interpolation, much used in the applications, is Catmull-Rom interpolation, so shortly dealing with it is worthwhile. In the next exercise, we briefly discuss its implementation.
 
-<span id="exercise_5" label="exercise_5">\[Exercise 5\]</span> Catmull-Rom interpolation  is another form of spline interpolation for which:
+<span id="exercise_5" label="exercise_5">\[Exercise 5\]</span> Catmull-Rom interpolation [\[11\]](#CATMULL_ROM_INTERPOLATION) is another form of spline interpolation for which:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=w_0(\alpha)=\frac{1}{2}\left[-\alpha %2B 2\alpha^2-\alpha^3\right]">, [32]
@@ -1138,45 +1141,53 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 12. No.
 
 # REFERENCES
+<p align="center" id="CUDA_BY_EXAMPLE" >
+</p>
+[1] J. Sanders, E. Kandrot, CUDA by Example: an Introduction to General-Purpose GPU Programming, Boston, MA, Addison-Wesley, 2011.
+
+<p align="center" id="HWU" >
+</p>
+[2] D.B. Kirk, W.-m.W. Hwu, Programming Massively Parallel Processors: A Hands-on Approach, Burlington, MA, Morgan-Kaufmann, 2017.
+
 <p align="center" id="BURDEN_FAIRES" >
 </p>
-[1] R.L. Burden, J.D. Faires, Numerical Analysis Ed. 9, Boston, MA, Brooks/Cole Cengage Learning, 2011.
+[3] R.L. Burden, J.D. Faires, Numerical Analysis Ed. 9, Boston, MA, Brooks/Cole Cengage Learning, 2011.
 
 <p align="center" id="Z_CURVE" >
 </p>
-[2] Y. Sugimoto, F. Ino, K. Hagihara, "Improving cache locality for GPU-based volume rendering," Parallel Computing, vol. 40, n. 5-6, pp. 59-69, May 2014 [link](http://www-ppl.ist.osaka-u.ac.jp/research/papers/201405_sugimoto_pc.pdf).
+[4] Y. Sugimoto, F. Ino, K. Hagihara, "Improving cache locality for GPU-based volume rendering," Parallel Computing, vol. 40, n. 5-6, pp. 59-69, May 2014 [link](http://www-ppl.ist.osaka-u.ac.jp/research/papers/201405_sugimoto_pc.pdf).
 
 <p align="center" id="TEXTURE_FETCHING" >
 </p>
-[3] NVIDIA Corporation, "CUDA Programming Guide, Texture Fetching and Filtering," [link](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#texture-fetching).
+[5] NVIDIA Corporation, "CUDA Programming Guide, Texture Fetching and Filtering," [link](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#texture-fetching).
 
 <p align="center" id="ADDRESSING_MODES" >
 </p>
-[4] The different addressing modes of CUDA textures, StackOverflow, Sept. 2013, [link](https://stackoverflow.com/questions/19020963/the-different-addressing-modes-of-cuda-textures).
+[6] The different addressing modes of CUDA textures, StackOverflow, Sept. 2013, [link](https://stackoverflow.com/questions/19020963/the-different-addressing-modes-of-cuda-textures).
 
 <p align="center" id="CUDA_ERROR_CHECKING" >
 </p>
-[5] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, [link](https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api).
+[7] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, [link](https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api).
 
 <p align="center" id="INTERPOLATION_REVISITED" >
 </p>
-[6] P. Thévenaz, T. Blu, M. Unser, "Interpolation revisited," IEEE Trans. Medical Imaging, vol. 19, n. 7, pp. 739-758, Jul. 2000.
+[8] P. Thévenaz, T. Blu, M. Unser, "Interpolation revisited," IEEE Trans. Medical Imaging, vol. 19, n. 7, pp. 739-758, Jul. 2000.
 
 <p align="center" id="GPU_GEMS_2_INTERPOLATION" >
 </p>
-[7] C. Sigg, M. Hadwiger, "Fast third-order texture filtering," in GPU Gems 2, Programming Techniques for High-Performance Graphics and General-Purpose Computation, Randima Fernando Ed., 2004.
+[9] C. Sigg, M. Hadwiger, "Fast third-order texture filtering," in GPU Gems 2, Programming Techniques for High-Performance Graphics and General-Purpose Computation, Randima Fernando Ed., 2004.
 
 <p align="center" id="RUIJTERS" >
 </p>
-[8] D. Ruijters, B.M. ter Haar Romeny, P. Suetens, "Efficient GPU-based texture interpolation using uniform B-spline," J. Graphics Tools, vol. 13, n. 4, pp. 61-69, 2008.
+[10] D. Ruijters, B.M. ter Haar Romeny, P. Suetens, "Efficient GPU-based texture interpolation using uniform B-spline," J. Graphics Tools, vol. 13, n. 4, pp. 61-69, 2008.
 
 <p align="center" id="INTERPOLATION_CUDA_SAMPLE" >
 </p>
-[9] Bicubic B-spline interpolation CUDA sample, NVIDIA Corporation, [link](https://docs.nvidia.com/cuda/cuda-samples/index.html#bicubic-b-spline-interoplation).
+[11] Bicubic B-spline interpolation CUDA sample, NVIDIA Corporation, [link](https://docs.nvidia.com/cuda/cuda-samples/index.html#bicubic-b-spline-interoplation).
 
 <p align="center" id="CATMULL_ROM_INTERPOLATION" >
 </p>
-[10] J. Li, S. Chen, "The Cubic <img src="https://render.githubusercontent.com/render/math?math=\alpha">-Catmull-Rom Spline," Math. and Comput. Appl., vol. 21, n. 33, pp. 1-14, 2016.
+[11] J. Li, S. Chen, "The Cubic <img src="https://render.githubusercontent.com/render/math?math=\alpha">-Catmull-Rom Spline," Math. and Comput. Appl., vol. 21, n. 33, pp. 1-14, 2016.
 
 
 
