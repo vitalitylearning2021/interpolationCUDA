@@ -1162,20 +1162,21 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 </p>
 [6] P. Thévenaz, T. Blu, M. Unser, "Interpolation revisited," IEEE Trans. Medical Imaging, vol. 19, n. 7, pp. 739-758, Jul. 2000.
 
-<p align="center" id="INTERPOLATION_REVISITED" >
+<p align="center" id="GPU_GEMS_2_INTERPOLATION" >
 </p>
-[7] P. Thévenaz, T. Blu, M. Unser, "Interpolation revisited," IEEE Trans. Medical Imaging, vol. 19, n. 7, pp. 739-758, Jul. 2000.
+[7] C. Sigg, M. Hadwiger, "Fast third-order texture filtering," in GPU Gems 2, Programming Techniques for High-Performance Graphics and General-Purpose Computation, Randima Fernando Ed., 2004.
 
-@article{GPU_GEMS_3_INTERPOLATION,
-	%address = {City},
-    %note = "\url{https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api}",
-	publisher = {in GPU Gems 2, Programming Techniques for High-Performance Graphics and General-Purpose Computation, Randima Fernando Ed.},
-	author = {C. Sigg, M. Hadwiger},
-	title = {Fast third-order texture filtering},
-	year = {2004},
-	%volume = {19},
-	%number = {7},
-	%pages = {739--758},
-	%month = {Jul}
-}
+<p align="center" id="RUIJTERS" >
+</p>
+[8] D. Ruijters, B.M. ter Haar Romeny, P. Suetens, "Efficient GPU-based texture interpolation using uniform B-spline," J. Graphics Tools, vol. 13, n. 4, pp. 61-69, 2008.
+
+<p align="center" id="INTERPOLATION_CUDA_SAMPLE" >
+</p>
+[9] Bicubic B-spline interpolation CUDA sample, NVIDIA Corporation, [link](https://docs.nvidia.com/cuda/cuda-samples/index.html#bicubic-b-spline-interoplation).
+
+<p align="center" id="CATMULL_ROM_INTERPOLATION" >
+</p>
+[10] J. Li, S. Chen, "The Cubic <img src="https://render.githubusercontent.com/render/math?math=\alpha">-Catmull-Rom Spline," Math. and Comput. Appl., vol. 21, n. 33, pp. 1-14, 2016.
+
+
 
