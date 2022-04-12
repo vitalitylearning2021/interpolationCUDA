@@ -1161,15 +1161,21 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 
 <p align="center" id="TEXTURE_FETCHING" >
 </p>
-[5] NVIDIA Corporation, "CUDA Programming Guide, Texture Fetching and Filtering," [link](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#texture-fetching).
+[5] NVIDIA Corporation, "CUDA Programming Guide, Texture Fetching and Filtering" 
+
+[link](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#texture-fetching).
 
 <p align="center" id="ADDRESSING_MODES" >
 </p>
-[6] The different addressing modes of CUDA textures, StackOverflow, Sept. 2013, [link](https://stackoverflow.com/questions/19020963/the-different-addressing-modes-of-cuda-textures).
+[6] The different addressing modes of CUDA textures, StackOverflow, Sept. 2013. 
+
+[link](https://stackoverflow.com/questions/19020963/the-different-addressing-modes-of-cuda-textures).
 
 <p align="center" id="CUDA_ERROR_CHECKING" >
 </p>
-[7] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, [link](https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api).
+[7] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012.
+
+[link](https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api).
 
 <p align="center" id="INTERPOLATION_REVISITED" >
 </p>
@@ -1185,7 +1191,9 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 
 <p align="center" id="INTERPOLATION_CUDA_SAMPLE" >
 </p>
-[11] Bicubic B-spline interpolation CUDA sample, NVIDIA Corporation, [link](https://docs.nvidia.com/cuda/cuda-samples/index.html#bicubic-b-spline-interoplation).
+[11] Bicubic B-spline interpolation CUDA sample, NVIDIA Corporation. 
+
+[link](https://docs.nvidia.com/cuda/cuda-samples/index.html#bicubic-b-spline-interoplation).
 
 <p align="center" id="CATMULL_ROM_INTERPOLATION" >
 </p>
