@@ -22,7 +22,7 @@ Different common interpolation techniques for PGM images are implemented with cu
 ## Technical requirements
 
 The main prerequisites regard the fundamentals of C/C++ and CUDA programming and basic elements of calculus, especially function approximation. 
-Concerning CUDA, a reference introductory book is [\[1\]](#id=CUDA_BY_EXAMPLE) while a reference advanced book is [\[2\]](#id="HWU"). The GitHub link for all the code files is: [https://github.com/vitalitylearning2021/interpolationCUDA](https://github.com/vitalitylearning2021/interpolationCUDA).
+Concerning CUDA, a reference introductory book is [\[1\]](#CUDA_BY_EXAMPLE) while a reference advanced book is [\[2\]](#HWU). The GitHub link for all the code files is: [https://github.com/vitalitylearning2021/interpolationCUDA](https://github.com/vitalitylearning2021/interpolationCUDA).
 
 ## The interpolation problem
 
