@@ -1155,9 +1155,7 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 
 <p align="center" id="Z_CURVE" >
 </p>
-[4] Y. Sugimoto, F. Ino, K. Hagihara, "Improving cache locality for GPU-based volume rendering," Parallel Computing, vol. 40, n. 5-6, pp. 59-69, May 2014 [Duck Duck Go](https://duckduckgo.com)
-
-[link](http://www-ppl.ist.osaka-u.ac.jp/research/papers/201405_sugimoto_pc.pdf).
+[4] Y. Sugimoto, F. Ino, K. Hagihara, "Improving cache locality for GPU-based volume rendering," Parallel Computing, vol. 40, n. 5-6, pp. 59-69, May 2014 [link](http://www-ppl.ist.osaka-u.ac.jp/research/papers/201405_sugimoto_pc.pdf).
 
 <p align="center" id="TEXTURE_FETCHING" >
 </p>
@@ -1169,7 +1167,7 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 
 <p align="center" id="CUDA_ERROR_CHECKING" >
 </p>
-[7] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, (link)[https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api].
+[7] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, [link](https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api).
 
 <p align="center" id="INTERPOLATION_REVISITED" >
 </p>
