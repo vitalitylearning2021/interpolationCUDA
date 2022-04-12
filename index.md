@@ -26,7 +26,7 @@ Concerning CUDA, a reference introductory book is [\[1\]](#CUDA_BY_EXAMPLE) whil
 
 ## The interpolation problem
 
-Interpolation [\[3\]](#id="BURDEN_FAIRES" ) consists of approximately reconstructing the values of a function by properly combining its samples. 
+Interpolation [\[3\]](#BURDEN_FAIRES) consists of approximately reconstructing the values of a function by properly combining its samples. 
 The *interpolation points* are the points where the function needs to be reconstructed and are located within the region covered by the function samples, as in Figure [1](#interpolationProblem). Thanks to interpolation, the properties of a function are “coded” within a certain number of properly chosen samples. The problem of reconstructing a function in the region outside that covered by the samples is called *extrapolation*. Extrapolation requires techniques completely different from those used for interpolation and is not dealt with here. 
 Figure [1](#interpolationProblem) below shows an example of the interpolation problem:
 
@@ -707,7 +707,7 @@ and
 </p>
 
 It is possible to verify that <img src="https://render.githubusercontent.com/render/math?math=0\leq \widetilde{h}_0(\alpha) \leq 1"> and <img src="https://render.githubusercontent.com/render/math?math=0\leq \widetilde{h}_1(\alpha) \leq 1">. This means that the quantities <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(m-1 %2B \widetilde{h}_0(\alpha))"> and <img src="https://render.githubusercontent.com/render/math?math=f^{(1)}(m %2B 1 %2B \widetilde{h}_1(\alpha))">, and, consequently, the cubic B-spline interpolation, can be computed by linear in-hardware texture filtering. Indeed those quantities correspond to set <img src="https://render.githubusercontent.com/render/math?math=i=m-1"> and <img src="https://render.githubusercontent.com/render/math?math=i=m %2B 1">, respectively, in equation [\[19\]](#linearCombinationTexture).  
-For better compatibility with other published work [\[9\]](#GPU_GEMS_2_INTERPOLATION, equation [\[20\]](#cubicInterpolationTexture) is now rewritten as:
+For better compatibility with other published work [\[9\]](#GPU_GEMS_2_INTERPOLATION), equation [\[20\]](#cubicInterpolationTexture) is now rewritten as:
 
 <p align="center">
   <img src="https://render.githubusercontent.com/render/math?math=f^{(3)}(x)=g_0(\alpha)f^{(1)}(m %2B h_0(\alpha)) %2B g_1(\alpha)f^{(1)}(m %2B h_1(\alpha))"  id="eq6">, [23]
