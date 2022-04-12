@@ -1167,7 +1167,7 @@ In the next Chapter, a likewise common problem in numerical approaches, namely, 
 
 <p align="center" id="CUDA_ERROR_CHECKING" >
 </p>
-[7] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, [link](https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api).
+[7] What is the canonical way to check for errors using the CUDA runtime API?, StackOverflow, Dec. 2012, (link)[https://stackoverflow.com/questions/14038589/what-is-the-canonical-way-to-check-for-errors-using-the-cuda-runtime-api].
 
 <p align="center" id="INTERPOLATION_REVISITED" >
 </p>
