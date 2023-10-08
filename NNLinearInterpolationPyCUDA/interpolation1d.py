@@ -101,7 +101,6 @@ __global__ void linear_interpolation_kernel_function_GPU(const float* __restrict
 
   if (j < M) {
 
-    //float     ndx       = 1.f / (d_xin[1] - d_xin[0]);
     float     xi        = d_xout[j] - d_xin[0];
     int       fxi       = __float2int_rz(xi * ndx_const);
     float     dk        = d_yin[fxi];
@@ -115,7 +114,6 @@ __global__ void linear_interpolation_kernel_function_GPU_texture(const float* __
 
   if (j < M) {
 
-    //float     ndx       = 1.f / (d_xin[1] - d_xin[0]);
     float     xi        = d_xout[j] - d_xin[0];
     int       fxi       = __float2int_rz(xi * ndx_const);
     float     dk        = tex1Dfetch(d_yintexture, fxi);
